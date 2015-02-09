@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/childrenLab.iml" filepath="$PROJECT_DIR$/childrenLab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/childrenLab-grailsPlugins.iml" filepath="$PROJECT_DIR$/childrenLab-grailsPlugins.iml" />
     </modules>
   </component>
 </project>
