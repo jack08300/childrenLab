@@ -22,7 +22,10 @@
 * other Params - birthday, nickName, sex, address, city, zipCode, role(2 type: ROLE_USER, ROLE_NANNY)
 * The default role is ROLE_USER
 
-* Exception example: {
+* Exception example: 
+```
+{
 "success": false,
 "message": "The email already registered."
 }
+```
