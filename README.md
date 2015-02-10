@@ -3,7 +3,9 @@
 
 # /childrenLab/api/login
 * Params - email, password
-* Return example: {
+* Return example: 
+'''
+{
 "username": "test@test.com",
 "roles": [
 "ROLE_USER"
@@ -11,6 +13,7 @@
 "access_token": "4ncvvg81j5smer66avrgdasgvcncngd3",
 "token_type": "Bearer"
 }
+'''
 
 * Exception: if email or password not match, the response status will be 401 Unauthorized (let me know if you don't like it...)
 
