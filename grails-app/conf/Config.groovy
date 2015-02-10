@@ -115,3 +115,37 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails.plugin.springsecurity.rest.login.usernamePropertyName = 'email'
+grails.plugin.springsecurity.rest.login.passwordPropertyName = 'password'
+grails.plugin.springsecurity.rest.login.endpointUrl = '/api/login'
+grails.plugin.springsecurity.rest.login.useRequestParamsCredentials = true
+grails.plugin.springsecurity.rest.login.useJsonCredentials = true
+grails.plugin.springsecurity.rest.login.failureStatusCode = 401
+grails.plugin.springsecurity.rest.token.enableAnonymousAccess = true
+grails.plugin.springsecurity.filterChain.chainMap = [
+        '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',  // Stateless chain
+        '/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'                                                                          // Traditional chain
+]
+
+grails.plugin.springsecurity.rest.token.storage.useGorm = true
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName = "childrenlab.AuthenticationToken"
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenValuePropertyName = "token"
+grails.plugin.springsecurity.rest.token.storage.gorm.usernamePropertyName = "email"
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.usernamePropertyName = "email"
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'childrenlab.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'childrenlab.UserRole'
+grails.plugin.springsecurity.authority.className = 'childrenlab.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['ROLE_ADMIN'],
+	'/index.gsp':                     ['ROLE_ADMIN'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+

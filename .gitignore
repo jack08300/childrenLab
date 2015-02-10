@@ -35,5 +35,6 @@
 /target
 /.idea
 /childrenLab-grailsPlugins.iml
-
-
+web-app/WEB-INF/tld/c.tld
+web-app/WEB-INF/tld/fmt.tld
+childrenLab.iml
