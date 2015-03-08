@@ -124,10 +124,11 @@ grails.plugin.springsecurity.rest.login.useJsonCredentials = true
 grails.plugin.springsecurity.rest.login.failureStatusCode = 401
 grails.plugin.springsecurity.rest.token.enableAnonymousAccess = true
 grails.plugin.springsecurity.rest.token.validation.headerName = "x-auth-token"
+grails.plugin.springsecurity.rest.token.validation.useBearerToken = false
 grails.plugin.springsecurity.filterChain.chainMap = [
         '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',  // Stateless chain
         '/**': 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor',                                                                          // Traditional chain
-        '/user/**': 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
+        '/user/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'
 ]
 
 grails.plugin.springsecurity.rest.token.storage.useGorm = true
