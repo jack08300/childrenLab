@@ -37,8 +37,7 @@ class UserService {
 
     def addKid(String firstName, String lastName, String nickName, String birthday, String note){
         User user = springSecurityService.getCurrentUser() as User
-println user
-        return
+
         if(!firstName || !lastName || !birthday){
             return [success: false, message: "Please fill up all of fields."]
         }
