@@ -8,6 +8,9 @@ class Kids {
     Date birthday
     String note
 
+    Date dateCreated
+    Date lastUpdated
+
     static belongsTo = [parent: User]
 
     static constraints = {
@@ -16,5 +19,8 @@ class Kids {
         nickName nullable: true
         birthday nullable: true
         note nullable: true
+
+        dateCreated nullable: true
+        lastUpdated nullable: true
     }
 }

@@ -12,10 +12,10 @@ class User {
     Date birthday
     String nickName
     String sex
-    String address
-    String city
-    int zipCode
     String profile
+
+    Date dateCreated
+    Date lastUpdated
 
 	boolean enabled = true
 	boolean accountExpired
@@ -34,10 +34,11 @@ class User {
         birthday nullable: true
         nickName nullable: true
         sex nullable: true
-        address nullable: true
-        city nullable: true
-        zipCode nullable: true
+
         profile nullable: true
+
+        dateCreated nullable: true
+        lastUpdated nullable: true
 
 	}
 
