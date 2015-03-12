@@ -1,8 +1,12 @@
 import childrenlab.Role
+import childrenlab.Schedule
 import childrenlab.User
 import childrenlab.UserRole
+import grails.converters.JSON
 import grails.plugin.springsecurity.SecurityFilterPosition
 import grails.plugin.springsecurity.SpringSecurityUtils
+
+import java.text.SimpleDateFormat
 
 class BootStrap {
 
@@ -18,6 +22,22 @@ class BootStrap {
         new UserRole(role: Role.get(1), user: testUser).save(flush: true)
         new UserRole(role: Role.get(2), user: testUser2).save(flush: true)
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+
+        JSON.registerObjectMarshaller(Schedule){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['dateCreated'] = dateFormat.format(it.dateCreated)
+            returnArray['lastUpdated'] = dateFormat.format(it.lastUpdated)
+            returnArray['startDate'] = dateFormat.format(it.startDate)
+            returnArray['endDate'] = dateFormat.format(it.endDates)
+            returnArray['status'] = it.status.name()
+            returnArray['type'] = it.type.name()
+            returnArray['user'] = it.user.firstName + " " + it.user.lastName
+            returnArray['userId'] = it.user.id
+
+            return returnArray
+        }
     }
     def destroy = {
     }

@@ -40,9 +40,28 @@ if the user already has schedule during the dates
 ```
 {
 "success": false,
-"message": "The user already has schedule between the dates"
+"message": "You already has schedule between the dates"
 }
 ``` 
+when create successfully
+```
+{
+"success": true
+}
+```
+
+# www.childrenLab.com/schedule/edit
+* Params - only scheduleId is required
+* Same as create, but can't edit status, and type
+
+* Exception example:
+if the user already has schedule during the dates
+```
+{
+"success": false,
+"message": "You already has schedule between the dates"
+}
+```
 when create successfully
 ```
 {
@@ -66,5 +85,39 @@ when update successfully
 ```
 {
 "success": true
+}
+```
+
+# www.childrenLab.com/schedule/list
+* This return all of schedule (Not sure if you need it)
+
+* Return example:
+```
+{
+"success": true,
+"list": [
+{
+"id": 1,
+"dateCreated": "2015-03-09T23:35:23Z",
+"lastUpdated": "2015-03-12T21:33:43Z",
+"startDate": "2015-01-31T16:00:00Z",
+"endDate": "2015-02-28T16:00:00Z",
+"status": "REMOVED",
+"type": "NANNY",
+"user": "J C",
+"userId": 4
+},
+{
+"id": 2,
+"dateCreated": "2015-03-09T23:37:59Z",
+"lastUpdated": "2015-03-09T23:37:59Z",
+"startDate": "2015-01-30T16:00:00Z",
+"endDate": "2015-02-28T16:00:00Z",
+"status": "PRIVATE",
+"type": "NANNY",
+"user": "J C",
+"userId": 4
+}
+]
 }
 ```

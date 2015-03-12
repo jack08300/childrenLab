@@ -20,4 +20,18 @@ class ScheduleController {
         def result = scheduleService.updateStatus(scheduleId, status)
         render result as JSON
     }
+
+    def list(){
+        def list = Schedule.list()
+
+        def result = [success: true, list: list]
+
+        render result as JSON
+    }
+
+    def edit(int scheduleId, String startDate, String endDate, int paymentPerHour, String note){
+        def result = scheduleService.editSchedule(scheduleId, startDate, endDate, paymentPerHour, note)
+
+        render result as JSON
+    }
 }
