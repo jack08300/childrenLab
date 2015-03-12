@@ -30,7 +30,7 @@ class BootStrap {
             returnArray['dateCreated'] = dateFormat.format(it.dateCreated)
             returnArray['lastUpdated'] = dateFormat.format(it.lastUpdated)
             returnArray['startDate'] = dateFormat.format(it.startDate)
-            returnArray['endDate'] = dateFormat.format(it.endDates)
+            returnArray['endDate'] = dateFormat.format(it.endDate)
             returnArray['status'] = it.status.name()
             returnArray['type'] = it.type.name()
             returnArray['user'] = it.user.firstName + " " + it.user.lastName

@@ -98,4 +98,22 @@ class ScheduleService {
             return [success: false, message: "something wrong with server, please try again later"]
         }
     }
+
+    def retrieveUserSchedule(int scheduleId){
+        try {
+            User user = springSecurityService.getCurrentUser() as User
+
+            def schedule
+            if(scheduleId > 0){
+                schedule = Schedule.findByUserAndId(user, scheduleId)
+            }else{
+                schedule = Schedule.findAllByUser(user)
+            }
+
+            return [success: true, schedule: schedule]
+        }catch(Exception e){
+            e.printStackTrace()
+            return [success: false, message: "something wrong with server, please try again later"]
+        }
+    }
 }

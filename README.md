@@ -88,6 +88,42 @@ when update successfully
 }
 ```
 
+# www.childrenLab.com/schedule/retrieveUserSchedule
+* Params - scheduleId
+* If you call this API with scheduleId, it will return only one schedule
+* If you call this without scheduleId, it will return all of schedule that related to the login user
+
+* Return example:
+```
+{
+"success": true,
+"schedule": [
+{
+"id": 1,
+"dateCreated": "2015-03-10 07:35:23",
+"lastUpdated": "2015-03-13 05:33:43",
+"startDate": "2015-02-01 12:00:00",
+"endDate": "2015-03-01 12:00:00",
+"status": "REMOVED",
+"type": "NANNY",
+"user": "J C",
+"userId": 4
+},
+{
+"id": 2,
+"dateCreated": "2015-03-10 07:37:59",
+"lastUpdated": "2015-03-10 07:37:59",
+"startDate": "2015-01-31 12:00:00",
+"endDate": "2015-03-01 12:00:00",
+"status": "PRIVATE",
+"type": "NANNY",
+"user": "J C",
+"userId": 4
+}
+]
+}
+```
+
 # www.childrenLab.com/schedule/list
 * This return all of schedule (Not sure if you need it)
 
@@ -98,10 +134,10 @@ when update successfully
 "list": [
 {
 "id": 1,
-"dateCreated": "2015-03-09T23:35:23Z",
-"lastUpdated": "2015-03-12T21:33:43Z",
-"startDate": "2015-01-31T16:00:00Z",
-"endDate": "2015-02-28T16:00:00Z",
+"dateCreated": "2015-03-10 07:35:23",
+"lastUpdated": "2015-03-13 05:33:43",
+"startDate": "2015-02-01 12:00:00",
+"endDate": "2015-03-01 12:00:00",
 "status": "REMOVED",
 "type": "NANNY",
 "user": "J C",
@@ -109,10 +145,10 @@ when update successfully
 },
 {
 "id": 2,
-"dateCreated": "2015-03-09T23:37:59Z",
-"lastUpdated": "2015-03-09T23:37:59Z",
-"startDate": "2015-01-30T16:00:00Z",
-"endDate": "2015-02-28T16:00:00Z",
+"dateCreated": "2015-03-10 07:37:59",
+"lastUpdated": "2015-03-10 07:37:59",
+"startDate": "2015-01-31 12:00:00",
+"endDate": "2015-03-01 12:00:00",
 "status": "PRIVATE",
 "type": "NANNY",
 "user": "J C",

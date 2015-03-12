@@ -29,9 +29,19 @@ class ScheduleController {
         render result as JSON
     }
 
+    def retrieveUserSchedule(int scheduleId){
+        def result = scheduleService.retrieveUserSchedule(scheduleId)
+
+        render result as JSON
+    }
+
     def edit(int scheduleId, String startDate, String endDate, int paymentPerHour, String note){
         def result = scheduleService.editSchedule(scheduleId, startDate, endDate, paymentPerHour, note)
 
         render result as JSON
+    }
+
+    def message(){
+
     }
 }
