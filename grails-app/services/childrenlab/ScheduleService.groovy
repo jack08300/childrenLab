@@ -73,7 +73,7 @@ class ScheduleService {
             Date end = toolsService.stringToDate(endDate)
 
             def schedule = Schedule.findByUserAndId(user, scheduleId)
-            if(!schedule){  return [success: false, message: "The user already has schedule between the dates"] }
+            if(!schedule){  return [success: false, message: "Can't find schedule to edit"] }
 
             if(start && end){
                 if(checkHasScheduled(user, start, end, schedule)){ return [success: false, message: "You already has schedule between the dates"] }
