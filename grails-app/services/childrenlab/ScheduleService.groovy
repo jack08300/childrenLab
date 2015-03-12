@@ -40,6 +40,26 @@ class ScheduleService {
         }
     }
 
+    def updateStatus(int scheduleId, String status){
+        try{
+            User user = springSecurityService.getCurrentUser() as User
+            def schedule = Schedule.findByUserAndId(user, scheduleId)
+
+            if(!schedule) { return [success: false, message: "Can't find schedule."]}
+
+            def scheduleStatus = status ? status as ScheduleStatus : schedule.status
+
+            schedule.status = scheduleStatus
+            schedule.save(failOnError: true)
+
+            return [success: true]
+            
+        }catch(Exception e){
+            e.printStackTrace()
+            return [success: false, message: "Error: $e.message"]
+        }
+    }
+
     def checkHasScheduled(def user, Date startDate, Date endDate){
         def schedule = Schedule.executeQuery("from Schedule where user = :user and ((startDate between :startDate and :endDate) or (endDate between :startDate and :endDate))", [user: user, startDate: startDate, endDate: endDate])
         println (schedule && schedule.first())

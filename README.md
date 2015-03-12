@@ -32,7 +32,7 @@
 
 # www.childrenLab.com/schedule/create
 * Params(required) - startDate, endDate (format: yyyy-MM-dd hh:mm), paymentPerHour
-* other Params - status(^PENDING,PUBLIC,COMPLETED), type(NANNY, PARENT), note
+* other Params - status(^PENDING,PUBLIC,COMPLETED,REMOVED), type(NANNY, PARENT), note
 * The default status is PENDING
 
 * Exception example:
@@ -44,6 +44,25 @@ if the user already has schedule during the dates
 }
 ``` 
 when create successfully
+```
+{
+"success": true
+}
+```
+
+# www.childrenLab.com/schedule/updateStatus
+* Params(required) - scheduleId, status (PENDING,PUBLIC,COMPLETED,REMOVED)
+* This API is able to change schedule status, even for deleting schedule, just change the status = REMOVED
+
+* Exception example:
+if the something wrong when update
+```
+{
+"success": false,
+"message": "Can't find schedule."
+}
+``` 
+when update successfully
 ```
 {
 "success": true

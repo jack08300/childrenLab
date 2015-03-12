@@ -14,4 +14,10 @@ class ScheduleController {
 
         render result as JSON
     }
+
+    def updateStatus(int scheduleId, String status){
+
+        def result = scheduleService.updateStatus(scheduleId, status)
+        render result as JSON
+    }
 }

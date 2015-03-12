@@ -1,7 +1,7 @@
 package childrenlab
 
 public enum ScheduleStatus{
-    PRIVATE, PUBLIC, COMPLETED
+    PRIVATE, PUBLIC, COMPLETED, REMOVED
 }
 
 public enum ScheduleType {
