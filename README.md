@@ -15,7 +15,7 @@
 }
 ```
 
-* Exception: if email or password not match, the response status will be 401 Unauthorized (let me know if you don't like it...)
+* Exception: if email or password not match, the response status will be 403 Unauthorized (let me know if you don't like it...)
 
 # www.childrenLab.com/user/register
 * Params(required) - email, password, phoneNumber, firstName, lastName
