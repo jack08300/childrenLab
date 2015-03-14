@@ -133,4 +133,26 @@ class ScheduleService {
             return [success: false, message: "something wrong with server, please try again later."]
         }
     }
+
+    def search(String startDate, String endDate, int offset, int max){
+        try {
+            User user = springSecurityService.getCurrentUser() as User
+
+            Date start = toolsService.stringToDate(startDate)
+            Date end = toolsService.stringToDate(endDate)
+
+            if(!start || !end){ return [success: false, message: "Please enter start and end date."]}
+
+            def schedule = Schedule.findAllByStartDateBetweenAndEndDateBetween(start, end, start, end)
+
+            int totalSize = schedule.size()
+            int index = totalSize > offset+max ? offset+max : totalSize
+            schedule = schedule.subList(offset, index)
+
+            return [success: true, scheduleList: schedule, totalSize: totalSize]
+        }catch(Exception e){
+            e.printStackTrace()
+            return [success: false, message: "something wrong with server, please try again later."]
+        }
+    }
 }

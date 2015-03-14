@@ -47,4 +47,11 @@ class ScheduleController {
 
         render result as JSON
     }
+
+    def search(String startDate, String endDate, int offset, int max){
+        max = max ?: 30
+        def result = scheduleService.search(startDate, endDate, offset, max)
+
+        render result as JSON
+    }
 }
