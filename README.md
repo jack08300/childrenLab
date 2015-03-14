@@ -90,7 +90,7 @@ when update successfully
 
 # www.childrenLab.com/schedule/retrieveUserSchedule
 * Params - scheduleId
-* If you call this API with scheduleId, it will return only one schedule
+* If you call this API with scheduleId, it will return only one schedule and its message list
 * If you call this without scheduleId, it will return all of schedule that related to the login user
 
 * Return example:
@@ -123,7 +123,70 @@ when update successfully
 ]
 }
 ```
-
+With message:
+```
+{
+"success": true,
+"schedule": {
+"id": 1,
+"dateCreated": "2015-03-15 02:22:14",
+"lastUpdated": "2015-03-15 02:22:14",
+"startDate": "2015-02-04 11:00:00",
+"endDate": "2015-03-01 09:00:00",
+"status": "PRIVATE",
+"type": "NANNY",
+"user": "J C",
+"userId": 3
+},
+"message": [
+{
+"class": "childrenlab.ScheduleMessage",
+"id": 3,
+"dateCreated": "2015-03-14T18:24:06Z",
+"lastUpdated": "2015-03-14T18:24:06Z",
+"message": "I'm herererererer",
+"schedule": {
+"class": "childrenlab.Schedule",
+"id": 1
+},
+"user": {
+"class": "childrenlab.User",
+"id": 3
+}
+},
+{
+"class": "childrenlab.ScheduleMessage",
+"id": 2,
+"dateCreated": "2015-03-14T18:23:48Z",
+"lastUpdated": "2015-03-14T18:23:48Z",
+"message": "Testing test",
+"schedule": {
+"class": "childrenlab.Schedule",
+"id": 1
+},
+"user": {
+"class": "childrenlab.User",
+"id": 3
+}
+},
+{
+"class": "childrenlab.ScheduleMessage",
+"id": 1,
+"dateCreated": "2015-03-14T18:23:03Z",
+"lastUpdated": "2015-03-14T18:23:03Z",
+"message": "Testing test",
+"schedule": {
+"class": "childrenlab.Schedule",
+"id": 1
+},
+"user": {
+"class": "childrenlab.User",
+"id": 3
+}
+}
+]
+}
+```
 # www.childrenLab.com/schedule/list
 * This return all of schedule (Not sure if you need it)
 

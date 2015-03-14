@@ -32,5 +32,6 @@ class Schedule {
 
     static mapping = {
         note type: 'text'
+        sort dateCreated: "desc"
     }
 }

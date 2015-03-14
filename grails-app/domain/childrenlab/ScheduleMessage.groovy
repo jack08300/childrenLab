@@ -17,5 +17,6 @@ class ScheduleMessage {
 
     static mapping = {
         message type: 'text'
+        sort dateCreated: "desc"
     }
 }

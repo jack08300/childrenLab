@@ -99,21 +99,38 @@ class ScheduleService {
         }
     }
 
-    def retrieveUserSchedule(int scheduleId){
+    def retrieveUserSchedule(int scheduleId, int offset, int max){
         try {
             User user = springSecurityService.getCurrentUser() as User
 
             def schedule
+            def message = []
             if(scheduleId > 0){
                 schedule = Schedule.findByUserAndId(user, scheduleId)
+                message = ScheduleMessage.findAllBySchedule(schedule)
+
             }else{
-                schedule = Schedule.findAllByUser(user)
+                schedule = Schedule.findAllByUser(user, [offset: offset, max: max])
             }
 
-            return [success: true, schedule: schedule]
+            return [success: true, schedule: schedule, message: message]
         }catch(Exception e){
             e.printStackTrace()
             return [success: false, message: "something wrong with server, please try again later"]
+        }
+    }
+
+    def leaveMessage(int scheduleId, String message){
+        try{
+            User user = springSecurityService.getCurrentUser() as User
+
+            def schedule = Schedule.findById(scheduleId)
+            new ScheduleMessage(user: user, schedule: schedule, message: message).save(failOnError: true)
+
+            return [success: true]
+        }catch(Exception e){
+            e.printStackTrace()
+            return [success: false, message: "something wrong with server, please try again later."]
         }
     }
 }

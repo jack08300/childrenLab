@@ -29,8 +29,9 @@ class ScheduleController {
         render result as JSON
     }
 
-    def retrieveUserSchedule(int scheduleId){
-        def result = scheduleService.retrieveUserSchedule(scheduleId)
+    def retrieveUserSchedule(int scheduleId, int offset, int max){
+        max = max ?: 30
+        def result = scheduleService.retrieveUserSchedule(scheduleId, offset, max)
 
         render result as JSON
     }
@@ -41,7 +42,9 @@ class ScheduleController {
         render result as JSON
     }
 
-    def message(){
+    def leaveMessage(String message, int scheduleId){
+        def result = scheduleService.leaveMessage(scheduleId, message)
 
+        render result as JSON
     }
 }
