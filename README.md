@@ -220,3 +220,50 @@ With message:
 ]
 }
 ```
+
+# www.childrenLab.com/schedule/search
+* Params(required) - startDate, endDate (format: yyyy-mm-dd hh:mm)
+* Params(not required) - offset, max
+
+* Return example:
+```
+{
+"success": true,
+"scheduleList": [
+{
+"id": 3,
+"dateCreated": "2015-03-15 02:53:17",
+"lastUpdated": "2015-03-15 02:53:17",
+"startDate": "2015-07-04 12:00:00",
+"endDate": "2015-07-05 05:00:00",
+"status": "PRIVATE",
+"type": "NANNY",
+"user": "J C",
+"userId": 3
+},
+{
+"id": 2,
+"dateCreated": "2015-03-15 02:51:12",
+"lastUpdated": "2015-03-15 02:51:12",
+"startDate": "2015-05-04 12:00:00",
+"endDate": "2015-05-05 05:00:00",
+"status": "PRIVATE",
+"type": "NANNY",
+"user": "J C",
+"userId": 3
+},
+{
+"id": 1,
+"dateCreated": "2015-03-15 02:22:14",
+"lastUpdated": "2015-03-15 02:22:14",
+"startDate": "2015-02-04 11:00:00",
+"endDate": "2015-03-01 09:00:00",
+"status": "PRIVATE",
+"type": "NANNY",
+"user": "J C",
+"userId": 3
+}
+],
+"totalSize": 3
+}
+```
