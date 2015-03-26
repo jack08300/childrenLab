@@ -35,6 +35,7 @@ class BootStrap {
             returnArray['type'] = it.type.name()
             returnArray['user'] = it.user.firstName + " " + it.user.lastName
             returnArray['userId'] = it.user.id
+            returnArray['note'] = it.note
 
             return returnArray
         }
