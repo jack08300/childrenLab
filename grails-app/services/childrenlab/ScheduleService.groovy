@@ -31,7 +31,7 @@ class ScheduleService {
         }catch(Exception e){
             e.printStackTrace()
             return [success: false, message: "something wrong with server, please try again later"]
-        }
+         }
     }
 
     def updateStatus(int scheduleId, String status){
