@@ -1,5 +1,9 @@
 package childrenlab
 
+public enum KidsStatus {
+    PRIVATE, PUBLIC, REMOVED
+}
+
 class Kids {
 
     String firstName
@@ -7,6 +11,7 @@ class Kids {
     String nickName
     Date birthday
     String note
+    KidsStatus status = KidsStatus.PUBLIC
 
     Date dateCreated
     Date lastUpdated

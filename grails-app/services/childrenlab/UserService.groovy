@@ -34,22 +34,4 @@ class UserService {
 
         return result
     }
-
-    def addKid(String firstName, String lastName, String nickName, String birthday, String note){
-        User user = springSecurityService.getCurrentUser() as User
-
-        if(!firstName || !lastName || !birthday){
-            return [success: false, message: "Please fill up all of fields."]
-        }
-
-        Date birthdayDate = birthday ? new Date().parse("yyyy-MM-dd", birthday) : null
-
-        def kid = new Kids(firstName: firstName, lastName: lastName, nickName: nickName, birthday: birthdayDate, note: note, parent: user).save(failOnError: true)
-
-        if(!kid){
-            return [success: false, message: 'Error when adding kid to database, please try again late.']
-        }
-
-        return [success: true]
-    }
 }

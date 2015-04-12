@@ -15,13 +15,4 @@ class UserController {
         render result as JSON
     }
 
-    @Secured(['ROLE_USER'])
-    def addKid(String firstName, String lastName, String nickName, String birthday, String note){
-
-        def result = userService.addKid(firstName, lastName,nickName, birthday, note)
-
-        render result as JSON
-
-    }
-
 }

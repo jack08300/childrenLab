@@ -1,3 +1,4 @@
+import childrenlab.Kids
 import childrenlab.Role
 import childrenlab.Schedule
 import childrenlab.User
@@ -35,6 +36,18 @@ class BootStrap {
             returnArray['type'] = it.type.name()
             returnArray['user'] = it.user.firstName + " " + it.user.lastName
             returnArray['userId'] = it.user.id
+            returnArray['note'] = it.note
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(Kids){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['firstName'] = it.firstName
+            returnArray['lastName'] = it.lastName
+            returnArray['nickName'] = it.nickName
+            returnArray['birthday'] = dateFormat.format(it.birthday)
             returnArray['note'] = it.note
 
             return returnArray

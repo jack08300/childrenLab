@@ -267,3 +267,61 @@ With message:
 "totalSize": 3
 }
 ```
+
+# www.childrenLab.com/kids/add
+* Params(required) - firstName, lastName, birthday(Format must be: "yyyy-MM-dd"
+* Params(not required) - nickName, note
+
+* Return example:
+```
+{
+"success": true
+}
+```
+
+# www.childrenLab.com/kids/edit
+* Params(required) - kidId
+* Params(not required) - firstName, lastName, birthday, nickName, note
+
+* Return example:
+```
+{
+"success": true
+}
+```
+
+# www.childrenLab.com/kids/remove
+* Params(required) - kidId
+
+* Return example:
+```
+{
+"success": true
+}
+```
+
+# www.childrenLab.com/kids/list
+* Return example:
+```
+{
+    "success": true,
+    "kids": [
+        {
+            "id": 2,
+            "firstName": "test2",
+            "lastName": "testLast2",
+            "nickName": "testNick2",
+            "birthday": "1985-09-30 12:00:00",
+            "note": "hahaha"
+        },
+        {
+            "id": 1,
+            "firstName": "test",
+            "lastName": "testLast",
+            "nickName": "testNick",
+            "birthday": "1985-08-29 12:00:00",
+            "note": "hahaha, it's test"
+        }
+    ]
+}
+```
