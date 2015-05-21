@@ -222,8 +222,8 @@ With message:
 ```
 
 # www.childrenLab.com/schedule/search
-* Params(required) - startDate, endDate (format: yyyy-mm-dd hh:mm)
-* Params(not required) - offset, max
+* Params(required) - startDate, endDate (format: yyyy-mm-dd hh:mm), startPrice, endPrice, gender
+* Params(not required) - offset, max, zipcode
 
 * Return example:
 ```

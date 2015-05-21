@@ -134,7 +134,7 @@ class ScheduleService {
         }
     }
 
-    def search(String startDate, String endDate, int offset, int max){
+    def search(String startDate, String endDate, int startPrice, int endPrice, String zipcode, String gender, int offset, int max){
         try {
             User user = springSecurityService.getCurrentUser() as User
 
@@ -143,7 +143,7 @@ class ScheduleService {
 
             if(!start || !end){ return [success: false, message: "Please enter start and end date."]}
 
-            def schedule = Schedule.findAllByStartDateBetweenAndEndDateBetween(start, end, start, end)
+            def schedule = Schedule.findAll("from Schedule where (startDate between :startDate and :endDate) and (endDate between :startDate and :endDate) and (paymentPerHour between :startPrice and :endPrice) and type = :scheduleType and status = :scheduleStatus and user.sex = :gender", [startDate: start, endDate: end, startPrice: startPrice, endPrice: endPrice, scheduleType: ScheduleType.NANNY, scheduleStatus: ScheduleStatus.PRIVATE, gender: gender])
 
             int totalSize = schedule.size()
             int index = totalSize > offset+max ? offset+max : totalSize

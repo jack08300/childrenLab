@@ -48,10 +48,10 @@ class ScheduleController {
         render result as JSON
     }
 
-    def search(String startDate, String endDate, int offset, int max){
+    def search(String startDate, String endDate, int startPrice, int endPrice, String zipcode, String gender, int offset, int max){
         max = max ?: 30
-        def result = scheduleService.search(startDate, endDate, offset, max)
-
+        def result = scheduleService.search(startDate, endDate, startPrice, endPrice, zipcode, gender, offset, max)
+        //JSON.use('deep')
         render result as JSON
     }
 }

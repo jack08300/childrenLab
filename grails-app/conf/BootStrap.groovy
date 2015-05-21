@@ -34,8 +34,19 @@ class BootStrap {
             returnArray['endDate'] = dateFormat.format(it.endDate)
             returnArray['status'] = it.status.name()
             returnArray['type'] = it.type.name()
-            returnArray['user'] = it.user.firstName + " " + it.user.lastName
-            returnArray['userId'] = it.user.id
+            returnArray['price'] = it.paymentPerHour
+            returnArray['user'] = [
+                    id: it.user.id,
+                    firstName: it.user.firstName,
+                    lastName: it.user.lastName,
+                    name: "$it.user.firstName  $it.user.lastName",
+                    nickName: it.user.nickName,
+                    birthday: it.user.birthday,
+                    phoneNumber: it.user.phoneNumber,
+                    gender: it.user.sex,
+                    email: it.user.email
+
+            ]
             returnArray['note'] = it.note
 
             return returnArray
@@ -49,6 +60,21 @@ class BootStrap {
             returnArray['nickName'] = it.nickName
             returnArray['birthday'] = dateFormat.format(it.birthday)
             returnArray['note'] = it.note
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(User){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['firstName'] = it.firstName
+            returnArray['lastName'] = it.lastName
+            returnArray['nickName'] = it.nickName
+            returnArray['birthday'] = dateFormat.format(it.birthday)
+            returnArray['phoneNumber'] = it.phoneNumber
+            returnArray['sex'] = it.sex
+            returnArray['email'] = it.email
+
 
             return returnArray
         }
