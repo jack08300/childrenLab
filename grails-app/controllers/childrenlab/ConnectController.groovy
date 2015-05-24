@@ -15,7 +15,7 @@ class ConnectController {
             return
         }
 
-        def connect = Connect.findByUuid(uuid) ?: new Connect(uuid: uuid)
+        def connect = Connect.findByPhoneUuid(uuid) ?: new Connect(phoneUuid: uuid)
 
         User user = springSecurityService.getCurrentUser() as User
 

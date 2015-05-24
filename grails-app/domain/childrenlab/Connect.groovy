@@ -5,7 +5,8 @@ class Connect {
     String deviceModel
     String cordova
     String devicePlatform
-    String uuid
+    String phoneUuid
+    String deviceUuid
     String deviceVersion
     User user
 
@@ -17,7 +18,8 @@ class Connect {
         deviceModel nullable: true
         cordova nullable: true
         devicePlatform nullable: true
-        uuid nullable: false, unique: true
+        phoneUuid nullable: true
+        deviceUuid nullable: false, unique: true
         deviceVersion nullable: true
         user nullable: true
     }

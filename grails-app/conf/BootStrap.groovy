@@ -35,6 +35,7 @@ class BootStrap {
             returnArray['status'] = it.status.name()
             returnArray['type'] = it.type.name()
             returnArray['price'] = it.paymentPerHour
+            returnArray['note'] = it.note
             returnArray['user'] = [
                     id: it.user.id,
                     firstName: it.user.firstName,
