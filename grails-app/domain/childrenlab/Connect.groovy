@@ -19,7 +19,7 @@ class Connect {
         cordova nullable: true
         devicePlatform nullable: true
         phoneUuid nullable: true
-        deviceUuid nullable: false, unique: true
+        deviceUuid nullable: true
         deviceVersion nullable: true
         user nullable: true
     }

@@ -134,6 +134,21 @@ class ScheduleService {
         }
     }
 
+    def retrieveMessage(int scheduleId){
+        try{
+            User user = springSecurityService.getCurrentUser() as User
+
+            def schedule = Schedule.findById(scheduleId)
+            def scheduleMessage = ScheduleMessage.findAll("from ScheduleMessage where schedule = ? and (user = ? or user = ?)", [schedule, user, schedule.user])
+
+
+            return [success: true, scheduleMessage: scheduleMessage]
+        }catch(Exception e){
+            e.printStackTrace()
+            return [success: false, message: "something wrong with server, please try again later."]
+        }
+    }
+
     def search(String startDate, String endDate, int startPrice, int endPrice, String zipcode, String gender, int offset, int max){
         try {
             User user = springSecurityService.getCurrentUser() as User

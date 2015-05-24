@@ -1,6 +1,7 @@
 import childrenlab.Kids
 import childrenlab.Role
 import childrenlab.Schedule
+import childrenlab.ScheduleMessage
 import childrenlab.User
 import childrenlab.UserRole
 import grails.converters.JSON
@@ -49,6 +50,24 @@ class BootStrap {
 
             ]
             returnArray['note'] = it.note
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(ScheduleMessage){
+            def returnArray = [:]
+
+            returnArray['id'] = it.id
+            returnArray['user'] = [
+                    id: it.user.id,
+                    email: it.user.email
+            ]
+            returnArray['message'] = it.message
+            returnArray['owner'] = [
+                    id: it.schedule.user.id,
+                    email: it.schedule.user.email
+            ]
+            returnArray['date'] = it.dateCreated
 
             return returnArray
         }

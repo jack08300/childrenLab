@@ -267,6 +267,65 @@ With message:
 "totalSize": 3
 }
 ```
+# www.childrenLab.com/schedule/leaveMessage
+* Params(required) - message, scheduleId
+
+* Return example:
+```
+{
+"success": true
+}
+```
+# www.childrenLab.com/schedule/retrieveMessage
+* Params(required) - scheduleId
+
+* Return example:
+```
+{
+"success": true,
+"scheduleMessage": [
+{
+"id": 1,
+"user": {
+"id": 3,
+"email": "jack08300@gmail.com"
+},
+"message": "Testing test",
+"owner": {
+"id": 3,
+"email": "jack08300@gmail.com"
+},
+"date": "2015-03-14T18:23:03Z"
+},
+{
+"id": 2,
+"user": {
+"id": 3,
+"email": "jack08300@gmail.com"
+},
+"message": "Testing test",
+"owner": {
+"id": 3,
+"email": "jack08300@gmail.com"
+},
+"date": "2015-03-14T18:23:48Z"
+},
+{
+"id": 3,
+"user": {
+"id": 3,
+"email": "jack08300@gmail.com"
+},
+"message": "I'm herererererer",
+"owner": {
+"id": 3,
+"email": "jack08300@gmail.com"
+},
+"date": "2015-03-14T18:24:06Z"
+}
+]
+}
+```
 
 # www.childrenLab.com/kids/add
 * Params(required) - firstName, lastName, birthday(Format must be: "yyyy-MM-dd"
