@@ -74,29 +74,29 @@ class ChildrenLabAuthFilter extends GenericFilterBean {
                 authenticationRequest.details = authenticationDetailsSource.buildDetails(httpServletRequest)
 
                 try {
-                    println "Trying to authenticate the request"
+                    log.debug "Trying to authenticate the request"
                     authenticationResult = authenticationManager.authenticate(authenticationRequest)
 
                     if (authenticationResult.authenticated) {
-                        println "Request authenticated. Storing the authentication result in the security context"
-                        println "Authentication result: ${authenticationResult}"
+                        log.debug "Request authenticated. Storing the authentication result in the security context"
+                        log.debug "Authentication result: ${authenticationResult}"
 
                         SecurityContextHolder.context.setAuthentication(authenticationResult)
                     }
                 } catch (AuthenticationException ae) {
 
-                    println "Authentication failed: ${ae.message}"
+                    log.debug "Authentication failed: ${ae.message}"
                     authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, ae)
                 }
 
             }else{
-                println "Username and/or password parameters are missing."
+                log.debug "Username and/or password parameters are missing."
                 if(!authentication){
-                    println "Setting status to ${HttpServletResponse.SC_BAD_REQUEST}"
+                    log.debug "Setting status to ${HttpServletResponse.SC_BAD_REQUEST}"
                     httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST)
                     return
                 }else{
-                    println "Using authentication already in security context."
+                    log.debug "Using authentication already in security context."
                     authenticationResult = authentication
                 }
             }

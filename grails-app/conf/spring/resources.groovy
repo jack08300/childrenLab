@@ -11,6 +11,7 @@ beans = {
         authenticationFailureHandler = ref('restAuthenticationFailureHandler')
         authenticationDetailsSource = ref('authenticationDetailsSource')
         credentialsExtractor = ref('credentialsExtractor')
+        tokenStorageService = ref('tokenStorageService')
         endpointUrl = application.config.grails.plugin.springsecurity.rest.login.endpointUrl ?: '/api/login'
         tokenGenerator = ref('tokenGenerator')
     }
