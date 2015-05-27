@@ -50,7 +50,7 @@ class ChildrenLabAuthFilter extends GenericFilterBean {
 
         def actualUri =  httpServletRequest.requestURI - httpServletRequest.contextPath
 
-        println "Actual URI is ${actualUri}; endpoint URL is ${endpointUrl}"
+        log.debug "Actual URI is ${actualUri}; endpoint URL is ${endpointUrl}"
 
         //Only apply filter to the configured URL
         if (actualUri == endpointUrl) {

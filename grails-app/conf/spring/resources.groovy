@@ -18,7 +18,7 @@ beans = {
 
     restAuthenticationFailureHandler(ChildLabAuthFailureHandler) {
         statusCode = application.config.grails.plugin.springsecurity.rest.login.failureStatusCode ?: HttpServletResponse.SC_UNAUTHORIZED
-        renderer = ref('restAuthenticationTokenJsonRenderer')
+        //renderer = ref('restAuthenticationTokenJsonRenderer')
     }
 
 
