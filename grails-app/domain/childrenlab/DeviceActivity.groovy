@@ -6,7 +6,7 @@ class DeviceActivity {
     String activityY
     String activityZ
     String light
-    String sound
+    String audio
     String uv
 
     static belongsTo = [device: Device]
@@ -19,7 +19,7 @@ class DeviceActivity {
         activityY nullable: true
         activityZ nullable: true
         light nullable: true
-        sound nullable: true
+        audio nullable: true
         uv nullable: true
         device nullable: false
     }
