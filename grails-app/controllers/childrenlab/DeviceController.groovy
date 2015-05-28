@@ -1,16 +1,14 @@
 package childrenlab
 
-import grails.converters.JSON
-
 class DeviceController {
     def deviceService
 
-    String uploadData(String activity, String lightData, String soundData, String uvData, String uuid, String email){
-        if(!uuid){
-            render([success: false, message: "Missing device UUID"] as JSON)
+    String uploadData(String activityX, String activityY, String activityZ, String light, String sound, String uv, String macId, String email){
+        if(!macId){
+            render false
         }
-        def result = deviceService.uploadData(activity, lightData, soundData, uvData, uuid, email)
+        def result = deviceService.uploadData(activityX, activityY, activityZ, light, sound, uv, macId, email)
 
-        render result as JSON
+        render result
     }
 }
