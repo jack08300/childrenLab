@@ -5,14 +5,16 @@ import grails.transaction.Transactional
 @Transactional
 class DeviceService {
 
-    def uploadData(String activityX, String activityY, String activityZ, String light, String sound, String uv, String macId, String email){
+    def springSecurityService
 
-        User user = null
-        if(email){
-            user = User.findByEmail(email)
-        }
+    def uploadData(String activityX, String activityY, String activityZ, String light, String sound, String uv, String macId){
 
-        new DeviceActivity(activityX: activityX, activityY: activityY, activityZ: activityZ, light: light, sound: sound, uv: uv, macId: macId).save(failOnError: true)
+
+        User user = springSecurityService.getCurrentUser() as User
+
+        def device = Device.findByMacId(macId) ?: new Device(macId: macId, user: user).save(failOnError: true)
+
+        new DeviceActivity(activityX: activityX, activityY: activityY, activityZ: activityZ, light: light, sound: sound, uv: uv, device: device).save(failOnError: true)
 
         return true
     }
