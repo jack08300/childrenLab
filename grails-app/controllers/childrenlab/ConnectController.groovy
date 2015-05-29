@@ -8,14 +8,14 @@ class ConnectController {
 
     def springSecurityService
 
-    def device(String model, String cordova, String platform, String uuid, String version){
+    def device(String model, String cordova, String platform, String phoneUuid, String version){
         if(!uuid){
-            log.error("UUID is missing. $model, $cordova, $platform, $uuid, $version")
+            log.error("UUID is missing. $model, $cordova, $platform, $phoneUuid, $version")
             render([success: false, message: "uuid is missing"] as JSON)
             return
         }
 
-        def connect = Connect.findByPhoneUuid(uuid) ?: new Connect(phoneUuid: uuid)
+        def connect = Connect.findByPhoneUuid(phoneUuid) ?: new Connect(phoneUuid: phoneUuid)
 
         User user = springSecurityService.getCurrentUser() as User
 
