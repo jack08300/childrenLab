@@ -6,12 +6,30 @@ import grails.plugin.springsecurity.annotation.Secured
 class DeviceController {
     def deviceService
 
-    String uploadData(String activityX, String activityY, String activityZ, String light, String audio, String uv, String macId){
+    def uploadData(String activityX, String activityY, String activityZ, String light, String audio, String uv, String macId){
         if(!macId){
             render false
+            return
         }
         def result = deviceService.uploadData(activityX, activityY, activityZ, light, audio, uv, macId)
 
         render result
     }
+
+    @Secured(['ROLE_ADMIN'])
+    def list(){
+        def device = Device.list();
+
+        render(view: "list", model: [deviceList: device])
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def deviceDataList(String macId){
+        def device = Device.findByMacId(macId)
+        def data = DeviceActivity.findAllByDevice(device)
+
+        render(view: "dataList", model: [data: data])
+    }
+
+
 }

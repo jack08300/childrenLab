@@ -126,10 +126,7 @@ grails.plugin.springsecurity.rest.token.enableAnonymousAccess = true
 grails.plugin.springsecurity.rest.token.validation.headerName = "x-auth-token"
 grails.plugin.springsecurity.rest.token.validation.useBearerToken = false
 grails.plugin.springsecurity.filterChain.chainMap = [
-        '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',  // Stateless chain
-        '/**': 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor',                                                                          // Traditional chain
-        '/user/**':  'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',
-        '/test/**':  'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'
+        '/**': 'JOINED_FILTERS'  // Stateless chain
 ]
 
 grails.plugin.springsecurity.rest.token.storage.useGorm = true
@@ -142,6 +139,15 @@ grails.plugin.springsecurity.userLookup.usernamePropertyName = "email"
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'childrenlab.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'childrenlab.UserRole'
 grails.plugin.springsecurity.authority.className = 'childrenlab.Role'
+grails.plugin.springsecurity.securityConfigType = "Annotation"
+
+grails.plugin.springsecurity.providerName = [
+        'restAuthenticationProvider',
+        'rememberMeAuthenticationProvider',
+        'daoAuthenticationProvider',
+        'anonymousAuthenticationProvider',
+        'rememberMeAuthenticationProvider'
+]
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['ROLE_ADMIN'],
@@ -152,6 +158,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll'],
     '/connect/**':                    ['permitAll'],
-    '/device/**':                     ['permitAll']
+    '/device/uploadData':             ['permitAll'],
+    '/schedule/**':                   ['ROLE_USER'],
+    '/device/list':                   ['ROLE_ADMIN']
 ]
 

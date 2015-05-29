@@ -23,4 +23,8 @@ class DeviceActivity {
         uv nullable: true
         device nullable: false
     }
+
+    static mapping = {
+        sort dateCreated: "desc"
+    }
 }
