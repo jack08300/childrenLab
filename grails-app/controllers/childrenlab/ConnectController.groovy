@@ -9,7 +9,7 @@ class ConnectController {
     def springSecurityService
 
     def device(String model, String cordova, String platform, String phoneUuid, String version){
-        if(!uuid){
+        if(!phoneUuid){
             log.error("UUID is missing. $model, $cordova, $platform, $phoneUuid, $version")
             render([success: false, message: "uuid is missing"] as JSON)
             return
