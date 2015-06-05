@@ -16,6 +16,13 @@
 
 <body>
 
+<div class="nav" role="navigation">
+    <ul>
+        <li><g:link controller="home" class="home">Menu</g:link></li>
+        <li><g:link controller="device" action="list" class="back">list</g:link></li>
+    </ul>
+</div>
+
 <table>
     <thead>
     <tr>

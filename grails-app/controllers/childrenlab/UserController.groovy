@@ -21,4 +21,12 @@ class UserController {
 
         render result as JSON
     }
+
+    def feedbackList(){
+        def feedback = Feedback.list()
+
+
+
+        render(view: 'feedbackList', model: [success: true, feedbackList: feedback])
+    }
 }
