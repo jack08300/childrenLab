@@ -34,4 +34,13 @@ class UserService {
 
         return result
     }
+
+    def leaveFeedback(String typeString, String text){
+        User user = springSecurityService.getCurrentUser() as User
+
+        FeedbackType type = typeString as FeedbackType
+        new Feedback(user: user, type: type, text: text).save(failOnError: true)
+
+        return [success: true]
+    }
 }

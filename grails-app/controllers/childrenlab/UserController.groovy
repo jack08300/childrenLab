@@ -15,4 +15,10 @@ class UserController {
         render result as JSON
     }
 
+    @Secured(['ROLE_USER'])
+    def leaveFeedback(String type, String text){
+        def result = userService.leaveFeedback(type, text)
+
+        render result as JSON
+    }
 }
