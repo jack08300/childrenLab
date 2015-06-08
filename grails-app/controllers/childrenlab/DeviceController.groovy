@@ -6,12 +6,12 @@ import grails.plugin.springsecurity.annotation.Secured
 class DeviceController {
     def deviceService
 
-    def uploadData(String activityX, String activityY, String activityZ, String light, String audio, String uv, String macId){
+    def uploadData(String activityX, String activityY, String activityZ, String light, String audio, String uv, String macId, String temperature){
         if(!macId){
             render false
             return
         }
-        def result = deviceService.uploadData(activityX, activityY, activityZ, light, audio, uv, macId)
+        def result = deviceService.uploadData(activityX, activityY, activityZ, light, audio, uv, macId, temperature)
 
         render result
     }

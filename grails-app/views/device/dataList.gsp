@@ -32,7 +32,9 @@
         <g:sortableColumn property="audio" title="Audio" />
         <g:sortableColumn property="light" title="Light" />
         <g:sortableColumn property="uv" title="UV" />
+        <g:sortableColumn property="temperature" title="Temperature" />
         <g:sortableColumn property="date" title="Upload Date" />
+
 
     </tr>
     </thead>
@@ -46,6 +48,7 @@
             <td>${fieldValue(bean: listInstance, field: "audio")}</td>
             <td>${fieldValue(bean: listInstance, field: "light")}</td>
             <td>${fieldValue(bean: listInstance, field: "uv")}</td>
+            <td>${fieldValue(bean: listInstance, field: "temperature")}</td>
             <td>${fieldValue(bean: listInstance, field: "dateCreated")}</td>
         </tr>
     </g:each>

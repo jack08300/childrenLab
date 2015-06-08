@@ -8,6 +8,7 @@ class DeviceActivity {
     String light
     String audio
     String uv
+    String temperature
 
     static belongsTo = [device: Device]
 
@@ -22,6 +23,7 @@ class DeviceActivity {
         audio nullable: true
         uv nullable: true
         device nullable: false
+        temperature nullable: true
     }
 
     static mapping = {
