@@ -47,12 +47,12 @@ class UserService {
 
     def uploadUserProfile(def image){
         def user = springSecurityService.currentUser as User
-        def file = image as File
-        if(file && file.length() > 0){
+        
+        if(image && image.getSize() > 0){
             try{
                 String fileName ="user_profile_${user.id}.png"
                 String filePath = "userProfile"
-                ftpService.save(file.getBytes(), fileName, filePath)
+                ftpService.save(image.getBytes(), fileName, filePath)
                 fileName = "userUpload/$filePath/$fileName"
                 user.profile = fileName
                 user.save()
@@ -63,7 +63,6 @@ class UserService {
                 return [success: false, message: "Erorr on uploading image null error: ${e.message}"]
             }
         }
-
 
     }
 }
