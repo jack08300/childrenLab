@@ -24,9 +24,10 @@ class UserController {
 
     def feedbackList(){
         def feedback = Feedback.list()
-
-
-
         render(view: 'feedbackList', model: [success: true, feedbackList: feedback])
+    }
+
+    def uploadUserProfile(){
+        def result = userService.uploadUserProfile(params.image, params.type)
     }
 }

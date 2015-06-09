@@ -7,6 +7,7 @@ import grails.transaction.Transactional
 class UserService {
 
     def springSecurityService
+    def ftpService
 
     def register(String email, String password, String phoneNumber, String firstName, String lastName, String birthday, String nickName, String sex, String address, String city, int zipCode, String roleString){
 
@@ -42,5 +43,23 @@ class UserService {
         new Feedback(user: user, type: type, text: text).save(failOnError: true)
 
         return [success: true]
+    }
+
+    def uploadUserProfile(def image, String type){
+        def user = springSecurityService.currentUser as User
+
+        if(image && image.getSize() > 0){
+            try{
+                String fileName ="user_profile_${user.id}.$type"
+                String filePath = "userProfile"
+                ftpService.save(image.getBytes(), fileName, filePath)
+                fileName = "userUpload/$filePath/$fileName"
+                user.profile = fileName
+                user.save()
+            }catch(Exception e){
+                e.printStackTrace()
+                return [success: false, message: "Erorr on uploading image null error: ${e.message}"]
+            }
+        }
     }
 }
