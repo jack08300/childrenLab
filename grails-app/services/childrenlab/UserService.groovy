@@ -45,21 +45,25 @@ class UserService {
         return [success: true]
     }
 
-    def uploadUserProfile(def image, String type){
+    def uploadUserProfile(def image){
         def user = springSecurityService.currentUser as User
 
         if(image && image.getSize() > 0){
             try{
-                String fileName ="user_profile_${user.id}.$type"
+                String fileName ="user_profile_${user.id}.png"
                 String filePath = "userProfile"
                 ftpService.save(image.getBytes(), fileName, filePath)
                 fileName = "userUpload/$filePath/$fileName"
                 user.profile = fileName
                 user.save()
+
+                return [success: true]
             }catch(Exception e){
                 e.printStackTrace()
                 return [success: false, message: "Erorr on uploading image null error: ${e.message}"]
             }
         }
+
+
     }
 }
