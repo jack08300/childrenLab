@@ -28,7 +28,7 @@ class UserController {
     }
 
     def uploadUserProfile(){
-        def result = userService.uploadUserProfile(params.image, params.type)
+        def result = userService.uploadUserProfile(params.image)
 
         render result as JSON
     }
