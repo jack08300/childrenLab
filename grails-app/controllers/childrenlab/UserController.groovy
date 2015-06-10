@@ -41,4 +41,12 @@ class UserController {
         def result = [success: true, user: user]
         render result as JSON
     }
+
+    @Secured(['ROLE_USER'])
+    def updateProfile(String email, String phoneNumber, String firstName, String lastName, String gender){
+        def result = userService.updateProfile(email, phoneNumber, firstName, lastName, gender)
+
+        render result as JSON
+    }
+
 }

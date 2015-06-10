@@ -65,4 +65,24 @@ class UserService {
         }
 
     }
+
+    def updateProfile(String email, String phoneNumber, String firstName, String lastName, String gender){
+        def user = springSecurityService.currentUser as User
+
+        try{
+            if(email && user.email != email){ user.email = email }
+            if(phoneNumber && user.phoneNumber != phoneNumber){ user.phoneNumber = phoneNumber}
+            if(firstName && user.firstName != firstName){ user.firstName = firstName }
+            if(lastName && user.lastName != lastName){ user.lastName = lastName}
+            if(gender && user.sex != gender){ user.sex = gender}
+
+            user.save(failOnError: true, flash: true)
+
+            return [success: true]
+        }catch(Exception e){
+            log.error("Error on updating user profile. $e.message")
+            return[success: false]
+        }
+
+    }
 }
