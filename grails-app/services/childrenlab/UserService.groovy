@@ -47,7 +47,7 @@ class UserService {
 
     def uploadUserProfile(def image){
         def user = springSecurityService.currentUser as User
-        
+
         if(image && image.getSize() > 0){
             try{
                 String fileName ="user_profile_${user.id}.png"

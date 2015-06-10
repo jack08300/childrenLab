@@ -7,6 +7,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class UserController {
 
     def userService
+    def springSecurityService
 
     def register(String email, String password, String phoneNumber, String firstName, String lastName, String birthday, String nickName, String sex, String address, String city, int zipCode, String role){
 
@@ -30,6 +31,14 @@ class UserController {
     def uploadUserProfile(){
         def result = userService.uploadUserProfile(params.image)
 
+        render result as JSON
+    }
+
+    @Secured(['ROLE_USER'])
+    def retrieveUserProfile(){
+        def user = springSecurityService.currentUser as User
+
+        def result = [success: true, user: user]
         render result as JSON
     }
 }
