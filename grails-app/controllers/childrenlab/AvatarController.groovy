@@ -24,4 +24,10 @@ class AvatarController {
 
         render result as JSON
     }
+
+    def uploadProfileImage(String encodedImage, int width, int height){
+        def result = avatarService.uploadProfileImage(encodedImage, width, height)
+
+        render result as JSON
+    }
 }
