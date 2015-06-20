@@ -1,4 +1,6 @@
 import auth.ChildLabAuthFailureHandler
+import auth.ChildLabAuthenticationTokenJsonRender
+import auth.ChildLabSuccessHandler
 import auth.ChildrenLabAuthFilter
 
 import javax.servlet.http.HttpServletResponse
@@ -19,6 +21,17 @@ beans = {
     restAuthenticationFailureHandler(ChildLabAuthFailureHandler) {
         statusCode = application.config.grails.plugin.springsecurity.rest.login.failureStatusCode ?: HttpServletResponse.SC_UNAUTHORIZED
         //renderer = ref('restAuthenticationTokenJsonRenderer')
+    }
+
+    defaultRestAuthenticationTokenJsonRenderer(ChildLabAuthenticationTokenJsonRender) {
+        usernamePropertyName = "email"
+        tokenPropertyName = "access_token"
+        authoritiesPropertyName = "rule"
+        //renderer = ref('restAuthenticationTokenJsonRenderer')
+    }
+
+    restAuthenticationSuccessHandler(ChildLabSuccessHandler){
+        renderer = ref('defaultRestAuthenticationTokenJsonRenderer')
     }
 
 
