@@ -57,7 +57,7 @@ class UserService {
                 user.profile = fileName
                 user.save()
 
-                return [success: true]
+                return [success: true, profileImage: user.profile]
             }catch(Exception e){
                 e.printStackTrace()
                 return [success: false, message: "Erorr on uploading image null error: ${e.message}"]
