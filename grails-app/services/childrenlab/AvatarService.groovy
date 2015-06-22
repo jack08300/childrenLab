@@ -38,7 +38,7 @@ class AvatarService {
 
         user.profile = fileName
 
-        return [success: true]
+        return [success: true, profileImage: user.profile]
 
     }
 
