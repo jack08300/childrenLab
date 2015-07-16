@@ -166,6 +166,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/connect/**':                    ['permitAll'],
     '/device/uploadData':             ['permitAll'],
     '/schedule/**':                   ['ROLE_USER'],
-    '/device/list':                   ['ROLE_ADMIN']
+    '/device/list':                   ['ROLE_ADMIN'],
+    '/survey/**':                     ['permitAll']
 ]
 
