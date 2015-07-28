@@ -206,7 +206,7 @@
 				<li class="fieldcontain">
 					<span id="whereToBuySmartWatchOther-label" class="property-label"><g:message code="survey.whereToBuySmartWatchOther.label" default="Where To Buy Smart Watch Other" /></span>
 					
-						<span class="property-value" aria-labelledby="whereToBuySmartWatchOther-label"><g:fieldValue bean="${surveyInstance}" field="whereToBuySmartWatchOther"/></span>
+						<span class="property-value" aria-labelledby="whereToBuySmartWatchOther-label">${ new String(org.apache.commons.codec.binary.Base64.decodeBase64(surveyInstance.whereToBuySmartWatchOther), "UTF-8")}</span>
 					
 				</li>
 				</g:if>
@@ -268,8 +268,8 @@
 				<g:if test="${surveyInstance?.idea}">
 				<li class="fieldcontain">
 					<span id="idea-label" class="property-label"><g:message code="survey.idea.label" default="Idea" /></span>
-					
-						<span class="property-value" aria-labelledby="idea-label"><g:fieldValue bean="${surveyInstance}" field="idea"/></span>
+
+						<span class="property-value" aria-labelledby="idea-label">${ new String(org.apache.commons.codec.binary.Base64.decodeBase64(surveyInstance.idea), "UTF-8")}</span>
 					
 				</li>
 				</g:if>
