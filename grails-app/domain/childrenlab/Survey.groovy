@@ -29,11 +29,14 @@ class Survey {
     String idea
     String email
     String ip
+    String region
 
     String token
     String resourcePage
 
     Date dateCreated
+
+    boolean completed = false
 
 
     static constraints = {
@@ -59,6 +62,7 @@ class Survey {
         smartWatchPrefer nullable: true
         whereToBuySmartWatchOther nullable: true
         smartWatchExpense nullable: true
+        region nullable: true
 
         buyOrNot nullable: true
         wantToHaveFunction nullable: true

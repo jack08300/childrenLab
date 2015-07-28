@@ -2,6 +2,15 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'token', 'error')} required">
+	<label for="token">
+		<g:message code="survey.token.label" default="Token" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="token" required="" value="${surveyInstance?.token}"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'gender', 'error')} ">
 	<label for="gender">
 		<g:message code="survey.gender.label" default="Gender" />
@@ -173,6 +182,24 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'smartWatchExpense', 'error')} ">
+	<label for="smartWatchExpense">
+		<g:message code="survey.smartWatchExpense.label" default="Smart Watch Expense" />
+		
+	</label>
+	<g:textField name="smartWatchExpense" value="${surveyInstance?.smartWatchExpense}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'region', 'error')} ">
+	<label for="region">
+		<g:message code="survey.region.label" default="Region" />
+		
+	</label>
+	<g:textField name="region" value="${surveyInstance?.region}"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'buyOrNot', 'error')} ">
 	<label for="buyOrNot">
 		<g:message code="survey.buyOrNot.label" default="Buy Or Not" />
@@ -236,12 +263,21 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'smartWatchExpense', 'error')} required">
-	<label for="smartWatchExpense">
-		<g:message code="survey.smartWatchExpense.label" default="Smart Watch Expense" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'resourcePage', 'error')} ">
+	<label for="resourcePage">
+		<g:message code="survey.resourcePage.label" default="Resource Page" />
+		
 	</label>
-	<g:textField name="smartWatchExpense" required="" value="${surveyInstance?.smartWatchExpense}"/>
+	<g:textField name="resourcePage" value="${surveyInstance?.resourcePage}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'completed', 'error')} ">
+	<label for="completed">
+		<g:message code="survey.completed.label" default="Completed" />
+		
+	</label>
+	<g:checkBox name="completed" value="${surveyInstance?.completed}" />
 
 </div>
 

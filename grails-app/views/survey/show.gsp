@@ -31,6 +31,15 @@
 			</g:if>
 			<ol class="property-list survey">
 			
+				<g:if test="${surveyInstance?.token}">
+				<li class="fieldcontain">
+					<span id="token-label" class="property-label"><g:message code="survey.token.label" default="Token" /></span>
+					
+						<span class="property-value" aria-labelledby="token-label"><g:fieldValue bean="${surveyInstance}" field="token"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${surveyInstance?.gender}">
 				<li class="fieldcontain">
 					<span id="gender-label" class="property-label"><g:message code="survey.gender.label" default="Gender" /></span>
@@ -202,6 +211,24 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${surveyInstance?.smartWatchExpense}">
+				<li class="fieldcontain">
+					<span id="smartWatchExpense-label" class="property-label"><g:message code="survey.smartWatchExpense.label" default="Smart Watch Expense" /></span>
+					
+						<span class="property-value" aria-labelledby="smartWatchExpense-label"><g:fieldValue bean="${surveyInstance}" field="smartWatchExpense"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${surveyInstance?.region}">
+				<li class="fieldcontain">
+					<span id="region-label" class="property-label"><g:message code="survey.region.label" default="Region" /></span>
+					
+						<span class="property-value" aria-labelledby="region-label"><g:fieldValue bean="${surveyInstance}" field="region"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${surveyInstance?.buyOrNot}">
 				<li class="fieldcontain">
 					<span id="buyOrNot-label" class="property-label"><g:message code="survey.buyOrNot.label" default="Buy Or Not" /></span>
@@ -265,20 +292,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${surveyInstance?.resourcePage}">
+				<li class="fieldcontain">
+					<span id="resourcePage-label" class="property-label"><g:message code="survey.resourcePage.label" default="Resource Page" /></span>
+					
+						<span class="property-value" aria-labelledby="resourcePage-label"><g:fieldValue bean="${surveyInstance}" field="resourcePage"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${surveyInstance?.completed}">
+				<li class="fieldcontain">
+					<span id="completed-label" class="property-label"><g:message code="survey.completed.label" default="Completed" /></span>
+					
+						<span class="property-value" aria-labelledby="completed-label"><g:formatBoolean boolean="${surveyInstance?.completed}" /></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${surveyInstance?.dateCreated}">
 				<li class="fieldcontain">
 					<span id="dateCreated-label" class="property-label"><g:message code="survey.dateCreated.label" default="Date Created" /></span>
 					
 						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${surveyInstance?.dateCreated}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${surveyInstance?.smartWatchExpense}">
-				<li class="fieldcontain">
-					<span id="smartWatchExpense-label" class="property-label"><g:message code="survey.smartWatchExpense.label" default="Smart Watch Expense" /></span>
-					
-						<span class="property-value" aria-labelledby="smartWatchExpense-label">$<g:fieldValue bean="${surveyInstance}" field="smartWatchExpense"/></span>
 					
 				</li>
 				</g:if>
