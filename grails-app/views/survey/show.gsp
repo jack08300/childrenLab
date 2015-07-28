@@ -6,6 +6,14 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'survey.label', default: 'Survey')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+        <style type="text/css" media="screen">
+        #swingLogo {
+            font-size: 25px;
+            padding: 15px;
+            font-weight: bold;
+            background-color: #ABBF78;
+        }
+        </style>
 	</head>
 	<body>
 		<a href="#show-survey" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -270,7 +278,7 @@
 				<li class="fieldcontain">
 					<span id="smartWatchExpense-label" class="property-label"><g:message code="survey.smartWatchExpense.label" default="Smart Watch Expense" /></span>
 					
-						<span class="property-value" aria-labelledby="smartWatchExpense-label"><g:fieldValue bean="${surveyInstance}" field="smartWatchExpense"/></span>
+						<span class="property-value" aria-labelledby="smartWatchExpense-label">$<g:fieldValue bean="${surveyInstance}" field="smartWatchExpense"/></span>
 					
 				</li>
 				</g:if>
