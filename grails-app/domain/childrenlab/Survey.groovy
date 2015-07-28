@@ -30,10 +30,15 @@ class Survey {
     String email
     String ip
 
+    String token
+    String resourcePage
+
     Date dateCreated
 
 
     static constraints = {
+        token nullable: false, unique: true
+
         gender nullable: true
         age nullable: true
         income nullable: true
@@ -53,6 +58,7 @@ class Survey {
         mustHaveFunction nullable: true
         smartWatchPrefer nullable: true
         whereToBuySmartWatchOther nullable: true
+        smartWatchExpense nullable: true
 
         buyOrNot nullable: true
         wantToHaveFunction nullable: true
@@ -61,5 +67,6 @@ class Survey {
         idea nullable: true
         email nullable: true
         ip nullable: true
+        resourcePage nullable: true
     }
 }

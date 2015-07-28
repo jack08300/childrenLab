@@ -32,6 +32,11 @@
             <g:link controller="user" action="feedbackList">Feedback Data</g:link>
         </td>
     </tr>
+    <tr>
+        <td>
+            <g:link controller="survey" action="index">Survey</g:link>
+        </td>
+    </tr>
     </tbody>
 </table>
 
