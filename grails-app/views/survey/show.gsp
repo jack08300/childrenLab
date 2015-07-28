@@ -292,11 +292,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${surveyInstance?.resourcePage}">
+				<g:if test="${surveyInstance?.source}">
 				<li class="fieldcontain">
-					<span id="resourcePage-label" class="property-label"><g:message code="survey.resourcePage.label" default="Resource Page" /></span>
+					<span id="resourcePage-label" class="property-label"><g:message code="survey.resourcePage.label" default="Source" /></span>
 					
-						<span class="property-value" aria-labelledby="resourcePage-label"><g:fieldValue bean="${surveyInstance}" field="resourcePage"/></span>
+						<span class="property-value" aria-labelledby="source-label"><g:fieldValue bean="${surveyInstance}" field="source"/></span>
 					
 				</li>
 				</g:if>

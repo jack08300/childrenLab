@@ -32,7 +32,7 @@ class Survey {
     String region
 
     String token
-    String resourcePage
+    String source
 
     Date dateCreated
 
@@ -71,6 +71,6 @@ class Survey {
         idea nullable: true
         email nullable: true
         ip nullable: true
-        resourcePage nullable: true
+        source nullable: true
     }
 }
