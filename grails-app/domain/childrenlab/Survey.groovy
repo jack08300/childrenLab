@@ -37,6 +37,7 @@ class Survey {
     Date dateCreated
 
     boolean completed = false
+    boolean emailSent = false
 
 
     static constraints = {

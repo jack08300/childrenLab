@@ -59,6 +59,19 @@ grails {
     }
 }
 
+//Email
+grails {
+    mail {
+        host = "mail.childrenlab.com"
+        port = 587
+        username = "support@childrenlab.com"
+        password = "sUPuteP6"
+        props = ["mail.smtp.auth":"true",
+                 "mail.smtp.socketFactory.port":"587",
+                 "mail.smtp.socketFactory.fallback":"false"]
+    }
+}
+
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration

@@ -56,6 +56,7 @@ grails.project.dependency.resolution = {
     plugins {
         // plugins for the build system only
         build ":tomcat:7.0.54"
+        compile ":mail:1.0.7"
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"

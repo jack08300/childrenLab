@@ -5,6 +5,8 @@ import grails.converters.JSON
 
 class SurveyController {
 
+    def mailService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 
@@ -24,6 +26,11 @@ class SurveyController {
                 value = value.toString()
                 survey["$key"] = "${value.replace("[", "").replace("]", "").replaceAll(",", " ")}"
             }
+        }
+
+        if(survey.email && survey.completed && !survey.emailSent){
+            sendPromoEmail(survey.email)
+            survey.emailSent = true
         }
 
         survey.save(flush: true, failOnError: true)
@@ -62,5 +69,19 @@ class SurveyController {
 
         response.setHeader("content-disposition", "attachment; filename=SurveyReport.csv")
         render(contentType: "text/csv", text: csvFile)
+    }
+
+    def sendPromoEmail(String email){
+        sendMail {
+            to email
+            from "support@childrenlab.com"
+            subject "Kids Dynamic Tech"
+            html '<b>Dear customer</b>, <br/><br/>Thank you for spending the time to fill out our market research survey. ' +
+                    'Your feedback and participation are greatly appreciated. ' +
+                    'We would like to offer you a $10 coupon to our Swing Watch Generation 1, ' +
+                    'which will be in market in April 2016. Please use the promo code below for your swing watch purchase next year.<br/><br/>' +
+                    'Thank you for your support! We will continue working on delivering great product for you and your kids. <br/><br/>' +
+                    'Kids Dynamic Tech'
+        }
     }
 }
