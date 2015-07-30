@@ -66,7 +66,7 @@ class SurveyController {
         String csvFile = "Completed, Region, Email, Gender, Age, Income, job, ZipCode, Kids, Kids_Age, Weekly_Spend_On_Kids, Kids_Schedule, Outdoor_Activity, Percent_Spend_On_Activity, Activity_Category, Activity_From, Used_Smart_Watch, What_Kind_Of_Watch, Must_Have_Function, Smart_Watch_Prefer, Smart_Watch_Expense, Buy_Or_Not, Wish_Function, Where_To_Buy_Watch, Where_To_Buy_Watch_Others, Suggestion, Idea, IP, source\n"
 
         survey.each(){
-            csvFile+= "$it.completed, $it.region, $it.email, $it.gender, $it.age, $it.income, $it.job, $it.zipcode, $it.kids, $it.kidsAge, $it.weeklySpend, $it.kidsSchedule, $it.outdoorActivity,  $it.percentSpendOnActivity, $it.activityCategory, $it.activityFrom, $it.usedSmartWatch, $it.whatKindOfWatch, $it.mustHaveFunction, $it.smartWatchPrefer, $it.smartWatchExpense, $it.buyOrNot, $it.wantToHaveFunction, $it.whereToBuySmartWatch, $it.whereToBuySmartWatchOther, $it.improve, $it.idea, $it.ip, $it.resourcePage\n"
+            csvFile+= "$it.completed, $it.region, $it.email, $it.gender, $it.age, $it.income, $it.job, $it.zipcode, $it.kids, $it.kidsAge, $it.weeklySpend, $it.kidsSchedule, $it.outdoorActivity,  $it.percentSpendOnActivity, $it.activityCategory, $it.activityFrom, $it.usedSmartWatch, $it.whatKindOfWatch, $it.mustHaveFunction, $it.smartWatchPrefer, $it.smartWatchExpense, $it.buyOrNot, $it.wantToHaveFunction, $it.whereToBuySmartWatch, $it.whereToBuySmartWatchOther, $it.improve, $it.idea, $it.ip, $it.source\n"
         }
 
         csvFile.replaceAll(",", "\",\"")
