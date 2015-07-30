@@ -29,8 +29,12 @@ class SurveyController {
         }
 
         if(survey.email && survey.completed && !survey.emailSent){
-            sendPromoEmail(survey.email)
-            survey.emailSent = true
+            def surveyConfig = SurveySourceConfig.findBySource(survey.source)
+            if(surveyConfig && surveyConfig.email){
+                sendPromoEmail(survey.email)
+                survey.emailSent = true
+            }
+
         }
 
         survey.save(flush: true, failOnError: true)
