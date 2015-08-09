@@ -49,4 +49,10 @@ class UserController {
         render result as JSON
     }
 
+    def isEmailRegistered(String email){
+        boolean registered = User.findByEmail(email) != null
+
+        render([success: true, registered: registered])
+    }
+
 }
