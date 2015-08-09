@@ -9,6 +9,31 @@ class UserService {
     def springSecurityService
     def ftpService
 
+    def register(String email, String password){
+
+        def user = User.findByEmail(email)
+        def result
+        try{
+
+            Role role = Role.findByAuthority('ROLE_USER')
+
+            if(user){
+                //User exists
+                result = [success: false, message: "The email already registered."]
+            } else {
+                user = new User(email: email, password: password).save(flush: true, failOnError: true)
+
+                new UserRole(user: user, role: role).save(flush: true, failOnError: true)
+                result = [success: true]
+            }
+        }catch(Exception e){
+            log.error("Login or register error: ", e);
+            result = [success: false, message: "The server incounter error stage, please try it again later."]
+        }
+
+        return result
+    }
+
     def register(String email, String password, String phoneNumber, String firstName, String lastName, String birthday, String nickName, String sex, String address, String city, int zipCode, String roleString){
 
         def user = User.findByEmail(email)

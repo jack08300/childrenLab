@@ -26,11 +26,11 @@ class User {
 
 	static constraints = {
 		email blank: false, unique: true
-        phoneNumber blank: false
-		password blank: false
+        password blank: false
 
-        firstName nullable: false
-        lastName nullable: false
+        phoneNumber nullable: true, blank: true
+        firstName nullable: true
+        lastName nullable: true
         birthday nullable: true
         nickName nullable: true
         sex nullable: true
