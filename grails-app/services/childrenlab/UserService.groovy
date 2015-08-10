@@ -80,6 +80,7 @@ class UserService {
             if(firstName && user.firstName != firstName){ user.firstName = firstName }
             if(lastName && user.lastName != lastName){ user.lastName = lastName}
             if(gender && user.sex != gender){ user.sex = gender}
+            if(!user.completed) user.completed = true
 
             user.save(failOnError: true, flash: true)
 
@@ -88,6 +89,31 @@ class UserService {
             log.error("Error on updating user profile. $e.message")
             return[success: false]
         }
+    }
+
+    def updateUserRole(String roleString){
+        def user = springSecurityService.currentUser as User
+        Role role = null
+        switch(roleString){
+            case "parent":
+                role = Role.findByAuthority('ROLE_PARENT')
+                break;
+            case "nanny":
+                role = Role.findByAuthority('ROLE_NANNY')
+                break;
+        }
+
+        if(role){
+            def roles = springSecurityService.getPrincipal().getAuthorities()
+            if(!(roles.toString().contains(role.authority))){
+                new UserRole(user: user, role: role).save(flush: true, failOnError: true)
+                return [success: true]
+            }else{
+                log.error("User trying add role $user, $role")
+            }
+        }
+
+        return [success: false]
     }
 
 

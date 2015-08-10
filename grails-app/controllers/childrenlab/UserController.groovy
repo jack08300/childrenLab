@@ -61,4 +61,13 @@ class UserController {
         render([success: true, registered: registered])
     }
 
+    @Secured(['ROLE_USER'])
+    def updateUserRole(String role){
+        if(!role){ render([success: false] as JSON)}
+
+        def result = userService.updateUserRole(role)
+
+        render result as JSON
+    }
+
 }
