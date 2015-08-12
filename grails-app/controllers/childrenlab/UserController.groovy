@@ -58,7 +58,7 @@ class UserController {
     def isEmailRegistered(String email){
         boolean registered = User.findByEmail(email) != null
 
-        render([success: true, registered: registered])
+        render([success: true, registered: registered] as JSON)
     }
 
     @Secured(['ROLE_USER'])
