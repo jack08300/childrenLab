@@ -12,7 +12,7 @@ class KidsService {
         User user = springSecurityService.getCurrentUser() as User
         try{
             def birthday = toolsService.stringToDate(birthdayString, "yyyy-MM-dd")
-            if(!birthday){return [success: false, message: "Birthday format was not right."]}
+//            if(!birthday){return [success: false, message: "Birthday format was not right."]}
 
             new Kids(firstName: firstName, lastName: lastName, nickName: nickName, birthday: birthday, note: note, parent: user).save(failOnError: true)
 
