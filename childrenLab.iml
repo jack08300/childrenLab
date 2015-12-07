@@ -30,17 +30,18 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/i18n" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/domain" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/jobs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/utils" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/work/gspcompile" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-build-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-provided-classes" />
@@ -55,7 +56,28 @@
       <library name="Grails User Library (childrenLab)">
         <CLASSES>
           <root url="file://$MODULE_DIR$/lib" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.1.6/quartz-2.1.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcprov-jdk15on/1.51/bcprov-jdk15on-1.51.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/minidev/json-smart/1.1.1/json-smart-1.1.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/nimbusds/nimbus-jose-jwt/3.8/nimbus-jose-jwt-3.8.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.0.6/jackson-core-2.0.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.0.6/jackson-annotations-2.0.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.0.6/jackson-databind-2.0.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/scribe/scribe/1.3.5/scribe-1.3.5.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/pac4j/pac4j-oauth/1.5.0/pac4j-oauth-1.5.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/pac4j/pac4j-core/1.5.0/pac4j-core-1.5.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava-base/r03/guava-base-r03.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava-annotations/r03/guava-annotations-r03.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava-io/r03/guava-io-r03.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/spy/spymemcached/2.10.3/spymemcached-2.10.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/javax/mail/javax.mail-api/1.5.1/javax.mail-api-1.5.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/liquibase/liquibase-core/2.0.5/liquibase-core-2.0.5.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/4.0.5.RELEASE/spring-orm-4.0.5.RELEASE.jar!/" />
@@ -75,6 +97,8 @@
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/classmate/1.0.0/classmate-1.0.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/5.0.3.Final/hibernate-validator-5.0.3.Final.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.1/javax.mail-1.5.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/7.0.53/tomcat-embed-core-7.0.53.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/jdt/core/compiler/ecj/3.7.2/ecj-3.7.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/7.0.53/tomcat-embed-websocket-7.0.53.jar!/" />
@@ -82,29 +106,6 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/7.0.53/tomcat-embed-el-7.0.53.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.53/tomcat-embed-jasper-7.0.53.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.53/tomcat-catalina-ant-7.0.53.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.0.6/jackson-core-2.0.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.0.6/jackson-annotations-2.0.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.0.6/jackson-databind-2.0.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/scribe/scribe/1.3.5/scribe-1.3.5.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/pac4j/pac4j-oauth/1.5.0/pac4j-oauth-1.5.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/pac4j/pac4j-core/1.5.0/pac4j-core-1.5.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava-base/r03/guava-base-r03.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava-annotations/r03/guava-annotations-r03.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava-io/r03/guava-io-r03.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/net/spy/spymemcached/2.10.3/spymemcached-2.10.3.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcprov-jdk15on/1.51/bcprov-jdk15on-1.51.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/net/minidev/json-smart/1.1.1/json-smart-1.1.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/nimbusds/nimbus-jose-jwt/3.8/nimbus-jose-jwt-3.8.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.1.6/quartz-2.1.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/javax/mail/javax.mail-api/1.5.1/javax.mail-api-1.5.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.1/javax.mail-1.5.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -112,5 +113,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="childrenLab-grailsPlugins" />
+    <orderEntry type="library" name="grails-2.4.2" level="application" />
   </component>
 </module>

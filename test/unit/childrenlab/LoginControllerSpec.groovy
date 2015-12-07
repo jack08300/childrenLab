@@ -1,5 +1,6 @@
 package childrenlab
 
+import grails.plugin.springsecurity.LoginController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

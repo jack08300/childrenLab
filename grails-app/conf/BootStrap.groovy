@@ -1,3 +1,4 @@
+import childrenlab.Device
 import childrenlab.Kids
 import childrenlab.Role
 import childrenlab.Schedule
@@ -21,9 +22,12 @@ class BootStrap {
 
         def testUser = new User(email: 'admin', password: 'admin', firstName: "Jay", lastName: "Chen", phoneNumber: '12345656').save(flush: true)
         def testUser2 = new User(email: 'user', password: 'user', firstName: 'Jay', lastName: 'chen', phoneNumber: '12234214512').save(flush: true)
+        def userTester = new User(email: 'user', password: 'user', firstName: 'TESTER', lastName: 'TESTER', phoneNumber: '12234214512').save(flush: true)
 
         new UserRole(role: Role.get(1), user: testUser).save(flush: true)
         new UserRole(role: Role.get(2), user: testUser2).save(flush: true)
+
+        def device = Device.findByMacId('test') ?: new Device(user: userTester, swingVersion: 'Test', macId: 'test').save(flush: true)
 
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
 

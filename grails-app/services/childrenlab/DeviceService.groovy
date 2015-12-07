@@ -12,6 +12,10 @@ class DeviceService {
 
         User user = springSecurityService.getCurrentUser() as User
 
+        if(!macId){
+            macId = 'test'
+        }
+
         def device = Device.findByMacId(macId) ?: new Device(macId: macId, user: user).save(failOnError: true)
 
         new DeviceActivity(activityX: activityX, activityY: activityY, activityZ: activityZ, light: light, audio: audio, uv: uv, device: device, temperature: temperature).save(failOnError: true)
