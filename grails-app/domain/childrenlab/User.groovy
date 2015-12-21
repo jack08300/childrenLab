@@ -14,6 +14,8 @@ class User {
     String sex
     String profile
 
+	static hasMany = [calendarEvent: CalendarEvent]
+
     Date dateCreated
     Date lastUpdated
 

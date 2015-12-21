@@ -37,6 +37,11 @@
             <g:link controller="survey" action="index">Survey</g:link>
         </td>
     </tr>
+    <tr>
+        <td>
+            <g:link controller="calendarEvent" action="index">Calendar Event</g:link>
+        </td>
+    </tr>
     </tbody>
 </table>
 

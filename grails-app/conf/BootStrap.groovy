@@ -1,3 +1,4 @@
+import childrenlab.CalendarEvent
 import childrenlab.Device
 import childrenlab.Kids
 import childrenlab.Role
@@ -101,6 +102,19 @@ class BootStrap {
             returnArray['email'] = it.email
             returnArray['profile'] = it.profile
 
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(CalendarEvent){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['eventName'] = it.eventName
+            returnArray['startDate'] = it.startDate
+            returnArray['endDate'] = it.endDate
+            returnArray['color'] = it.color
+            returnArray['status'] = it.status?.name()
+            returnArray['description'] = it.description
 
             return returnArray
         }
