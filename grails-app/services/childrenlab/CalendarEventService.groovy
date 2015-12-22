@@ -1,5 +1,6 @@
 package childrenlab
 
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional
@@ -25,20 +26,24 @@ class CalendarEventService {
 
     }
 
-    def getEventsByUser(def params){
+    def getEventsByUser(String query, int month, int year, int day){
         def user = springSecurityService.currentUser as User
+
+        println "Event By User Params: $query, $month, $year, $day"
 
         def events
 
-        if(params.query == "month"){
-            events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ?", [user, params.month.toInteger(), params.year.toInteger()])
-        }else if(params.query == "day"){
-            events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) and Day(startDate) = ?", [user, params.month, params.year, params.day])
+        if(query == "month"){
+            events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ? order by startDate", [user, month, year])
+        }else if(query == "day"){
+            events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) and Day(startDate) = ?  order by startDate", [user, month, year, day])
         }else{
-            events = CalendarEvent.findAll("from CalendarEvent where user = ?", [user])
+            events = CalendarEvent.findAll("from CalendarEvent where user = ?  order by startDate", [user])
         }
 
-        return events
+        println "Result: ${events as JSON}"
+
+        return [events: events, totalCount: events.size()]
     }
 
     @Transactional
