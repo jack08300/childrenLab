@@ -29,8 +29,6 @@ class CalendarEventService {
     def getEventsByUser(String query, int month, int year, int day){
         def user = springSecurityService.currentUser as User
 
-        println "Event By User Params: $query, $month, $year, $day"
-
         def events
 
         if(query == "month"){
@@ -41,9 +39,7 @@ class CalendarEventService {
             events = CalendarEvent.findAll("from CalendarEvent where user = ?  order by startDate", [user])
         }
 
-        println "Result: ${events as JSON}"
-
-        return [events: events, totalCount: events.size()]
+        return [success: true, events: events, totalCount: events.size()]
     }
 
     @Transactional

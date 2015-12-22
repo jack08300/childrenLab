@@ -6240,3 +6240,7 @@ n:360:org/grails/datastore/mapping/reflect/ClassPropertyFetcher$ReferenceInstanc
 y:1967:org/grails/datastore/mapping/reflect/ClassPropertyFetcher$GetterPropertyFetcher
 n:753:org/grails/datastore/mapping/reflect/ClassPropertyFetcher$PropertyFetcher
 y:5602:org/grails/datastore/mapping/reflect/ReflectionUtils
+n:1716:org/codehaus/groovy/antlr/ASTRuntimeException
+n:1564:org/codehaus/groovy/antlr/ASTParserException
+n:961:org/codehaus/groovy/syntax/ParserException
+n:1570:org/codehaus/groovy/syntax/TokenException

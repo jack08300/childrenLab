@@ -30,7 +30,7 @@ class BootStrap {
 
         def device = Device.findByMacId('test') ?: new Device(user: userTester, swingVersion: 'Test', macId: 'test').save(flush: true)
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 
         JSON.registerObjectMarshaller(Schedule){
             def returnArray = [:]
@@ -110,11 +110,11 @@ class BootStrap {
             def returnArray = [:]
             returnArray['id'] = it.id
             returnArray['eventName'] = it.eventName
-            returnArray['startDate'] = it.startDate
-            returnArray['endDate'] = it.endDate
+            returnArray['startDate'] = dateFormat.format(it.startDate)
+            returnArray['endDate'] = dateFormat.format(it.endDate)
             returnArray['color'] = it.color
             returnArray['status'] = it.status?.name()
-            returnArray['description'] = it.description
+            returnArray['description'] = it.description ?: ''
 
             return returnArray
         }
