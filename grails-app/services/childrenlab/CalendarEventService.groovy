@@ -34,7 +34,7 @@ class CalendarEventService {
         if(query == "month"){
             events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ? order by startDate", [user, month, year])
         }else if(query == "day"){
-            events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) and Day(startDate) = ?  order by startDate", [user, month, year, day])
+            events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ? and Day(startDate) = ?  order by startDate", [user, month, year, day])
         }else{
             events = CalendarEvent.findAll("from CalendarEvent where user = ?  order by startDate", [user])
         }
