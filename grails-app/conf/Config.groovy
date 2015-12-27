@@ -135,6 +135,10 @@ log4j.main = {
            'net.sf.ehcache.hibernate'
 }
 
+grails.plugins.stripe.secretKey = "sk_test_uI3Heeuj8WhZRr44RDME4tQE"
+grails.plugins.stripe.publishableKey = "pk_test_PPUcJNop6egHqyPhIGWrtyo1"
+grails.plugins.stripe.api.url = "/stripe/callback"
+
 grails.plugin.springsecurity.rest.login.usernamePropertyName = 'email'
 grails.plugin.springsecurity.rest.login.passwordPropertyName = 'password'
 grails.plugin.springsecurity.rest.login.endpointUrl = '/api/login'
@@ -180,6 +184,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/device/uploadData':             ['permitAll'],
     '/schedule/**':                   ['ROLE_USER'],
     '/device/list':                   ['ROLE_ADMIN'],
-    '/survey/**':                     ['permitAll']
+    '/survey/**':                     ['permitAll'],
+    '/stripe/**':               ['permitAll']
 ]
 
