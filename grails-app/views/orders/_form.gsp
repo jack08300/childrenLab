@@ -47,3 +47,12 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'charged', 'error')} ">
+	<label for="charged">
+		<g:message code="orders.charged.label" default="Charged" />
+		
+	</label>
+	<g:checkBox name="charged" value="${ordersInstance?.charged}" />
+
+</div>
+

@@ -68,6 +68,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${ordersInstance?.charged}">
+				<li class="fieldcontain">
+					<span id="charged-label" class="property-label"><g:message code="orders.charged.label" default="Charged" /></span>
+					
+						<span class="property-value" aria-labelledby="charged-label"><g:formatBoolean boolean="${ordersInstance?.charged}" /></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:ordersInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

@@ -117,7 +117,7 @@ class CalendarEventController {
     @Secured(['ROLE_USER'])
     def getEventsByUser(String query, int month, int year, int day){
         def result = calendarEventService.getEventsByUser(query, month , year, day)
-
+println result
         render result as JSON
     }
 

@@ -34,6 +34,10 @@
 					
 						<g:sortableColumn property="amount" title="${message(code: 'orders.amount.label', default: 'Amount')}" />
 					
+						<g:sortableColumn property="charged" title="${message(code: 'orders.charged.label', default: 'Charged')}" />
+
+						<g:sortableColumn property="charged" title="${message(code: 'orders.charged.label', default: 'Place Order')}" />
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +53,13 @@
 						<td>${fieldValue(bean: ordersInstance, field: "charge")}</td>
 					
 						<td>${fieldValue(bean: ordersInstance, field: "amount")}</td>
+					
+						<td><g:formatBoolean boolean="${ordersInstance.charged}" /></td>
+
+						<g:if test="${!ordersInstance.charged}">
+							<td><g:link controller="stripe" action="charge" params="[orderId: ordersInstance.orderId]">Charge</g:link></td>
+						</g:if>
+
 					
 					</tr>
 				</g:each>
