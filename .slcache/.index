@@ -6639,3 +6639,6 @@ n:1916:org/apache/log4j/Logger$getLogger
 n:644:org/springframework/core/SpringVersion
 n:3367:BuildConfig$_run_closure1_closure5
 n:2609:groovyx/net/http/ContentType
+n:22629:org/hibernate/type/CollectionType
+n:1248:org/hibernate/type/AssociationType
+n:6399:org/hibernate/type/AbstractType

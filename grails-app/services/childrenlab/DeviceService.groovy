@@ -7,7 +7,7 @@ class DeviceService {
 
     def springSecurityService
 
-    def uploadData(String activityX, String activityY, String activityZ, String light, String audio, String uv, String macId, String temperature){
+    def uploadData(String x, String y, String z, String u, String v, String macId){
 
 
         User user = springSecurityService.getCurrentUser() as User
@@ -16,9 +16,10 @@ class DeviceService {
             macId = 'test'
         }
 
+
         def device = Device.findByMacId(macId) ?: new Device(macId: macId, user: user).save(failOnError: true)
 
-        new DeviceActivity(activityX: activityX, activityY: activityY, activityZ: activityZ, light: light, audio: audio, uv: uv, device: device, temperature: temperature).save(failOnError: true)
+        new DeviceActivity(activityX: x, activityY: y, activityZ: z, u: u, v: v, device: device).save(failOnError: true)
 
         return true
     }

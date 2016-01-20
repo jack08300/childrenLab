@@ -26,15 +26,17 @@
 					
 						<g:sortableColumn property="orderId" title="${message(code: 'orders.orderId.label', default: 'Order Id')}" />
 					
-						<th><g:message code="orders.stripe.label" default="Stripe" /></th>
+						<th><g:message code="orders.stripe.label" default="Email" /></th>
 					
 						<g:sortableColumn property="product" title="${message(code: 'orders.product.label', default: 'Product')}" />
 					
-						<g:sortableColumn property="charge" title="${message(code: 'orders.charge.label', default: 'Charge')}" />
+						<g:sortableColumn property="charge" title="${message(code: 'orders.charge.label', default: 'Estimate <br/> charge')}" />
 					
 						<g:sortableColumn property="amount" title="${message(code: 'orders.amount.label', default: 'Amount')}" />
 					
 						<g:sortableColumn property="charged" title="${message(code: 'orders.charged.label', default: 'Charged')}" />
+
+						<g:sortableColumn property="dateCreated" title="${message(code: 'orders.dateCreated.label', default: 'Order Date')}" />
 
 						<g:sortableColumn property="charged" title="${message(code: 'orders.charged.label', default: 'Place Order')}" />
 					
@@ -46,15 +48,18 @@
 					
 						<td><g:link action="show" id="${ordersInstance.id}">${fieldValue(bean: ordersInstance, field: "orderId")}</g:link></td>
 					
-						<td>${fieldValue(bean: ordersInstance, field: "stripe")}</td>
+						<td>${fieldValue(bean: ordersInstance, field: "stripe.email")}</td>
 					
 						<td>${fieldValue(bean: ordersInstance, field: "product")}</td>
 					
 						<td>${fieldValue(bean: ordersInstance, field: "charge")}</td>
 					
 						<td>${fieldValue(bean: ordersInstance, field: "amount")}</td>
-					
+
+
 						<td><g:formatBoolean boolean="${ordersInstance.charged}" /></td>
+
+						<td>${fieldValue(bean: ordersInstance, field: "dateCreated")}</td>
 
 						<g:if test="${!ordersInstance.charged}">
 							<td><g:link controller="stripe" action="charge" params="[orderId: ordersInstance.orderId]">Charge</g:link></td>

@@ -1,11 +1,11 @@
 package childrenlab
 
 import grails.converters.JSON
-import grails.plugins.rest.client.RestBuilder
 import grails.transaction.Transactional
 import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
+import net.minidev.json.JSONObject
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 
@@ -16,87 +16,47 @@ public enum ErrorType {
 @Transactional
 class StripeService {
 
-    def apiRequest(String api, Map params, boolean useRequestForm = false){
-        def rest = new RestBuilder(connectTimeout:1000, readTimeout:20000)
-println "params:-  $params"
-
-
-/*        def resp = rest.post("https://api.stripe.com/$api") {
-            header "Authorization", "Bearer sk_test_Owf8vzeSEzWuMsQPvvC8SoIS"
-            contentType "application/x-www-form-urlencoded"
-            accept "application/json"
-            json useRequestForm ? getRequestForm(params) : params
-        }*/
-
-/*        if(!useRequestForm){
-            resp = rest.post("https://api.stripe.com/$api") {
-                header "Authorization", "Bearer sk_test_Owf8vzeSEzWuMsQPvvC8SoIS"
-                contentType "application/x-www-form-urlencoded"
-                accept "application/json"
-                json params
-            }
-        }else{
-            def form = getRequestForm(params)
-            resp = rest.post("https://api.stripe.com/$api") {
-                header "Authorization", "Bearer sk_test_Owf8vzeSEzWuMsQPvvC8SoIS"
-                contentType "application/x-www-form-urlencoded"
-                accept "application/json"
-                body form
-            }
-
-        }
-        if(resp.status == 200){
-
-            return resp.json
-
-        }else {
-            log.error("Error on calling Strip -  $resp.status - $resp.json")
-        }*/
+    def apiRequest(String api, def params, boolean useRequestForm = false){
+        println "params:-  $params"
 
 println "path:- $api"
         def http = new HTTPBuilder("https://api.stripe.com/")
         def result = [success: false]
         http.request(Method.POST, ContentType.URLENC){
-            headers.'contentType' = ContentType.JSON
+            headers.'Accept' = ContentType.JSON
             headers.'Authorization' = "Bearer sk_test_Owf8vzeSEzWuMsQPvvC8SoIS"
             uri.path = api
-/*            if(useRequestForm){
-                uri.query = params
-            }else{
-                body = params
-            }*/
             uri.query = params
             response.success = { resp, json ->
                 println json
-
-                result = json
+                println json.keySet();
+                return JSON.parse(json.keySet().toString())
             }
 
             response.failure = { resp, message ->
                 println "Request failed with status ${resp.status} ${message}"
+                return JSON.parse(message.keySet().toString());
             }
         }
 
 
-        return result
+//        return result
     }
 
     def createCustomer(String email, String description = null, def card = [:], def billingAddress = [:]){
 
         def user = Stripe.findByEmail(email)
-        if(user && !card){
-            return user
-        }
 
         def body = [
                 "description": description,
                 "email": email
         ]
 
-        println card
         if(card){
-
             def token = getCardToken(card, billingAddress)
+            if(token.error[0]){
+                return [success: false, message: token.error.message]
+            }
             body["source"] = token.id
         }
 
@@ -105,7 +65,12 @@ println "path:- $api"
 
         if(result){
             println "Create new customer Result: - $result"
-            user = new Stripe(customerId: result.id, cardId: result?.sources?.data[0]?.id, email: result.email).save(failOnError: true)
+
+            user = user ?: new Stripe(email: result.email)
+
+            user.cardId = result?.sources?.data[0]?.id
+            user.customerId = result.id
+            user.save(failOnError: true)
         }
 
         return user
@@ -116,7 +81,7 @@ println "path:- $api"
         def order = Orders.findByOrderIdAndCharged(orderId, false)
         def user = order.stripe
         def body = [
-                "amount": Math.round(order.charge * 100),
+                "amount": String.valueOf(Math.round(order.charge * 100)),
                 "currency": "usd",
                 "customer": user.customerId
         ]
@@ -159,7 +124,7 @@ println "path:- $api"
 
     def getRequestForm(Map body){
         MultiValueMap<String, Object> form = new LinkedMultiValueMap<String, Object>()
-println "Test2"
+
         form = childrenForm(body, form)
         println form
 

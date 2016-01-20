@@ -29,10 +29,8 @@
         <g:sortableColumn property="activityX" title="Activity X" />
         <g:sortableColumn property="activityY" title="Activity Y" />
         <g:sortableColumn property="activityZ" title="Activity Z" />
-        <g:sortableColumn property="audio" title="Audio" />
-        <g:sortableColumn property="light" title="Light" />
-        <g:sortableColumn property="uv" title="UV" />
-        <g:sortableColumn property="temperature" title="Temperature" />
+        <g:sortableColumn property="u" title="U" />
+        <g:sortableColumn property="v" title="V" />
         <g:sortableColumn property="date" title="Upload Date" />
 
 
@@ -45,10 +43,8 @@
             <td>${fieldValue(bean: listInstance, field: "activityX")}</td>
             <td>${fieldValue(bean: listInstance, field: "activityY")}</td>
             <td>${fieldValue(bean: listInstance, field: "activityZ")}</td>
-            <td>${fieldValue(bean: listInstance, field: "audio")}</td>
-            <td>${fieldValue(bean: listInstance, field: "light")}</td>
-            <td>${fieldValue(bean: listInstance, field: "uv")}</td>
-            <td>${fieldValue(bean: listInstance, field: "temperature")}</td>
+            <td>${fieldValue(bean: listInstance, field: "u")}</td>
+            <td>${fieldValue(bean: listInstance, field: "v")}</td>
             <td>${fieldValue(bean: listInstance, field: "dateCreated")}</td>
         </tr>
     </g:each>

@@ -24,7 +24,7 @@
     <tbody>
     <tr>
         <td>
-            <g:link controller="deviceActivity" action="index">Swing Data</g:link>
+            <g:link controller="device" action="list">Swing Data</g:link>
         </td>
     </tr>
     <tr>

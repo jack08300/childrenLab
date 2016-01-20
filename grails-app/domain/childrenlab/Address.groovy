@@ -22,6 +22,7 @@ class Address {
         state nullable: false
         country nullable: false
         zipCode nullable: false
+        orders nullable: true
 
     }
 }

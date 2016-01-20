@@ -73,7 +73,7 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:2.0-RC4"
         compile ":spring-security-rest:1.5.0.M1"
         compile ":quartz2:2.1.6.2"
-        compile "org.grails.plugins:rest-client-builder:2.1.1"
+//        compile "org.grails.plugins:rest-client-builder:2.1.1"
 
         compile "org.grails.plugins:rest:0.8"
 //        compile "org.grails.plugins:joda-time:1.5"

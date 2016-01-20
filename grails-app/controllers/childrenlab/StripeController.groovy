@@ -12,23 +12,25 @@ class StripeController {
     def preOrder(String email, int amount){
 println params as JSON
 
+        def shippingAddress = JSON.parse(params.shippingAddress)
         def stripe = stripeService.createCustomer(email, null, JSON.parse(params.card), JSON.parse(params.billingAddress))
         if(stripe instanceof Stripe){
-            def order = new Orders(stripe: stripe, amount: amount, charge: params.charge, orderId: "test", phoneNumber: params.shippingAddress.phoneNumber)
+            def order = new Orders(stripe: stripe, amount: amount, charge: params.charge, orderId: "test", phoneNumber: shippingAddress.phoneNumber).save(failOnError: true, flush: true)
 
             def address = new Address(
-                    address1: params.shippingAddress.address.address1,
-                    address2: params.shippingAddress.address.address2,
-                    city: params.shippingAddress.address.city,
-                    state: params.shippingAddress.address.state,
-                    country: params.shippingAddress.address.country,
-                    zipCode: params.shippingAddress.address.zipcode,
-                    name: "${params.shippingAddress.firstName} ${params.shippingAddress.lastName}",
-            ).save(failOnError: true)
+                    address1: shippingAddress.address1,
+                    address2: shippingAddress.address2,
+                    city: shippingAddress.city,
+                    state: shippingAddress.state,
+                    country: shippingAddress.country,
+                    zipCode: shippingAddress.zipcode,
+                    name: "${shippingAddress.firstName} ${shippingAddress.lastName}",
+                    orders: order
+            ).save(failOnError: true, flush: true)
             order.address = address
             order.save(failOnError: true)
         }else{
-            render([success: false, message: "something wrong when create customer"] as JSON)
+            render([success: false, message: stripe.message ?: "something wrong when create customer"] as JSON)
             return
         }
 
@@ -55,13 +57,13 @@ println params as JSON
             flash.message = "Something wrong when processing."
         }
 
-        render(controller: "orders")
+        redirect(controller: "orders")
 
     }
 
     def testCreateCustomer(){
         def card = [
-                number: "4242424242424242",
+                number: "4012888888881881",
                 month: "2",
                 year: "17",
                 cvc: "123",
@@ -91,7 +93,7 @@ println params as JSON
 
         ]
 
-        def result = stripeService.createCustomer("yen-chieh.chen@kapitall.com", "FOr test", card, shipping, billing)
+        def result = stripeService.createCustomer("yen-chieh.chen2@kapitall.com", "FOr test", card, billing)
         render result
     }
 
