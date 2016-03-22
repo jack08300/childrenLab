@@ -12,6 +12,7 @@ class Kids {
     Date birthday
     String note
     KidsStatus status = KidsStatus.PUBLIC
+    String profile
 
     Date dateCreated
     Date lastUpdated
@@ -24,6 +25,7 @@ class Kids {
         nickName nullable: true
         birthday nullable: true
         note nullable: true
+        profile nullable: true
 
         dateCreated nullable: true
         lastUpdated nullable: true

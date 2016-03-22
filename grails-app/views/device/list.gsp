@@ -24,6 +24,8 @@
     <tr>
         <g:sortableColumn property="macId" title="Mac ID" />
         <g:sortableColumn property="user.email" title="User Email" />
+        <g:sortableColumn property="Size" title="Size" />
+        <g:sortableColumn property="delete" title="Delete" />
 
     </tr>
     </thead>
@@ -33,10 +35,16 @@
 
             <td><g:link action="deviceDataList" params="[macId: listInstance.macId]">${fieldValue(bean: listInstance, field: "macId")}</g:link></td>
             <td>${fieldValue(bean: listInstance, field: "user.email")}</td>
+            <td>${childrenlab.DeviceActivity.countByDevice(listInstance)}</td>
+            <td><g:link action="deleteByDevice" params="[macId: listInstance.macId]">Delete</g:link></td>
         </tr>
     </g:each>
     </tbody>
 </table>
+
+<div class="pagination">
+    <g:paginate total="${deviceInstanceCount ?: 0}" />
+</div>
 
 </body>
 </html>

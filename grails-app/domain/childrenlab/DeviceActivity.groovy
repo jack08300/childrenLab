@@ -11,6 +11,7 @@ class DeviceActivity {
     String u
     String v
     String temperature
+    long receivedTime = 0
 
     static belongsTo = [device: Device]
 
@@ -31,6 +32,6 @@ class DeviceActivity {
     }
 
     static mapping = {
-        sort dateCreated: "desc"
+        sort id: "desc"
     }
 }

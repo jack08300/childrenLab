@@ -18,6 +18,7 @@ class User {
 
     Date dateCreated
     Date lastUpdated
+	String registrationId
 
 	boolean enabled = true
 	boolean accountExpired
@@ -42,7 +43,7 @@ class User {
 
         dateCreated nullable: true
         lastUpdated nullable: true
-
+		registrationId nullable: true
 	}
 
 	static mapping = {

@@ -116,5 +116,21 @@ class UserService {
         return [success: false]
     }
 
+    def updateRegistration(String registrationId){
+        if(!registrationId){
+            return [success: false, message: 'need registrationId']
+        }
+        User user = springSecurityService.getCurrentUser() as User
+
+        if(!user){
+            return [success: false, message: "couldn't find your device"]
+        }
+
+        user.registrationId = registrationId
+        user.save(flush:true, failOnError: true)
+
+        return [success: true]
+    }
+
 
 }

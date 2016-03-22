@@ -84,8 +84,8 @@ class BootStrap {
             returnArray['firstName'] = it.firstName
             returnArray['lastName'] = it.lastName
             returnArray['nickName'] = it.nickName
-            returnArray['birthday'] = dateFormat.format(it.birthday)
             returnArray['note'] = it.note
+            returnArray['profile'] = it.profile
 
             return returnArray
         }
@@ -115,6 +115,7 @@ class BootStrap {
             returnArray['color'] = it.color
             returnArray['status'] = it.status?.name()
             returnArray['description'] = it.description ?: ''
+            returnArray['alert'] = it.alert
 
             return returnArray
         }

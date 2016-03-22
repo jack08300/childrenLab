@@ -70,4 +70,17 @@ class UserController {
         render result as JSON
     }
 
+    def updateRegistration(String registrationId){
+        def result = userService.updateRegistration(registrationId)
+
+        render result
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def getPushList(){
+        def users = User.findAllByRegistrationIdIsNotNull()
+
+        render(view: 'pushNotificationList', model: [users: users])
+    }
+
 }

@@ -8,7 +8,7 @@ class CalendarEventService {
 
     def springSecurityService
 
-    def addEvent(String eventName, String startDate, String endDate, String color, String status, description){
+    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, String alert){
         if(!eventName || !startDate || !endDate){
             return [success: false, message: "One of parameter doesn't fill"]
         }
@@ -16,7 +16,7 @@ class CalendarEventService {
         Date start = Date.parse("yyyy/MM/dd HH:mm:ss", startDate)
         Date end = Date.parse("yyyy/MM/dd HH:mm:ss", endDate)
 
-        def newEvent = new CalendarEvent(eventName: eventName, startDate: start, endDate: end, color: color, status: status ? status as EventStatus : EventStatus.Open, description: description, user: springSecurityService.currentUser as User).save(failOnError: true)
+        def newEvent = new CalendarEvent(eventName: eventName, startDate: start, endDate: end, color: color, status: status ? status as EventStatus : EventStatus.Open, description: description, user: springSecurityService.currentUser as User, alert: alert).save(failOnError: true)
 
         if(!newEvent){
             return [success: false, message: "Something wrong when save the event"]

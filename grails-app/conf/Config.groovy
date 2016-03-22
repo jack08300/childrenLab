@@ -107,6 +107,7 @@ ftp.path = "/"
 environments {
     development {
         grails.logging.jul.usebridge = true
+
     }
     production {
         grails.logging.jul.usebridge = false

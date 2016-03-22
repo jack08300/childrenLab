@@ -42,6 +42,12 @@
             <g:link controller="calendarEvent" action="index">Calendar Event</g:link>
         </td>
     </tr>
+
+    <tr>
+        <td>
+            <g:link controller="user" action="getPushList">Push Notification</g:link>
+        </td>
+    </tr>
     </tbody>
 </table>
 

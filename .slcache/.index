@@ -6642,3 +6642,11 @@ n:2609:groovyx/net/http/ContentType
 n:22629:org/hibernate/type/CollectionType
 n:1248:org/hibernate/type/AssociationType
 n:6399:org/hibernate/type/AbstractType
+n:3350:BuildConfig$_run_closure1_closure5
+n:656:com/notnoop/apns/APNS
+n:1136:com/notnoop/apns/ApnsService
+n:2273:org/codehaus/groovy/grails/commons/GrailsApplication$isArtefactOfType
+n:2057:org/codehaus/groovy/grails/commons/GrailsApplication$getArtefacts$0
+n:905:com/notnoop/exceptions/NetworkIOException
+n:808:com/notnoop/exceptions/ApnsException
+n:252:com/notnoop/apns/ApnsNotification

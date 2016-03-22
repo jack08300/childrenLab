@@ -12,6 +12,7 @@ class CalendarEvent {
     String color
     EventStatus status = EventStatus.Open
     String description
+    String alert
 
     static belongsTo = [user: User]
 
@@ -30,5 +31,6 @@ class CalendarEvent {
         endDate nullable: false
         user nullable: false
         description nullable: true
+        alert nullable: true
     }
 }
