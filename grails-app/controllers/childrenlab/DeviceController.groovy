@@ -2,7 +2,6 @@ package childrenlab
 
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
-import org.joda.time.DateTime
 
 @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class DeviceController {
