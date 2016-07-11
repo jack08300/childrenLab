@@ -23,7 +23,7 @@ Ex:
 ```
 
 
-# www.childrenLab.com/user/register
+# user/register
 * Params(required) - email, password, phoneNumber, firstName, lastName
 * other Params - birthday, nickName, sex, address, city, zipCode, role(2 type: ROLE_USER, ROLE_NANNY)
 * The default role is ROLE_USER
@@ -36,7 +36,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/user/isEmailRegistered
+# user/isEmailRegistered
 * Params - email
 * Return example:
 ```
@@ -45,7 +45,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/kids/add
+# kids/add
 * Params(required) - firstName, lastName, birthday(Format must be: "yyyy-MM-dd"
 * Params(not required) - nickName, note
 
@@ -56,7 +56,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/kids/edit
+# kids/edit
 * Params(required) - kidId
 * Params(not required) - firstName, lastName, birthday, nickName, note
 
@@ -67,7 +67,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/kids/remove
+# kids/remove
 * Params(required) - kidId
 
 * Return example:
@@ -77,7 +77,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/kids/list
+# kids/list
 * Return example:
 ```
 {
@@ -103,12 +103,12 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/avatar/temp
+# avatar/temp
 * Temp cloud place to store image
 * Params(required) - img
 * It return image byte format: data:image/png;base64
 
-# www.childrenLab.com/avatar/uploadProfileImage
+# avatar/uploadProfileImage
 * Profile Image for user
 * The image stored in http://avatar.childrenlab.com/'
 * Params(required) - encodedImage (we should change it)
@@ -120,7 +120,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/avatar/uploadKidsProfileImage
+# avatar/uploadKidsProfileImage
 * Profile Image for user
 * The image stored in http://avatar.childrenlab.com/'
 * Params(required) - encodedImage (we should change it), kidId
@@ -132,7 +132,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/calendarEvent/addEvent
+# calendarEvent/addEvent
 * Event creation
 * Params(required) - eventName, startDate, endDate, color, status, description, alert
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
@@ -144,7 +144,7 @@ Ex:
 ```
 
 
-# www.childrenLab.com/calendarEvent/getEventsByUser
+# calendarEvent/getEventsByUser
 * Event creation
 * Params - query, month, year, day
 * query - month or day.
@@ -183,7 +183,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/calendarEvent/editEvent
+# calendarEvent/editEvent
 * Params(required) - id, eventName, startDate, endDate, color, description, alert
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
 * Return example:
@@ -194,7 +194,7 @@ Ex:
 ```
 
 
-# www.childrenLab.com/calendarEvent/deleteEvent
+# calendarEvent/deleteEvent
 * Params(required) - id
 * Return example:
 ```
@@ -203,7 +203,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/device/uploadRawData
+# device/uploadRawData
 * Params(required) - rawData
 * Raw Data Example: |MacID,X,Y,Z,U,V,TIME|
 * Return example:
@@ -213,7 +213,7 @@ Ex:
 }
 ```
 
-# www.childrenLab.com/device/uploadResultData
+# device/uploadResultData
 * Params(required) - macId, activity, calories, distance, receivedTime
 * receivedTime is long - timestamp
 * Return example:
