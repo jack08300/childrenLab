@@ -20,7 +20,17 @@ class DeviceController {
         render result
     }
 
+    def uploadResultData(String macId, int activity, int calories, int distance, long receivedTime){
+        def result = deviceService.uploadResultData(macId, activity, calories, distance, receivedTime)
 
+        render result
+    }
+
+    def getWeeklyActivity(String macId){
+        def result = deviceService.getWeeklyActivity(macId)
+
+        render result
+    }
 
     @Secured(['ROLE_ADMIN'])
     def swingData(){
@@ -75,32 +85,4 @@ class DeviceController {
         redirect([action: 'list'])
 
     }
-
-    @Secured(['ROLE_ADMIN'])
-    @Transactional
-    def fixBugTime(int deviceId){
-        def device = Device.get(deviceId);
-        def list = DeviceActivity.findAll("from DeviceActivity where device = ? and dateCreated > '2016-02-10'", [device])
-
-        def previousDate;
-        def count = 0;
-        list.each(){
-            if(!previousDate){
-                previousDate = it.receivedTime;
-            }
-
-            if(previousDate == it.receivedTime){
-                it.receivedTime +=  Math.floor(count)
-                count += 0.5;
-            }else{
-                previousDate = it.receivedTime
-                count = 0.5
-            }
-            it.save(flash: true, failOnError: true)
-
-        }
-
-    }
-
-
 }

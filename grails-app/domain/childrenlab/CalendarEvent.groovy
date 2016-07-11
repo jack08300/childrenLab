@@ -12,7 +12,7 @@ class CalendarEvent {
     String color
     EventStatus status = EventStatus.Open
     String description
-    String alert
+    int alert
 
     static belongsTo = [user: User]
 

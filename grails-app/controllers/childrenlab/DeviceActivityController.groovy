@@ -12,6 +12,7 @@ class DeviceActivityController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+        max=1000
         params.max = Math.min(max ?: 10, 100)
         respond DeviceActivity.list(params), model:[deviceActivityInstanceCount: DeviceActivity.count()]
     }

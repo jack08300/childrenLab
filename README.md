@@ -15,7 +15,13 @@
 }
 ```
 
-* Exception: if email or password not match, the response status will be 403 Unauthorized (let me know if you don't like it...)
+* Exception: if email or password not match, the response status will be 403 Unauthorized
+* Use the access_token to access other API. Put the token on the request header.
+Ex:
+```
+ x-auth-token: 4ncvvg81j5smer66avrgdasgvcncngd3
+```
+
 
 # www.childrenLab.com/user/register
 * Params(required) - email, password, phoneNumber, firstName, lastName
@@ -30,300 +36,12 @@
 }
 ```
 
-# www.childrenLab.com/schedule/create
-* Params(required) - startDate, endDate (format: yyyy-MM-dd hh:mm), paymentPerHour
-* other Params - status(^PENDING,PUBLIC,COMPLETED,REMOVED), type(NANNY, PARENT), note
-* The default status is PENDING
-
-* Exception example:
-if the user already has schedule during the dates
-```
-{
-"success": false,
-"message": "You already has schedule between the dates"
-}
-``` 
-when create successfully
-```
-{
-"success": true
-}
-```
-
-# www.childrenLab.com/schedule/edit
-* Params - only scheduleId is required
-* Same as create, but can't edit status, and type
-
-* Exception example:
-if the user already has schedule during the dates
-```
-{
-"success": false,
-"message": "You already has schedule between the dates"
-}
-```
-when create successfully
-```
-{
-"success": true
-}
-```
-
-# www.childrenLab.com/schedule/updateStatus
-* Params(required) - scheduleId, status (PENDING,PUBLIC,COMPLETED,REMOVED)
-* This API is able to change schedule status, even for deleting schedule, just change the status = REMOVED
-
-* Exception example:
-if the something wrong when update
-```
-{
-"success": false,
-"message": "Can't find schedule."
-}
-``` 
-when update successfully
-```
-{
-"success": true
-}
-```
-
-# www.childrenLab.com/schedule/retrieveUserSchedule
-* Params - scheduleId
-* If you call this API with scheduleId, it will return only one schedule and its message list
-* If you call this without scheduleId, it will return all of schedule that related to the login user
-
+# www.childrenLab.com/user/isEmailRegistered
+* Params - email
 * Return example:
 ```
 {
-"success": true,
-"schedule": [
-{
-"id": 1,
-"dateCreated": "2015-03-10 07:35:23",
-"lastUpdated": "2015-03-13 05:33:43",
-"startDate": "2015-02-01 12:00:00",
-"endDate": "2015-03-01 12:00:00",
-"status": "REMOVED",
-"type": "NANNY",
-"user": "J C",
-"userId": 4
-},
-{
-"id": 2,
-"dateCreated": "2015-03-10 07:37:59",
-"lastUpdated": "2015-03-10 07:37:59",
-"startDate": "2015-01-31 12:00:00",
-"endDate": "2015-03-01 12:00:00",
-"status": "PRIVATE",
-"type": "NANNY",
-"user": "J C",
-"userId": 4
-}
-]
-}
-```
-With message:
-```
-{
-"success": true,
-"schedule": {
-"id": 1,
-"dateCreated": "2015-03-15 02:22:14",
-"lastUpdated": "2015-03-15 02:22:14",
-"startDate": "2015-02-04 11:00:00",
-"endDate": "2015-03-01 09:00:00",
-"status": "PRIVATE",
-"type": "NANNY",
-"user": "J C",
-"userId": 3
-},
-"message": [
-{
-"class": "childrenlab.ScheduleMessage",
-"id": 3,
-"dateCreated": "2015-03-14T18:24:06Z",
-"lastUpdated": "2015-03-14T18:24:06Z",
-"message": "I'm herererererer",
-"schedule": {
-"class": "childrenlab.Schedule",
-"id": 1
-},
-"user": {
-"class": "childrenlab.User",
-"id": 3
-}
-},
-{
-"class": "childrenlab.ScheduleMessage",
-"id": 2,
-"dateCreated": "2015-03-14T18:23:48Z",
-"lastUpdated": "2015-03-14T18:23:48Z",
-"message": "Testing test",
-"schedule": {
-"class": "childrenlab.Schedule",
-"id": 1
-},
-"user": {
-"class": "childrenlab.User",
-"id": 3
-}
-},
-{
-"class": "childrenlab.ScheduleMessage",
-"id": 1,
-"dateCreated": "2015-03-14T18:23:03Z",
-"lastUpdated": "2015-03-14T18:23:03Z",
-"message": "Testing test",
-"schedule": {
-"class": "childrenlab.Schedule",
-"id": 1
-},
-"user": {
-"class": "childrenlab.User",
-"id": 3
-}
-}
-]
-}
-```
-# www.childrenLab.com/schedule/list
-* This return all of schedule (Not sure if you need it)
-
-* Return example:
-```
-{
-"success": true,
-"list": [
-{
-"id": 1,
-"dateCreated": "2015-03-10 07:35:23",
-"lastUpdated": "2015-03-13 05:33:43",
-"startDate": "2015-02-01 12:00:00",
-"endDate": "2015-03-01 12:00:00",
-"status": "REMOVED",
-"type": "NANNY",
-"user": "J C",
-"userId": 4
-},
-{
-"id": 2,
-"dateCreated": "2015-03-10 07:37:59",
-"lastUpdated": "2015-03-10 07:37:59",
-"startDate": "2015-01-31 12:00:00",
-"endDate": "2015-03-01 12:00:00",
-"status": "PRIVATE",
-"type": "NANNY",
-"user": "J C",
-"userId": 4
-}
-]
-}
-```
-
-# www.childrenLab.com/schedule/search
-* Params(required) - startDate, endDate (format: yyyy-mm-dd hh:mm), startPrice, endPrice, gender
-* Params(not required) - offset, max, zipcode
-
-* Return example:
-```
-{
-"success": true,
-"scheduleList": [
-{
-"id": 3,
-"dateCreated": "2015-03-15 02:53:17",
-"lastUpdated": "2015-03-15 02:53:17",
-"startDate": "2015-07-04 12:00:00",
-"endDate": "2015-07-05 05:00:00",
-"status": "PRIVATE",
-"type": "NANNY",
-"user": "J C",
-"userId": 3
-},
-{
-"id": 2,
-"dateCreated": "2015-03-15 02:51:12",
-"lastUpdated": "2015-03-15 02:51:12",
-"startDate": "2015-05-04 12:00:00",
-"endDate": "2015-05-05 05:00:00",
-"status": "PRIVATE",
-"type": "NANNY",
-"user": "J C",
-"userId": 3
-},
-{
-"id": 1,
-"dateCreated": "2015-03-15 02:22:14",
-"lastUpdated": "2015-03-15 02:22:14",
-"startDate": "2015-02-04 11:00:00",
-"endDate": "2015-03-01 09:00:00",
-"status": "PRIVATE",
-"type": "NANNY",
-"user": "J C",
-"userId": 3
-}
-],
-"totalSize": 3
-}
-```
-# www.childrenLab.com/schedule/leaveMessage
-* Params(required) - message, scheduleId
-
-* Return example:
-```
-{
-"success": true
-}
-```
-# www.childrenLab.com/schedule/retrieveMessage
-* Params(required) - scheduleId
-
-* Return example:
-```
-{
-"success": true,
-"scheduleMessage": [
-{
-"id": 1,
-"user": {
-"id": 3,
-"email": "jack08300@gmail.com"
-},
-"message": "Testing test",
-"owner": {
-"id": 3,
-"email": "jack08300@gmail.com"
-},
-"date": "2015-03-14T18:23:03Z"
-},
-{
-"id": 2,
-"user": {
-"id": 3,
-"email": "jack08300@gmail.com"
-},
-"message": "Testing test",
-"owner": {
-"id": 3,
-"email": "jack08300@gmail.com"
-},
-"date": "2015-03-14T18:23:48Z"
-},
-{
-"id": 3,
-"user": {
-"id": 3,
-"email": "jack08300@gmail.com"
-},
-"message": "I'm herererererer",
-"owner": {
-"id": 3,
-"email": "jack08300@gmail.com"
-},
-"date": "2015-03-14T18:24:06Z"
-}
-]
+  "registered": true
 }
 ```
 
@@ -382,5 +100,125 @@ With message:
             "note": "hahaha, it's test"
         }
     ]
+}
+```
+
+# www.childrenLab.com/avatar/temp
+* Temp cloud place to store image
+* Params(required) - img
+* It return image byte format: data:image/png;base64
+
+# www.childrenLab.com/avatar/uploadProfileImage
+* Profile Image for user
+* The image stored in http://avatar.childrenlab.com/'
+* Params(required) - encodedImage (we should change it)
+* Return example:
+```
+{
+    "success": true,
+    "profileImage": "1234521.png"
+}
+```
+
+# www.childrenLab.com/avatar/uploadKidsProfileImage
+* Profile Image for user
+* The image stored in http://avatar.childrenlab.com/'
+* Params(required) - encodedImage (we should change it), kidId
+* Return example:
+```
+{
+    "success": true,
+    "profileImage": "1234521.png"
+}
+```
+
+# www.childrenLab.com/calendarEvent/addEvent
+* Event creation
+* Params(required) - eventName, startDate, endDate, color, status, description, alert
+* startDate and endDate format: yyyy/MM/dd HH:mm:ss
+* Return example:
+```
+{
+    "success": true
+}
+```
+
+
+# www.childrenLab.com/calendarEvent/getEventsByUser
+* Event creation
+* Params - query, month, year, day
+* query - month or day.
+* If query == month, only month and year are required from parameters.
+* If query == day, month, year, and day are required from parameters.
+* month - integer
+* year - integer
+* day - integer
+* Return example:
+```
+{
+  "success": true,
+  "events": [
+    {
+      "id": 17,
+      "eventName": "Jehcd",
+      "startDate": "2016-07-06 09:39:00",
+      "endDate": "2016-07-06 09:40:00",
+      "color": "pink",
+      "status": "Open",
+      "description": "",
+      "alert": 43
+    },
+    {
+      "id": 18,
+      "eventName": "Tfvg",
+      "startDate": "2016-07-06 09:42:00",
+      "endDate": "2016-07-06 09:43:00",
+      "color": "green",
+      "status": "Open",
+      "description": "",
+      "alert": 48
+    }
+  ],
+  "totalCount": 2
+}
+```
+
+# www.childrenLab.com/calendarEvent/editEvent
+* Params(required) - id, eventName, startDate, endDate, color, description, alert
+* startDate and endDate format: yyyy/MM/dd HH:mm:ss
+* Return example:
+```
+{
+    "success": true
+}
+```
+
+
+# www.childrenLab.com/calendarEvent/deleteEvent
+* Params(required) - id
+* Return example:
+```
+{
+    "success": true
+}
+```
+
+# www.childrenLab.com/device/uploadRawData
+* Params(required) - rawData
+* Raw Data Example: |MacID,X,Y,Z,U,V,TIME|
+* Return example:
+```
+{
+    "success": true
+}
+```
+
+# www.childrenLab.com/device/uploadResultData
+* Params(required) - macId, activity, calories, distance, receivedTime
+* receivedTime is long - timestamp
+* Return example:
+```
+{
+    "success": true
 }
 ```

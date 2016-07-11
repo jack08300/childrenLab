@@ -25,7 +25,7 @@ class AvatarService {
         return [success: true, imageBytes:  "data:image/png;base64,${baos.toByteArray().encodeBase64()}", width: originalImage.width, height: originalImage.height];
     }
 
-    def uploadProfileImage(String encodedImage, int width, int height){
+    def uploadProfileImage(String encodedImage){
         encodedImage = encodedImage.replace("data:image/png;base64,", "")
         BufferedImage image = decodeToImage(encodedImage)
         ByteArrayOutputStream baos = new ByteArrayOutputStream()
@@ -42,6 +42,25 @@ class AvatarService {
 
     }
 
+    def uploadKidProfileImage(String encodedImage, int kidId){
+        User user = springSecurityService.getCurrentUser() as User
+        def kid = Kids.findByParentAndId(user, kidId)
+        if(!kid) {
+            return [success: false, message: "Can't find the kid"]
+        }
+        encodedImage = encodedImage.replace("data:image/png;base64,", "")
+        BufferedImage image = decodeToImage(encodedImage)
+        ByteArrayOutputStream baos = new ByteArrayOutputStream()
+        ImageIO.write( image, "png", baos )
+
+        String fileName = "avatar_${user.id}.png"
+        ftpService.save(baos.toByteArray(), fileName, "avatars")
+
+        kid.profile = fileName
+
+        return [success: true, profileImage: kid.profile]
+
+    }
     def BufferedImage decodeToImage(String imageString) {
 
         BufferedImage image = null;

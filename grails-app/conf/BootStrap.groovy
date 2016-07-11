@@ -1,3 +1,4 @@
+import childrenlab.Activity
 import childrenlab.CalendarEvent
 import childrenlab.Device
 import childrenlab.Kids
@@ -116,6 +117,17 @@ class BootStrap {
             returnArray['status'] = it.status?.name()
             returnArray['description'] = it.description ?: ''
             returnArray['alert'] = it.alert
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(Activity){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['steps'] = it.steps
+            returnArray['distance'] = it.distance
+            returnArray['calories'] = it.steps
+            returnArray['receivedTime'] = it.receivedTime
 
             return returnArray
         }

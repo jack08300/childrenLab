@@ -8,7 +8,7 @@ class CalendarEventService {
 
     def springSecurityService
 
-    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, String alert){
+    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert){
         if(!eventName || !startDate || !endDate){
             return [success: false, message: "One of parameter doesn't fill"]
         }
@@ -43,7 +43,7 @@ class CalendarEventService {
     }
 
     @Transactional
-    def editEvent(int id, String eventName, String startDate, String endDate, String color, String description){
+    def editEvent(int id, String eventName, String startDate, String endDate, String color, String description, int alert){
         def user = springSecurityService.currentUser as User
         def event = CalendarEvent.findByUserAndId(user, id)
 
@@ -59,6 +59,7 @@ class CalendarEventService {
         if(end) event.endDate = end
         if(color) event.color = color
         if(description) event.description = description
+        if(alert > 0) event.alert = alert
 
         event.save(failOnError: true, flush: true)
 

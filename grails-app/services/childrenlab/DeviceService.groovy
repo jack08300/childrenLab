@@ -29,6 +29,10 @@ class DeviceService {
 
         User user = springSecurityService.getCurrentUser() as User
 
+        if(!user){
+            user = User.findByEmail("BleTester") ?: new User(email: "BleTester", password: "bleTester").save(failOnError: true)
+        }
+
         def eachRaw = rawData.split("\\|");
         def eachData = []
 
@@ -65,5 +69,34 @@ class DeviceService {
         return true
     }
 
+    def uploadResultData(String macId, int steps, int calories, int distance, long receivedTime){
+        User user = springSecurityService.getCurrentUser() as User
+
+        if(!user){
+            user = User.findByEmail("BleTester") ?: new User(email: "BleTester", password: "bleTester").save(failOnError: true)
+        }
+
+        def device = Device.findByMacId(macId) ?: new Device(macId: macId, user: user).save(failOnError: true)
+
+        new Activity(device: device, steps: steps, calories: calories, distance: distance, receivedTime: receivedTime).save(failOnError: true)
+
+        return true
+    }
+
+    def getWeeklyActivity(String macId){
+        def device = Device.findByMacId(macId)
+
+        def activities = Activity.findAllByDevice(device)
+
+        return activities
+    }
+
 
 }
+
+/*
+E = sqrt(x^2+y^2+z^2)
+250 < E < 360
+x average < 35
+step = step+2 ;
+ */

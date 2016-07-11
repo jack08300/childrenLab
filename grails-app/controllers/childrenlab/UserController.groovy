@@ -43,8 +43,9 @@ class UserController {
     @Secured(['ROLE_USER'])
     def retrieveUserProfile(){
         def user = springSecurityService.currentUser as User
+        def userKids = Kids.findAllByParent(user)
 
-        def result = [success: true, user: user]
+        def result = [success: true, user: user, kids: userKids]
         render result as JSON
     }
 
@@ -58,7 +59,7 @@ class UserController {
     def isEmailRegistered(String email){
         boolean registered = User.findByEmail(email) != null
 
-        render([success: true, registered: registered] as JSON)
+        render([registered: registered] as JSON)
     }
 
     @Secured(['ROLE_USER'])

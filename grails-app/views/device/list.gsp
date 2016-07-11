@@ -42,9 +42,5 @@
     </tbody>
 </table>
 
-<div class="pagination">
-    <g:paginate total="${deviceInstanceCount ?: 0}" />
-</div>
-
 </body>
 </html>

@@ -29,6 +29,11 @@
     </tr>
     <tr>
         <td>
+            <g:link controller="activity" action="index">Swing Data Result</g:link>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <g:link controller="user" action="feedbackList">Feedback Data</g:link>
         </td>
     </tr>
