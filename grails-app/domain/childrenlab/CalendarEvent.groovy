@@ -13,9 +13,12 @@ class CalendarEvent {
     EventStatus status = EventStatus.Open
     String description
     int alert
+    String city
+    String state
+
 
     static belongsTo = [user: User]
-
+    static hasMany = [todoList: TodoList]
 
     Date dateCreated
     Date lastUpdated
@@ -32,5 +35,8 @@ class CalendarEvent {
         user nullable: false
         description nullable: true
         alert nullable: true
+        city nullable: true
+        state nullable: true
+        todoList nullable: true
     }
 }

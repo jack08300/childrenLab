@@ -5,6 +5,7 @@ import childrenlab.Kids
 import childrenlab.Role
 import childrenlab.Schedule
 import childrenlab.ScheduleMessage
+import childrenlab.TodoList
 import childrenlab.User
 import childrenlab.UserRole
 import grails.converters.JSON
@@ -117,6 +118,8 @@ class BootStrap {
             returnArray['status'] = it.status?.name()
             returnArray['description'] = it.description ?: ''
             returnArray['alert'] = it.alert
+            returnArray['city'] = it.city
+            returnArray['state'] = it.state
 
             return returnArray
         }
@@ -128,6 +131,15 @@ class BootStrap {
             returnArray['distance'] = it.distance
             returnArray['calories'] = it.steps
             returnArray['receivedTime'] = it.receivedTime
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(TodoList){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['text'] = it.text
+            returnArray['status'] = it.status.name()
 
             return returnArray
         }

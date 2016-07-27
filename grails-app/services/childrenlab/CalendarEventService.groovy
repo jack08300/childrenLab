@@ -8,7 +8,7 @@ class CalendarEventService {
 
     def springSecurityService
 
-    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert){
+    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state){
         if(!eventName || !startDate || !endDate){
             return [success: false, message: "One of parameter doesn't fill"]
         }
@@ -16,13 +16,15 @@ class CalendarEventService {
         Date start = Date.parse("yyyy/MM/dd HH:mm:ss", startDate)
         Date end = Date.parse("yyyy/MM/dd HH:mm:ss", endDate)
 
-        def newEvent = new CalendarEvent(eventName: eventName, startDate: start, endDate: end, color: color, status: status ? status as EventStatus : EventStatus.Open, description: description, user: springSecurityService.currentUser as User, alert: alert).save(failOnError: true)
+        def newEvent = new CalendarEvent(eventName: eventName, startDate: start, endDate: end, color: color,
+                status: status ? status as EventStatus : EventStatus.Open, description: description,
+                user: springSecurityService.currentUser as User, alert: alert, city: city, state: state).save(failOnError: true)
 
         if(!newEvent){
             return [success: false, message: "Something wrong when save the event"]
         }
 
-        return [success: true]
+        return [success: true, newEvent: newEvent]
 
     }
 
@@ -77,5 +79,46 @@ class CalendarEventService {
 
         return [success: true]
 
+    }
+
+
+    @Transactional
+    def addTodoList(int eventId, String todoList) {
+        def user = springSecurityService.currentUser as User
+        def event = CalendarEvent.get(eventId)
+
+
+
+//        def event = CalendarEvent.findByIdAndUser(eventId, user)
+        if(!event) {
+            return [success: false, message: "can't find event"]
+        }
+
+        def todos = todoList.split("\\|")
+        println todos
+
+        todos.each() {
+            event.addToTodoList(new TodoList(text: it).save(failOnError: true))
+        }
+
+        event.save(failOnError: true)
+
+        return [success: true, event: event, todo: event.todoList]
+    }
+
+    @Transactional
+    def todoDone(int todoId) {
+        def user = springSecurityService.currentUser as User
+
+        def todo = TodoList.findById(todoId)
+
+        if(!todo) {
+            return [success: false, message: "can't find todo"]
+        }
+
+        todo.status = TodoStatus.DONE
+        todo.save()
+
+        return [success: true]
     }
 }
