@@ -134,8 +134,72 @@ Ex:
 
 # calendarEvent/addEvent
 * Event creation
-* Params(required) - eventName, startDate, endDate, color, status, description, alert
+* Params(required) - eventName, startDate, endDate, color, status, description, alert, city, state
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
+* Return example:
+```
+{
+  "success": true,
+  "newEvent": {
+    "id": 3,
+    "eventName": "test1",
+    "startDate": "2015-10-10 03:12:12",
+    "endDate": "2015-12-01 12:12:12",
+    "color": "blue",
+    "status": "Open",
+    "description": "",
+    "alert": 0,
+    "city": "Taipei",
+    "state": null
+  }
+}
+```
+
+# calendarEvent/addTodo
+* Create todo under calendar event
+* Params(required) - eventId, todoList
+* todoList format - each todo separate with | 
+```
+todoList = Take a picture|Walk for 30 minutes|Take key
+```
+* Return example:
+```
+{
+  "success": true,
+  "event": {
+    "id": 2,
+    "eventName": "test1",
+    "startDate": "2015-10-10 03:12:12",
+    "endDate": "2015-12-01 12:12:12",
+    "color": "blue",
+    "status": "Open",
+    "description": "",
+    "alert": 0,
+    "city": null,
+    "state": null
+  },
+  "todo": [
+    {
+      "id": 29,
+      "text": "No",
+      "status": "PENDING"
+    },
+    {
+      "id": 35,
+      "text": "No",
+      "status": "PENDING"
+    },
+    {
+      "id": 38,
+      "text": "No",
+      "status": "PENDING"
+    }
+  ]
+}
+```
+# calendarEvent/todoDone
+* Done todo
+* Params - todoId
 * Return example:
 ```
 {
