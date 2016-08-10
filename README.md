@@ -25,10 +25,10 @@ Ex:
 
 # user/register
 * Params(required) - email, password, phoneNumber, firstName, lastName
-* other Params - birthday, nickName, address, city, zipCode
-* The default role is ROLE_USER
+* other Params - address, city, zipCode
+* Type - email: String, password: String ( > 6), phoneNumber: String, firstName: String, LastName: String, address: String, city: String, zipCode: String
 
-* Exception example: 
+* Return example: 
 ```
 {
 "success": false,
@@ -39,7 +39,7 @@ Ex:
 # user/updateProfile
 * Params(Not required) - address, city, state, zipCode, email, password, firstName, lastName
 
-* Exception example: 
+* Return example: 
 ```
 {
   "success": true,
@@ -62,7 +62,7 @@ Ex:
 
 # user/retrieveUserProfile
 
-* Exception example: 
+* Return example: 
 ```
 {
   "success": true,
@@ -96,6 +96,8 @@ Ex:
 # kids/add
 * Params(required) - firstName, lastName, birthday(Format must be: "yyyy-MM-dd"
 * Params(not required) - nickName, note
+
+* Type - birthday: Formatted String, firstName: String, LastName: String, nickName: String, note: String
 
 * Return example:
 ```
@@ -184,6 +186,9 @@ Ex:
 * Event creation
 * Params(required) - eventName, startDate, endDate, color, status, description, alert
 * Other Params - city, state
+* Type - eventName: String, startDate: Formatted String, endDate: Formatted String, color: String, status: String, description: String, alert: Int
+* Status Value: Open, Pass, Cancel
+* Color: yellow, purple, green, pink, orange, grey
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
 * Return example:
 ```
@@ -207,7 +212,8 @@ Ex:
 # calendarEvent/addTodo
 * Create todo under calendar event
 * Params(required) - eventId, todoList
-* todoList format - each todo separate with | 
+* Type - eventId: int, todoList: String
+* todoList format - each todo separate with | , Example:
 ```
 todoList = Take a picture|Walk for 30 minutes|Take key
 ```
