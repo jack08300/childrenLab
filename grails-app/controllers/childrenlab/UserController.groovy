@@ -9,8 +9,8 @@ class UserController {
     def userService
     def springSecurityService
 
-    def register(String email, String password){
-        def result = userService.register(email, password)
+    def register(String email, String password, String phoneNumber, String firstName, String lastName, String zipCode){
+        def result = userService.register(email, password, phoneNumber, firstName, lastName, zipCode)
 
         render result as JSON
     }
@@ -21,6 +21,8 @@ class UserController {
 
         render result as JSON
     }*/
+
+
 
     @Secured(['ROLE_USER'])
     def leaveFeedback(String type, String text){
@@ -50,8 +52,8 @@ class UserController {
     }
 
     @Secured(['ROLE_USER'])
-    def updateProfile(String email, String phoneNumber, String firstName, String lastName, String gender){
-        def result = userService.updateProfile(email, phoneNumber, firstName, lastName, gender)
+    def updateProfile(String email, String phoneNumber, String firstName, String lastName, String address, String city, String state, String zipCode){
+        def result = userService.updateProfile(email, phoneNumber, firstName, lastName, address, city, state, zipCode)
 
         render result as JSON
     }

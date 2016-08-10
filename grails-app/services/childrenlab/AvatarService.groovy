@@ -53,7 +53,7 @@ class AvatarService {
         ByteArrayOutputStream baos = new ByteArrayOutputStream()
         ImageIO.write( image, "png", baos )
 
-        String fileName = "avatar_${user.id}.png"
+        String fileName = "avatar_kid_${kid.id}.png"
         ftpService.save(baos.toByteArray(), fileName, "avatars")
 
         kid.profile = fileName

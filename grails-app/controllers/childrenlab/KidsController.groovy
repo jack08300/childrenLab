@@ -33,4 +33,9 @@ class KidsController {
         def result = kidsService.list()
         render result as JSON
     }
+
+    def getKid(int id) {
+        def result = kidsService.getKid(id)
+        render result as JSON
+    }
 }

@@ -121,4 +121,26 @@ class CalendarEventService {
 
         return [success: true]
     }
+
+    @Transactional
+    def deleteTodo(int todoId, int eventId) {
+        def user = springSecurityService.currentUser as User
+
+        def event = CalendarEvent.get(eventId)
+        def todo = event.removeFromTodoList(TodoList.findById(todoId))
+        event.save();
+
+        return [success: true]
+    }
+
+    def getEvent(int eventId){
+        def user = springSecurityService.currentUser as User
+        def event = CalendarEvent.findById(eventId)
+
+        if(!event){
+            return [success: false, message: "The event is not exist."]
+        }
+
+        return [success: true, event: event]
+    }
 }

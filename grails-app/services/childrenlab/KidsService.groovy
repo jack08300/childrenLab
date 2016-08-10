@@ -14,9 +14,9 @@ class KidsService {
             def birthday = toolsService.stringToDate(birthdayString, "yyyy-MM-dd")
 //            if(!birthday){return [success: false, message: "Birthday format was not right."]}
 
-            new Kids(firstName: firstName, lastName: lastName, nickName: nickName, birthday: birthday, note: note, parent: user).save(failOnError: true)
+            def kid = new Kids(firstName: firstName, lastName: lastName, nickName: nickName, birthday: birthday, note: note, parent: user).save(failOnError: true)
 
-            return [success: true]
+            return [success: true, kid: kid]
         }catch(Exception e){
             log.error("Error on adding kids for user $user", e)
             return [success: false, message: "Something wrong with system. Please try again later."]
@@ -71,6 +71,18 @@ class KidsService {
         }catch(Exception e){
             log.error("Error on editting kids for user $user", e)
             return [success: false, message: "Something wrong with system. Please try again later."]
+        }
+    }
+
+    def getKid(int id) {
+        User user = springSecurityService.getCurrentUser() as User
+        try{
+            def kids = Kids.findByIdAndParent(id, user)
+
+            return [success: true, kid: kids]
+        }catch(Exception e){
+            log.error("Error on getting kids list. $user.", e);
+            return [success: false, message: "Something wrong with system, please try again later."]
         }
     }
 }

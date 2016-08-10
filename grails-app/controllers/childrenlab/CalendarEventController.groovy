@@ -138,6 +138,13 @@ class CalendarEventController {
         render result as JSON
     }
 
+    @Secured(['ROLE_USER'])
+    def getEvent(int eventId){
+        def result = calendarEventService.getEvent(eventId)
+
+        render result as JSON
+    }
+
     @Transactional
     @Secured(['ROLE_USER'])
     def todoDone(int eventId, int todoId){
@@ -145,6 +152,15 @@ class CalendarEventController {
 
         render result as JSON
     }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
+    def deleteTodo(int todoId, int eventId){
+        def result = calendarEventService.deleteTodo(todoId, eventId)
+
+        render result as JSON
+    }
+
 
     @Transactional
     @Secured(['ROLE_USER'])

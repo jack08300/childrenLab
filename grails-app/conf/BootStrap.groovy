@@ -100,9 +100,12 @@ class BootStrap {
             returnArray['nickName'] = it.nickName
             returnArray['birthday'] = it.birthday ? dateFormat.format(it.birthday) : null
             returnArray['phoneNumber'] = it.phoneNumber
-            returnArray['sex'] = it.sex
             returnArray['email'] = it.email
             returnArray['profile'] = it.profile
+            returnArray['address'] = it.address
+            returnArray['city'] = it.city
+            returnArray['state'] = it.state
+            returnArray['zipCode'] = it.zipCode
 
 
             return returnArray
@@ -120,6 +123,7 @@ class BootStrap {
             returnArray['alert'] = it.alert
             returnArray['city'] = it.city
             returnArray['state'] = it.state
+            returnArray['todo'] = it.todoList
 
             return returnArray
         }

@@ -25,7 +25,7 @@ Ex:
 
 # user/register
 * Params(required) - email, password, phoneNumber, firstName, lastName
-* other Params - birthday, nickName, sex, address, city, zipCode, role(2 type: ROLE_USER, ROLE_NANNY)
+* other Params - birthday, nickName, address, city, zipCode
 * The default role is ROLE_USER
 
 * Exception example: 
@@ -33,6 +33,54 @@ Ex:
 {
 "success": false,
 "message": "The email already registered."
+}
+```
+
+# user/updateProfile
+* Params(Not required) - address, city, state, zipCode, email, password, firstName, lastName
+
+* Exception example: 
+```
+{
+  "success": true,
+  "user": {
+    "id": 3,
+    "firstName": "Jay1",
+    "lastName": "chen1",
+    "nickName": null,
+    "birthday": null,
+    "phoneNumber": "3020102031",
+    "email": "jack08300@gmail.com",
+    "profile": null,
+    "address": null,
+    "city": "Here",
+    "state": "NY",
+    "zipCode": "11342"
+  }
+}
+```
+
+# user/retrieveUserProfile
+
+* Exception example: 
+```
+{
+  "success": true,
+  "user": {
+    "id": 3,
+    "firstName": "Jay1",
+    "lastName": "chen1",
+    "nickName": null,
+    "birthday": null,
+    "phoneNumber": "3020102031",
+    "email": "jack08300@gmail.com",
+    "profile": null,
+    "address": null,
+    "city": "Here",
+    "state": "NY",
+    "zipCode": "11342"
+  },
+  "kids": []
 }
 ```
 
@@ -134,7 +182,8 @@ Ex:
 
 # calendarEvent/addEvent
 * Event creation
-* Params(required) - eventName, startDate, endDate, color, status, description, alert, city, state
+* Params(required) - eventName, startDate, endDate, color, status, description, alert
+* Other Params - city, state
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
 * Return example:
 ```
@@ -207,6 +256,14 @@ todoList = Take a picture|Walk for 30 minutes|Take key
 }
 ```
 
+# calendarEvent/deleteTodo
+* Params - todoId, eventId
+* Return example:
+```
+{
+    "success": true
+}
+```
 
 # calendarEvent/getEventsByUser
 * Event creation
@@ -244,6 +301,39 @@ todoList = Take a picture|Walk for 30 minutes|Take key
     }
   ],
   "totalCount": 2
+}
+```
+
+# calendarEvent/getEvent
+* Params - eventId
+* Return example:
+```
+{
+  "success": true,
+  "event": {
+    "id": 4,
+    "eventName": "test1",
+    "startDate": "2016-08-10 03:12:12",
+    "endDate": "2016-08-12 12:12:12",
+    "color": "blue",
+    "status": "Open",
+    "description": "",
+    "alert": 0,
+    "city": "Taipei",
+    "state": "test",
+    "todo": [
+      {
+        "id": 40,
+        "text": "YEs",
+        "status": "PENDING"
+      },
+      {
+        "id": 42,
+        "text": "You too",
+        "status": "PENDING"
+      }
+    ]
+  }
 }
 ```
 

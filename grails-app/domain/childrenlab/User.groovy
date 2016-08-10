@@ -13,6 +13,9 @@ class User {
     String nickName
     String sex
     String profile
+	String address
+	String city
+	String state
 
 	static hasMany = [calendarEvent: CalendarEvent]
 
@@ -24,7 +27,7 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-
+	String zipCode
     boolean completed = false
 	static transients = ['springSecurityService']
 
@@ -38,6 +41,11 @@ class User {
         birthday nullable: true
         nickName nullable: true
         sex nullable: true
+		zipCode nullable: true
+		address nullable: true
+		city nullable: true
+		state nullable: true
+
 
         profile nullable: true
 
