@@ -22,9 +22,10 @@
 <table>
     <thead>
     <tr>
+        <th>Data</th>
+        <th>Raw Data</th>
         <g:sortableColumn property="macId" title="Mac ID" />
         <g:sortableColumn property="user.email" title="User Email" />
-        <g:sortableColumn property="Size" title="Size" />
         <g:sortableColumn property="delete" title="Delete" />
 
     </tr>
@@ -32,10 +33,19 @@
     <tbody>
     <g:each in="${deviceList}" status="i" var="listInstance">
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+            <td>
+                <g:link action="deviceDataList" params="[macId: listInstance.macId, userId: listInstance.user ? listInstance.user.id : null]">Data List (${childrenlab.Activity.countByDevice(listInstance)})</g:link>
 
-            <td><g:link action="deviceDataList" params="[macId: listInstance.macId]">${fieldValue(bean: listInstance, field: "macId")}</g:link></td>
+            </td>
+            <td>
+                <g:link action="deviceDataRawList" params="[macId: listInstance.macId, userId: listInstance.user ? listInstance.user.id : null]">Raw Data List (${childrenlab.ActivityRaw.countByDevice(listInstance)})</g:link>
+
+            </td>
+            <td>
+                ${fieldValue(bean: listInstance, field: "macId")}
+
+            </td>
             <td>${fieldValue(bean: listInstance, field: "user.email")}</td>
-            <td>${childrenlab.DeviceActivity.countByDevice(listInstance)}</td>
             <td><g:link action="deleteByDevice" params="[macId: listInstance.macId]">Delete</g:link></td>
         </tr>
     </g:each>

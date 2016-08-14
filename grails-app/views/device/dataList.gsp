@@ -1,3 +1,4 @@
+<%@ page import="java.text.SimpleDateFormat; java.text.DateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,32 +28,37 @@
 <table>
     <thead>
     <tr>
-        <g:sortableColumn property="id" title="id" />
-        <g:sortableColumn property="activityX" title="Activity X" />
-        <g:sortableColumn property="activityY" title="Activity Y" />
-        <g:sortableColumn property="activityZ" title="Activity Z" />
-        <g:sortableColumn property="u" title="U" />
-        <g:sortableColumn property="v" title="V" />
-        <g:sortableColumn property="date" title="Time" />
+
+        <g:sortableColumn property="steps" title="${message(code: 'activity.calories.label', default: 'Steps')}" />
+
+        <g:sortableColumn property="type" title="${message(code: 'activity.receivedTime.label', default: 'Type')}" />
+
+        <g:sortableColumn property="receivedTime" title="${message(code: 'activity.receivedTime.label', default: 'Received Time')}" />
 
     </tr>
     </thead>
     <tbody>
-    <g:each in="${data}" status="i" var="listInstance">
+
+
+    <g:each in="${data}" status="i" var="activityInstance">
+        <%
+            def testTime = activityInstance.receivedTime;
+            java.text.DateFormat formatter= new SimpleDateFormat("YYYY/MM/dd kk:mm:ss Z");
+//            formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+        %>
+
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-            <td>${fieldValue(bean: listInstance, field: "id")}</td>
-            <td>${fieldValue(bean: listInstance, field: "activityX")}</td>
-            <td>${fieldValue(bean: listInstance, field: "activityY")}</td>
-            <td>${fieldValue(bean: listInstance, field: "activityZ")}</td>
-            <td>${fieldValue(bean: listInstance, field: "u")}</td>
-            <td>${fieldValue(bean: listInstance, field: "v")}</td>
-            <td>${new Date(listInstance.receivedTime*1000).format("YYYY/MM/dd HH:mm:ss")}</td>
+
+            <td>${fieldValue(bean: activityInstance, field: "steps")}</td>
+            <td>${activityInstance.type.name()}</td>
+            <td>${formatter.format(testTime)}</td>
+
         </tr>
     </g:each>
     </tbody>
 </table>
 <div class="pagination">
-    <g:paginate total="${deviceActivityInstanceCount ?: 0}" params="[macId: macId]" />
+    <g:paginate total="${deviceActivityInstance ?: 0}" params="[macId: macId, userId: userId]" />
 </div>
 </body>
 </html>

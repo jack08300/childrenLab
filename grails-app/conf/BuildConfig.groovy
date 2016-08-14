@@ -76,7 +76,7 @@ grails.project.dependency.resolution = {
 //        compile "org.grails.plugins:rest-client-builder:2.1.1"
 
         compile "org.grails.plugins:rest:0.8"
-//        compile "org.grails.plugins:joda-time:1.5"
+        compile "org.grails.plugins:joda-time:1.5"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.7.4"

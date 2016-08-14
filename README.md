@@ -364,8 +364,15 @@ todoList = Take a picture|Walk for 30 minutes|Take key
 ```
 
 # device/uploadRawData
-* Params(required) - rawData
-* Raw Data Example: |MacID,X,Y,Z,U,V,TIME|
+* Params(required) - indoorActivity, outdoorActivity, time, macId
+* time is "time stamp"
+* Raw Data Example: 
+```
+indoorActivity:  1471185427,1,232,0,0,2,0,0,0,3,0,0,0,4,0,0,0,0
+outdoorActivity: 1471185427,0,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+time:            1470885849
+macId:           tester1
+```
 * Return example:
 ```
 {
@@ -373,12 +380,126 @@ todoList = Take a picture|Walk for 30 minutes|Take key
 }
 ```
 
-# device/uploadResultData
-* Params(required) - macId, activity, calories, distance, receivedTime
-* receivedTime is long - timestamp
+# device/getDailyActivity
+* Params(required) - macId
+* For now, it only support today
 * Return example:
 ```
 {
-    "success": true
+  "success": true,
+  "activity": [
+    {
+      "id": 18,
+      "steps": 400,
+      "type": "OUTDOOR",
+      "distance": 0,
+      "calories": 400,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    },
+    {
+      "id": 17,
+      "steps": 928,
+      "type": "INDOOR",
+      "distance": 0,
+      "calories": 928,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    }
+  ],
+  "query": "daily"
+}
+```
+
+# device/getWeeklyActivity
+* Params(required) - macId
+* For now, it only support current week
+* Return example:
+```
+{
+  "success": true,
+  "activity": [
+    {
+      "id": 18,
+      "steps": 400,
+      "type": "OUTDOOR",
+      "distance": 0,
+      "calories": 400,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    },
+    {
+      "id": 17,
+      "steps": 928,
+      "type": "INDOOR",
+      "distance": 0,
+      "calories": 928,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    }
+  ],
+  "query": "daily"
+}
+```
+
+# device/getMonthlyActivity
+* Params(required) - macId
+* For now, it only support current month
+* Return example:
+```
+{
+  "success": true,
+  "activity": [
+    {
+      "id": 18,
+      "steps": 400,
+      "type": "OUTDOOR",
+      "distance": 0,
+      "calories": 400,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    },
+    {
+      "id": 17,
+      "steps": 928,
+      "type": "INDOOR",
+      "distance": 0,
+      "calories": 928,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    }
+  ],
+  "query": "daily"
+}
+```
+
+# device/getYearlyActivity
+* Params(required) - macId
+* For now, it only support currently year
+* Return example:
+```
+{
+  "success": true,
+  "activity": [
+    {
+      "id": 18,
+      "steps": 400,
+      "type": "OUTDOOR",
+      "distance": 0,
+      "calories": 400,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    },
+    {
+      "id": 17,
+      "steps": 928,
+      "type": "INDOOR",
+      "distance": 0,
+      "calories": 928,
+      "receivedTime": 1471185427000,
+      "receivedDate": "2016-08-14T14:37:07Z"
+    }
+  ],
+  "query": "daily"
 }
 ```

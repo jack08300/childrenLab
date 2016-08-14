@@ -24,15 +24,9 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="calories" title="${message(code: 'activity.calories.label', default: 'Calories')}" />
-					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'activity.dateCreated.label', default: 'Date Created')}" />
-					
-						<th><g:message code="activity.device.label" default="Device" /></th>
-					
-						<g:sortableColumn property="distance" title="${message(code: 'activity.distance.label', default: 'Distance')}" />
-					
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'activity.lastUpdated.label', default: 'Last Updated')}" />
+						<g:sortableColumn property="steps" title="${message(code: 'activity.calories.label', default: 'Steps')}" />
+
+						<g:sortableColumn property="type" title="${message(code: 'activity.receivedTime.label', default: 'Type')}" />
 					
 						<g:sortableColumn property="receivedTime" title="${message(code: 'activity.receivedTime.label', default: 'Received Time')}" />
 					
@@ -43,16 +37,10 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${activityInstance.id}">${fieldValue(bean: activityInstance, field: "calories")}</g:link></td>
-					
-						<td><g:formatDate date="${activityInstance.dateCreated}" /></td>
-					
-						<td>${fieldValue(bean: activityInstance, field: "device")}</td>
-					
+
 						<td>${fieldValue(bean: activityInstance, field: "distance")}</td>
 					
-						<td><g:formatDate date="${activityInstance.lastUpdated}" /></td>
-					
-						<td>${fieldValue(bean: activityInstance, field: "receivedTime")}</td>
+						<td>${new Date(activityInstance.receivedTime*1000).format("YYYY/MM/dd HH:mm:ss")}</td>
 					
 					</tr>
 				</g:each>

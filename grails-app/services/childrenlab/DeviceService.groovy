@@ -1,6 +1,11 @@
 package childrenlab
 
 import grails.transaction.Transactional
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
+
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 @Transactional
 class DeviceService {
@@ -24,74 +29,122 @@ class DeviceService {
         return true
     }
 
-    // Raw Data Example: |MacID,X,Y,Z,U,V,TIME|
-    def uploadRawData(String rawData){
+    def uploadRawData(String indoorActivity, String outdoorActivity, long time, String macId, int timezone = 0){
 
         User user = springSecurityService.getCurrentUser() as User
 
         if(!user){
             user = User.findByEmail("BleTester") ?: new User(email: "BleTester", password: "bleTester").save(failOnError: true)
         }
+        def device = Device.findByMacIdAndUser(macId, user) ?: new Device(macId: macId, user: user).save(failOnError: true)
 
-        def eachRaw = rawData.split("\\|");
-        def eachData = []
+        new ActivityRaw(indoorActivity: indoorActivity, outdoorActivity: outdoorActivity, time: time, device: device).save(failOnError: true)
 
-        eachRaw.each(){
-            if(it){
-                eachData.add(it.split(","))
-            }
+        //Insert into
+        def indoorActivityArray = indoorActivity.split(",")
+
+        def indoorTime = Long.parseLong(indoorActivityArray[0])*1000
+        def indoorActivityStep = Integer.parseInt(indoorActivityArray[2])
+
+        def dateTimezone = DateTimeZone.forOffsetHours(0)
+        def indoorDateTime = new DateTime(indoorTime).withZone(dateTimezone)
+        def today = new DateTime()
+
+        def outdoorActivityArray = outdoorActivity.split(",")
+        def outdoorTime = Long.parseLong(outdoorActivityArray[0])*1000
+        def outdoorActivityStep = Integer.parseInt(outdoorActivityArray[2])
+        def outdoorDatetime = new DateTime(outdoorTime).withZone(dateTimezone)
+
+        def todayActivity = Activity.findAll {
+            device: device
+            receivedDate >= today.toDateMidnight().toDate() && receivedDate <= today.plusDays(1).toDateMidnight().toDate()
         }
 
-        // [0] -> MacId, [1] -> X, [2] -> Y, [3] -> Z, [4] -> U, [5] -> V, [6] -> Time
-        eachData.each(){
-            if(it.size() < 6){
-                log.error("The data should be equals to 6. ${it}")
-                return
+        if(todayActivity.size() > 0) {
+            todayActivity.each() {
+                println it.type
+                if(it.type == ActivityType.INDOOR) {
+                    it.steps += indoorActivityStep
+                }else {
+                    println outdoorActivityStep
+                    it.steps += outdoorActivityStep
+                }
             }
-            String macId = it[0], x = it[1], y = it[2], z = it[3], u = it[4], v = it[5]
-            long time = 0
-            if(it[6]){
-                time = Long.parseLong(it[6].toString())
-            }
-
-
-            if(!macId){
-                macId = 'test'
-            }
-
-
-            def device = Device.findByMacId(macId) ?: new Device(macId: macId, user: user).save(failOnError: true)
-            new DeviceActivity(activityX: x, activityY: y, activityZ: z, u: u, v: v, receivedTime: time, device: device).save(failOnError: true)
+        }else{
+            new Activity(steps: indoorActivityStep, receivedTime: indoorTime, type: ActivityType.INDOOR, device: device, receivedDate: indoorDateTime.toDate()).save(failOnError: true)
+            new Activity(steps: outdoorActivityStep, receivedTime: outdoorTime, type: ActivityType.OUTDOOR, device: device, receivedDate: outdoorDatetime.toDate()).save(failOnError: true)
         }
 
 
 
-        return true
+        return [success: true]
     }
 
-    def uploadResultData(String macId, int steps, int calories, int distance, long receivedTime){
+    def getYearlyActivity(String macId) {
         User user = springSecurityService.getCurrentUser() as User
+        def device = Device.findByUserAndMacId(user, macId)
 
-        if(!user){
-            user = User.findByEmail("BleTester") ?: new User(email: "BleTester", password: "bleTester").save(failOnError: true)
+        def today = new DateTime()
+        def begin = today.minusDays(today.getDayOfYear()-1)
+        println begin
+
+
+        def yearlyActivity = Activity.findAll {
+            device: device
+            receivedDate >= today.toDateMidnight().toDate() && receivedDate <= today.plusDays(1).toDateMidnight().toDate()
         }
 
-        def device = Device.findByMacId(macId) ?: new Device(macId: macId, user: user).save(failOnError: true)
+        return [success: true, activity: yearlyActivity, query: "yearly"]
+    }
 
-        new Activity(device: device, steps: steps, calories: calories, distance: distance, receivedTime: receivedTime).save(failOnError: true)
+    def getMonthlyActivity(String macId) {
+        User user = springSecurityService.getCurrentUser() as User
+        def device = Device.findByUserAndMacId(user, macId)
 
-        return true
+        def today = new DateTime()
+        def begin = today.minusDays(today.getDayOfMonth()-1)
+        println begin
+        def end = today.dayOfWeek().dateTime
+
+        def todayActivity = Activity.findAll {
+            device: device
+            receivedDate >= today.toDateMidnight().toDate() && receivedDate <= today.plusDays(1).toDateMidnight().toDate()
+        }
+
+        println todayActivity
+        return [success: true, activity: todayActivity, query: "monthly"]
     }
 
     def getWeeklyActivity(String macId){
         def device = Device.findByMacId(macId)
 
-        def activities = Activity.findAllByDevice(device)
+        def today = new DateTime()
+        def begin = today.minusDays(today.getDayOfWeek()-1)
+        def end = today.dayOfWeek().dateTime
 
-        return activities
+
+        def weeklyActivity = Activity.findAll {
+            device: device
+            receivedDate >= begin.toDateMidnight().toDate()
+        }
+
+        return [success: true, activity: weeklyActivity, query: "weekly"]
     }
 
+    def getDailyActivity(String macId) {
+        User user = springSecurityService.getCurrentUser() as User
+        def device = Device.findByUserAndMacId(user, macId)
 
+        def today = new DateTime()
+
+        def todayActivity = Activity.findAll {
+            device: device
+            receivedDate >= today.toDateMidnight().toDate() && receivedDate <= today.plusDays(1).toDateMidnight().toDate()
+        }
+
+        println todayActivity
+        return [success: true, activity: todayActivity, query: "daily"]
+    }
 }
 
 /*

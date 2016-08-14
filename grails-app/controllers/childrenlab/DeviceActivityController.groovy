@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
 class DeviceActivityController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

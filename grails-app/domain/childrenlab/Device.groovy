@@ -14,10 +14,9 @@ class Device {
     static constraints = {
         swingVersion nullable: true
         kid nullable: true
-        macId nullable: false, unique: true
+        macId nullable: false
         batteryStatus nullable: true
         user nullable: true
-
 
         dateCreated nullable: true
         lastUpdated nullable: true
