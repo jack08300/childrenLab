@@ -107,6 +107,59 @@ class CalendarEventService {
     }
 
     @Transactional
+    def addEventWithTodoList(int id
+                             , String eventName
+                             , String startDate
+                             , String endDate
+                             , String color
+                             , String description
+                             , int alert
+                             , String city
+                             , String state
+                             , String todoList) {
+
+        def user = springSecurityService.currentUser as User
+        def event = CalendarEvent.findByUserAndId(user, id)
+
+        if(!event){
+            return [success: false, message: "Can't find the event"]
+        }
+
+        Date start = startDate ? Date.parse("yyyy/MM/dd HH:mm:ss", startDate) : null
+        Date end = endDate ? Date.parse("yyyy/MM/dd HH:mm:ss", endDate) : null
+
+        if(eventName) event.eventName = eventName
+        if(start) event.startDate = start
+        if(end) event.endDate = end
+        if(color) event.color = color
+        if(description) event.description = description
+        if(alert > 0) event.alert = alert
+        if(city) event.city = city
+        if(state) event.state = state
+
+        if(todoList) {
+            def todos = todoList.split("\\|")
+            def todoHistory = event.todoList
+            if(todoHistory.size() > 0){
+                todoHistory.toList().each(){
+                    event.removeFromTodoList(it)
+                }
+            }
+
+            event.save(failOnError: true)
+
+            todos.each() {
+                event.addToTodoList(new TodoList(text: it).save(failOnError: true))
+            }
+        }
+
+        event.save(failOnError: true, flush: true)
+
+        return [success: true, event: event]
+
+    }
+
+    @Transactional
     def todoDone(int todoId) {
         def user = springSecurityService.currentUser as User
 

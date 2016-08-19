@@ -1,3 +1,4 @@
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,11 +37,16 @@
     </thead>
     <tbody>
     <g:each in="${data}" status="i" var="listInstance">
+        <%
+            def testTime = listInstance.time;
+            java.text.DateFormat formatter= new SimpleDateFormat("YYYY/MM/dd kk:mm:ss Z");
+            formatter.setTimeZone(TimeZone.getTimeZone("Asia/Taipei"));
+        %>
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
             <td>${fieldValue(bean: listInstance, field: "id")}</td>
             <td>${fieldValue(bean: listInstance, field: "indoorActivity")}</td>
             <td>${fieldValue(bean: listInstance, field: "outdoorActivity")}</td>
-            <td>${new Date(listInstance.time*1000).format("YYYY/MM/dd HH:mm:ss")}</td>
+            <td>${formatter.format(testTime)}</td>
         </tr>
     </g:each>
     </tbody>

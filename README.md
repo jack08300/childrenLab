@@ -343,13 +343,44 @@ todoList = Take a picture|Walk for 30 minutes|Take key
 }
 ```
 
-# calendarEvent/editEvent
-* Params(required) - id, eventName, startDate, endDate, color, description, alert
+# calendarEvent/editEventWithTodo
+* Params(required) - id, eventName, startDate, endDate, color, description, alert, city, state, todoList
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
+* Send all of todos belong to this event, joined with |
+* todoList format: test1|test2|test3
 * Return example:
 ```
 {
-    "success": true
+  "success": true,
+  "event": {
+    "id": 3,
+    "eventName": "是中文喔!!",
+    "startDate": "2015-10-10 03:12:12",
+    "endDate": "2015-12-01 12:12:12",
+    "color": "Black",
+    "status": "Open",
+    "description": "",
+    "alert": 5,
+    "city": "台北",
+    "state": "test",
+    "todo": [
+      {
+        "id": 9,
+        "text": "YES",
+        "status": "PENDING"
+      },
+      {
+        "id": 7,
+        "text": "希望可以",
+        "status": "PENDING"
+      },
+      {
+        "id": 8,
+        "text": "過的了",
+        "status": "PENDING"
+      }
+    ]
+  }
 }
 ```
 
@@ -390,7 +421,7 @@ macId:           tester1
   "activity": [
     {
       "id": 18,
-      "steps": 400,
+      "steps": 400,w
       "type": "OUTDOOR",
       "distance": 0,
       "calories": 400,

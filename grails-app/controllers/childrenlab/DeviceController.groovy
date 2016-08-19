@@ -3,6 +3,7 @@ package childrenlab
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
+import org.springframework.web.servlet.support.RequestContextUtils
 
 @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class DeviceController {
@@ -67,6 +68,8 @@ class DeviceController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def deviceDataRawList(String macId, int userId, int max){
+        TimeZone timezone = RequestContextUtils.getTimeZone(request);
+        println timezone
         def device = Device.findByMacIdAndUser(macId, User.get(userId))
 
         params.max = Math.min(max ?: 50, 100)
@@ -99,7 +102,7 @@ class DeviceController {
 
         String csvFile = "Indoor, Outdoor, Time, Mac ID\n"
         data.each(){
-            def date = new Date(it.time*1000).format("YYYY/MM/dd HH:mm:ss")
+            def date = new Date(it.time).format("YYYY/MM/dd HH:mm:ss")
             csvFile += "${it.indoorActivity}, ${it.outdoorActivity}, ${date}, ${device.macId}\n"
         }
 

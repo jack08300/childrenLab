@@ -4,8 +4,6 @@ import grails.transaction.Transactional
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 
 @Transactional
 class DeviceService {
@@ -38,12 +36,14 @@ class DeviceService {
         }
         def device = Device.findByMacIdAndUser(macId, user) ?: new Device(macId: macId, user: user).save(failOnError: true)
 
-        new ActivityRaw(indoorActivity: indoorActivity, outdoorActivity: outdoorActivity, time: time, device: device).save(failOnError: true)
-
         //Insert into
         def indoorActivityArray = indoorActivity.split(",")
 
         def indoorTime = Long.parseLong(indoorActivityArray[0])*1000
+
+        new ActivityRaw(indoorActivity: indoorActivity, outdoorActivity: outdoorActivity, time: indoorTime, device: device).save(failOnError: true)
+
+
         def indoorActivityStep = Integer.parseInt(indoorActivityArray[2])
 
         def dateTimezone = DateTimeZone.forOffsetHours(0)
@@ -54,6 +54,16 @@ class DeviceService {
         def outdoorTime = Long.parseLong(outdoorActivityArray[0])*1000
         def outdoorActivityStep = Integer.parseInt(outdoorActivityArray[2])
         def outdoorDatetime = new DateTime(outdoorTime).withZone(dateTimezone)
+
+        println "--------------------------------------------\n" +
+                "indoorTime Long: $indoorTime\n" +
+                "indoorDateTime: $indoorDateTime\n" +
+                "indoorActivityStep: $indoorActivityStep\n" +
+                "\n" +
+                "outdoorTime Long: $outdoorTime\n" +
+                "outdoorDateTime: $outdoorDatetime\n" +
+                "outdoorActivityStep: $outdoorActivityStep\n" +
+                "----------------------------------------------"
 
         def todayActivity = Activity.findAll {
             device: device

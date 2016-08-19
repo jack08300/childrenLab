@@ -116,6 +116,24 @@ class CalendarEventController {
 
     @Transactional
     @Secured(['ROLE_USER'])
+    def editEventWithTodo(int id
+                         , String eventName
+                         , String startDate
+                         , String endDate
+                         , String color
+                         , String description
+                         , int alert
+                         , String city
+                         , String state
+                         , String todoList
+    ){
+        def result = calendarEventService.addEventWithTodoList(id, eventName, startDate, endDate, color, description, alert, city, state, todoList)
+
+        render result as JSON
+    }
+
+    @Transactional
+    @Secured(['ROLE_USER'])
     def addTodo(int eventId, String todoList){
         def result = calendarEventService.addTodoList(eventId, todoList)
 
