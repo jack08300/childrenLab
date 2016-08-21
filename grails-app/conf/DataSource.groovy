@@ -32,7 +32,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:mysql://localhost::3306/childre_prod?useUnicode=true&characterEncoding=UTF-8"
             username = "childre"
-            password = "sUPuteP6"
+            password = "koe7POut"
             pooled = true
             properties {
                 maxActive = -1
