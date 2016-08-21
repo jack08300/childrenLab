@@ -30,8 +30,8 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost::3306/childre_prod?useUnicode=true&characterEncoding=UTF-8"
-            username = "childre"
+            url = "jdbc:mysql://198.188.86.140::3306/childre_prod?useUnicode=true&characterEncoding=UTF-8"
+            username = "root"
             password = "koe7POut"
             pooled = true
             properties {
