@@ -41,7 +41,7 @@ class DeviceService {
 
         def indoorTime = Long.parseLong(indoorActivityArray[0])*1000
 
-        new ActivityRaw(indoorActivity: indoorActivity, outdoorActivity: outdoorActivity, time: indoorTime, device: device).save(failOnError: true)
+        new ActivityRaw(indoorActivity: indoorActivity, outdoorActivity: outdoorActivity, time: indoorTime, device: device, deviceTime: time).save(failOnError: true)
 
 
         def indoorActivityStep = Integer.parseInt(indoorActivityArray[2])
@@ -96,15 +96,22 @@ class DeviceService {
 
         def today = new DateTime()
         def begin = today.minusDays(today.getDayOfYear()-1)
-        println begin
 
+        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by a.type, a.receivedDate order by receivedDate", [device, user, begin.toDate()])
 
-        def yearlyActivity = Activity.findAll {
-            device: device
-            receivedDate >= today.toDateMidnight().toDate() && receivedDate <= today.plusDays(1).toDateMidnight().toDate()
+        def activity = []
+        todayActivity.each() {
+            def map = [:]
+            map.steps = it[0];
+            map.date = it[1];
+            map.type = it[2];
+
+            activity.push(map);
         }
 
-        return [success: true, activity: yearlyActivity, query: "yearly"]
+        println("Yearly Activity. Begin: ${begin.toString("YYYY-MM-DD")}")
+
+        return [success: true, activity: activity, query: "yearly"]
     }
 
     def getMonthlyActivity(String macId) {
@@ -112,33 +119,50 @@ class DeviceService {
         def device = Device.findByUserAndMacId(user, macId)
 
         def today = new DateTime()
-        def begin = today.minusDays(today.getDayOfMonth()-1)
-        println begin
-        def end = today.dayOfWeek().dateTime
+        def begin = today.minusDays(today.getDayOfMonth()-1).toDateMidnight()
+        def end = today.plusDays(1).toDateMidnight()
 
-        def todayActivity = Activity.findAll {
-            device: device
-            receivedDate >= today.toDateMidnight().toDate() && receivedDate <= today.plusDays(1).toDateMidnight().toDate()
+        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by a.type, a.receivedDate order by receivedDate", [device, user, begin.toDate()])
+
+        def activity = []
+        todayActivity.each() {
+            def map = [:]
+            map.steps = it[0];
+            map.date = it[1];
+            map.type = (it[2] as ActivityType).name();
+
+            activity.push(map);
         }
 
+        println("Monthly Activity. Begin: ${begin.toString("YYYY-MM-dd")} - End: ${end.toString("YYYY-MM-dd")} ")
+
         println todayActivity
-        return [success: true, activity: todayActivity, query: "monthly"]
+        return [success: true, activity: activity, query: "monthly"]
     }
 
     def getWeeklyActivity(String macId){
-        def device = Device.findByMacId(macId)
+        User user = springSecurityService.getCurrentUser() as User
+        def device = Device.findByUserAndMacId(user, macId)
 
         def today = new DateTime()
-        def begin = today.minusDays(today.getDayOfWeek()-1)
-        def end = today.dayOfWeek().dateTime
+        def begin = today.minusDays(today.getDayOfWeek()-1).toDateMidnight()
+        def end = today.plusDays(1).toDateMidnight()
 
+        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by a.type, a.receivedDate order by receivedDate", [device, user, begin.toDate()])
 
-        def weeklyActivity = Activity.findAll {
-            device: device
-            receivedDate >= begin.toDateMidnight().toDate()
+        def activity = []
+        todayActivity.each() {
+            def map = [:]
+            map.steps = it[0];
+            map.date = it[1];
+            map.type = (it[2] as ActivityType).name();
+
+            activity.push(map);
         }
 
-        return [success: true, activity: weeklyActivity, query: "weekly"]
+        println("Weekly Activity. Begin: ${begin.toString("YYYY-MM-dd")} - End: ${end.toString("YYYY-MM-dd")}")
+
+        return [success: true, activity: activity, query: "weekly"]
     }
 
     def getDailyActivity(String macId) {
@@ -146,14 +170,25 @@ class DeviceService {
         def device = Device.findByUserAndMacId(user, macId)
 
         def today = new DateTime()
+        def begin = today.toDateMidnight()
+        def end = today.plusDays(1).toDateMidnight()
 
-        def todayActivity = Activity.findAll {
-            device: device
-            receivedDate >= today.toDateMidnight().toDate() && receivedDate <= today.plusDays(1).toDateMidnight().toDate()
+
+        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by a.type, a.receivedDate order by receivedDate", [device, user, begin.toDate()])
+
+        def activity = []
+        todayActivity.each() {
+            def map = [:]
+            map.steps = it[0];
+            map.date = it[1];
+            map.type = (it[2] as ActivityType).name();
+
+            activity.push(map);
         }
+        println("Daily Activity. Begin: ${begin.toString("YYYY-MM-dd")} - End: ${end.toString("YYYY-MM-dd")} ")
 
-        println todayActivity
-        return [success: true, activity: todayActivity, query: "daily"]
+        println activity
+        return [success: true, activity: activity, query: "daily"]
     }
 }
 
