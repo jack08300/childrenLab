@@ -97,14 +97,14 @@ class DeviceService {
         def today = new DateTime()
         def begin = today.minusDays(today.getDayOfYear()-1)
 
-        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by a.type, a.receivedDate order by receivedDate", [device, user, begin.toDate()])
+        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by Month(receivedDate), a.type order by receivedDate", [device, user, begin.toDate()])
 
         def activity = []
         todayActivity.each() {
             def map = [:]
             map.steps = it[0];
             map.date = it[1];
-            map.type = it[2];
+            map.type = (it[2] as ActivityType).name();
 
             activity.push(map);
         }
@@ -122,7 +122,7 @@ class DeviceService {
         def begin = today.minusDays(today.getDayOfMonth()-1).toDateMidnight()
         def end = today.plusDays(1).toDateMidnight()
 
-        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by a.type, a.receivedDate order by receivedDate", [device, user, begin.toDate()])
+        def todayActivity = Activity.executeQuery("SELECT SUM(a.steps) as Step, DATE_FORMAT(a.receivedDate, '%Y-%m-%d') as Date, a.type as Type from Activity a WHERE a.device = ? and a.device.user = ? and a.receivedDate > ? group by  a.type, a.receivedDate order by receivedDate", [device, user, begin.toDate()])
 
         def activity = []
         todayActivity.each() {
