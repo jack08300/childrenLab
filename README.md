@@ -420,25 +420,27 @@ macId:           tester1
   "success": true,
   "activity": [
     {
-      "id": 18,
-      "steps": 400,w
-      "type": "OUTDOOR",
-      "distance": 0,
-      "calories": 400,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 242,
+      "date": "2016-08-21",
+      "type": "INDOOR"
     },
     {
-      "id": 17,
-      "steps": 928,
-      "type": "INDOOR",
-      "distance": 0,
-      "calories": 928,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 0,
+      "date": "2016-08-21",
+      "type": "OUTDOOR"
+    },
+    {
+      "steps": 1096,
+      "date": "2016-08-23",
+      "type": "INDOOR"
+    },
+    {
+      "steps": 482,
+      "date": "2016-08-23",
+      "type": "OUTDOOR"
     }
   ],
-  "query": "daily"
+  "query": "monthly"
 }
 ```
 
@@ -451,25 +453,27 @@ macId:           tester1
   "success": true,
   "activity": [
     {
-      "id": 18,
-      "steps": 400,
-      "type": "OUTDOOR",
-      "distance": 0,
-      "calories": 400,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 242,
+      "date": "2016-08-21",
+      "type": "INDOOR"
     },
     {
-      "id": 17,
-      "steps": 928,
-      "type": "INDOOR",
-      "distance": 0,
-      "calories": 928,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 0,
+      "date": "2016-08-21",
+      "type": "OUTDOOR"
+    },
+    {
+      "steps": 1096,
+      "date": "2016-08-23",
+      "type": "INDOOR"
+    },
+    {
+      "steps": 482,
+      "date": "2016-08-23",
+      "type": "OUTDOOR"
     }
   ],
-  "query": "daily"
+  "query": "monthly"
 }
 ```
 
@@ -482,25 +486,27 @@ macId:           tester1
   "success": true,
   "activity": [
     {
-      "id": 18,
-      "steps": 400,
-      "type": "OUTDOOR",
-      "distance": 0,
-      "calories": 400,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 242,
+      "date": "2016-08-21",
+      "type": "INDOOR"
     },
     {
-      "id": 17,
-      "steps": 928,
-      "type": "INDOOR",
-      "distance": 0,
-      "calories": 928,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 0,
+      "date": "2016-08-21",
+      "type": "OUTDOOR"
+    },
+    {
+      "steps": 1096,
+      "date": "2016-08-23",
+      "type": "INDOOR"
+    },
+    {
+      "steps": 482,
+      "date": "2016-08-23",
+      "type": "OUTDOOR"
     }
   ],
-  "query": "daily"
+  "query": "monthly"
 }
 ```
 
@@ -513,24 +519,26 @@ macId:           tester1
   "success": true,
   "activity": [
     {
-      "id": 18,
-      "steps": 400,
-      "type": "OUTDOOR",
-      "distance": 0,
-      "calories": 400,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 242,
+      "date": "2016-08-21",
+      "type": "INDOOR"
     },
     {
-      "id": 17,
-      "steps": 928,
-      "type": "INDOOR",
-      "distance": 0,
-      "calories": 928,
-      "receivedTime": 1471185427000,
-      "receivedDate": "2016-08-14T14:37:07Z"
+      "steps": 0,
+      "date": "2016-08-21",
+      "type": "OUTDOOR"
+    },
+    {
+      "steps": 1096,
+      "date": "2016-08-23",
+      "type": "INDOOR"
+    },
+    {
+      "steps": 482,
+      "date": "2016-08-23",
+      "type": "OUTDOOR"
     }
   ],
-  "query": "daily"
+  "query": "monthly"
 }
 ```
