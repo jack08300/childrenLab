@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 import org.springframework.web.servlet.support.RequestContextUtils
 
-@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+@Secured(['ROLE_USER'])
 class DeviceController {
     def deviceService
 
@@ -69,7 +69,7 @@ class DeviceController {
     @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def deviceDataRawList(String macId, int userId, int max){
         TimeZone timezone = RequestContextUtils.getTimeZone(request);
-        println timezone
+//        println timezone
         def device = Device.findByMacIdAndUser(macId, User.get(userId))
 
         params.max = Math.min(max ?: 50, 100)

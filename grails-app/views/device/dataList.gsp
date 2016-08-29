@@ -44,7 +44,7 @@
         <%
             def testTime = activityInstance.receivedTime;
             java.text.DateFormat formatter= new SimpleDateFormat("YYYY/MM/dd kk:mm:ss Z");
-            formatter.setTimeZone(TimeZone.getTimeZone("Asia/Taipei"));
+//            formatter.setTimeZone(TimeZone.getTimeZone("Asia/Taipei"));
         %>
 
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
