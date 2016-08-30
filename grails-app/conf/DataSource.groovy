@@ -1,8 +1,8 @@
 dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
-    username = "childre"
-    password = "sUPuteP6"
+    username = "root"
+    password = "koe7POut"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -14,25 +14,25 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://childrenlab.com/childre_qu?useUnicode=true&characterEncoding=UTF-8"
-            username = "childre"
-            password = "sUPuteP6"
+            url = "jdbc:mysql://45.55.248.58/childre_qu?useUnicode=true&characterEncoding=UTF-8"
+            username = "root"
+            password = "koe7POut"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://childrenlab.com/childre_qu?useUnicode=true&characterEncoding=UTF-8"
-            username = "childre"
-            password = "sUPuteP6"
+            url = "jdbc:mysql://45.55.248.58/childre_qu?useUnicode=true&characterEncoding=UTF-8"
+            username = "root"
+            password = "koe7POut"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://childrenlab.com/childre_prod?useUnicode=true&characterEncoding=UTF-8"
-            username = "childre"
-            password = "sUPuteP6"
+            url = "jdbc:mysql://45.55.248.58/childre_prod?useUnicode=true&characterEncoding=UTF-8"
+            username = "root"
+            password = "koe7POut"
             pooled = true
             properties {
                 maxActive = -1

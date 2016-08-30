@@ -142,7 +142,7 @@ class DeviceService {
 
     def getMonthlyActivity(String macId) {
         User user = springSecurityService.getCurrentUser() as User
-        def device = Device.findByUserAndMacId(user, macId)
+        def device = Device.findByUserAndMacId(user, macId8)
 
         def today = new DateTime()
         def begin = today.minusDays(30).toDateMidnight()
