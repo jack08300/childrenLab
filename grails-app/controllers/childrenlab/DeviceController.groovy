@@ -112,14 +112,32 @@ class DeviceController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     @Transactional
-    def deleteByDevice(String macId){
+    def deleteByDevice(String macId, String email){
         if(!macId){
             render 'Wrong'
             return;
         }
 
-        def device = Device.findByMacId(macId)
-        def delete = DeviceActivity.executeUpdate("delete from DeviceActivity where device = ?", [device])
+        User user = User.findByEmail(email)
+
+        def device = Device.findByUserAndMacId(user, macId)
+
+        Activity.executeUpdate("DELETE FROM Activity where device = ?", [device])
+        ActivityRaw.executeUpdate("DELETE FROM ActivityRaw where device = ?", [device])
+        Device.executeUpdate("DELETE FROM Device where id = ?", [device.id])
+
+        redirect([action: 'list'])
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
+    @Transactional
+    def createSampleData(String macId, String email){
+        if(!macId){
+            render 'Wrong'
+            return;
+        }
+
+        deviceService.createSampleData(macId, email)
 
         redirect([action: 'list'])
     }

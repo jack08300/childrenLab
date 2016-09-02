@@ -188,4 +188,223 @@ class CalendarEventController {
         render result as JSON
     }
 
+    @Secured(['ROLE_USER'])
+    def getCities(String country){
+        switch(country) {
+            case 'spain':
+                render spain as JSON
+                break;
+        }
+
+    }
+
+
+    def spain = [
+            [
+                city: "Álava",
+                utf: "%C3%81lava"
+            ],
+            [
+                city: "Ávila",
+                utf: "%C3%81vila"
+            ],
+            [
+                city: "Albacete",
+                utf: "Albacete"
+            ],
+            [
+                city: "Alicante",
+                utf:"Alicante"
+            ],
+            [
+                city: "Almería",
+                utf:"Almer%C3%ADa"
+            ],
+            [
+                city: "Asturias",
+                utf:"Asturias"
+            ],
+            [
+                city: "Badajoz",
+                utf:"Badajoz"
+            ],
+            [
+                city: "Baleares",
+                utf:"Baleares"
+            ],
+            [
+                city: "Barcelona",
+                utf:"Barcelona"
+            ],
+            [
+                city: "Bilbao",
+                utf:"Bilbao"
+            ],
+            [
+                city: "Burgos",
+                utf:"Burgos"
+            ],
+            [
+                city: "Cantabria",
+                utf:"Cantabria"
+            ],
+            [
+                city: "Castellón",
+                utf:"Castell%C3%B3n"
+            ],
+            [
+                city: "Ceuta",
+                utf:"Ceuta"
+            ],
+            [
+                city: "Ciudad Real",
+                utf:"Ciudad%20Real"
+            ],
+            [
+                city: "Coruña",
+                utf:"Coru%C3%B1a"
+            ],
+            [
+                city: "Cuenca",
+                utf:"Cuenca"
+            ],
+            [
+                city: "Cáceres",
+                utf:"C%C3%A1ceres"
+            ],
+            [
+                city: "Cádiz",
+                utf:"C%C3%A1diz"
+            ],
+            [
+                city: "Córdoba",
+                utf:"C%C3%B3rdoba"
+            ],
+            [
+                city: "Donostia",
+                utf:"Donostia"
+            ],
+            [
+                city: "Gerona",
+                utf:"Gerona"
+            ],
+            [
+                city: "Granada",
+                utf:"Granada"
+            ],
+            [
+                city: "Huelva",
+                utf:"Huelva"
+            ],
+            [
+                city: "Huesca",
+                utf:"Huesca"
+            ],
+            [
+                city: "Jaén",
+                utf:"Ja%C3%A9n"
+            ],
+            [
+                city: "Las Palmas",
+                utf:"Las%20Palmas"
+
+            ],
+            [
+                city: "León",
+                utf:"Le%C3%B3n"
+            ],
+            [
+                city: "Lleida",
+                utf:"Lleida"
+            ],
+            [
+                city: "Lugo",
+                utf:"Lugo"
+            ],
+            [
+                city: "Madrid",
+                utf:"Madrid"
+            ],
+            [
+                city: "Melilla",
+                utf:"Melilla"
+            ],
+            [
+                city: "Murcia",
+                utf:"Murcia"
+            ],
+            [
+                city: "Málaga",
+                utf:"M%C3%A1laga"
+            ],
+            [
+                city: "Navarra",
+                utf:"Navarra"
+            ],
+            [
+                city: "Orense",
+                utf:"Orense"
+            ],
+            [
+                city: "Palencia",
+                utf:"Palencia"
+            ],
+            [
+                city: "Pontevedra",
+                utf:"Pontevedra"
+            ],
+            [
+                city: "Rioja",
+                utf:"Rioja"
+            ],
+            [
+                city: "Salamanca",
+                utf:"Salamanca"
+            ],
+            [
+                city: "Segovia",
+                utf:"Segovia"
+            ],
+            [
+                city: "Sevilla",
+                utf:"Sevilla"
+            ],
+            [
+                city: "Soria",
+                utf:"Soria"
+            ],
+            [
+                city: "Tarragona",
+                utf:"Tarragona"
+            ],
+            [
+                city: "Tenerife",
+                utf:"Tenerife"
+            ],
+            [
+                city: "Teruel",
+                utf:"Teruel"
+            ],
+            [
+                city: "Toledo",
+                utf:"Toledo"
+            ],
+            [
+                city: "Valencia",
+                utf:"Valencia"
+            ],
+            [
+                city: "Valladolid",
+                utf:"Valladolid"
+            ],
+            [
+                city: "Zamora",
+                utf:"Zamora"
+            ],
+            [
+                city: "Zaragoza",
+                utf:"Zaragoza"
+            ]
+    ]
+
 }

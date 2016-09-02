@@ -17,6 +17,13 @@
 <div class="nav" role="navigation">
     <ul>
         <li><g:link controller="home" class="home">Menu</g:link></li>
+        <li>
+            <g:form controller="device" action="createSampleData">
+                Email: <input type="email" name="email" />
+                MacId: <input type="text" name="macId"/>
+                <g:submitButton name="submit" value="Create Sample Data"/>
+            </g:form>
+        </li>
     </ul>
 </div>
 <table>
@@ -46,7 +53,7 @@
 
             </td>
             <td>${fieldValue(bean: listInstance, field: "user.email")}</td>
-            <td><g:link action="deleteByDevice" params="[macId: listInstance.macId]">Delete</g:link></td>
+            <td><g:link action="deleteByDevice" params="[macId: listInstance.macId, email: listInstance.user ? listInstance.user.email : null]">Delete</g:link></td>
         </tr>
     </g:each>
     </tbody>
