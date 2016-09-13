@@ -31,7 +31,7 @@ environments {
         dataSource {
             dbCreate = "update"
             url = "jdbc:mysql://childrenlab.com/childre_prod?useUnicode=true&characterEncoding=UTF-8"
-            username = "childre"
+            username = "root"
             password = "koe7POut"
             pooled = true
             properties {
