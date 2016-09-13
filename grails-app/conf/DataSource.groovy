@@ -15,8 +15,8 @@ environments {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://childrenlab.com/childre_qu?useUnicode=true&characterEncoding=UTF-8"
-            username = "childre"
-            password = "sUPuteP6"
+            username = "root"
+            password = "koe7POut"
         }
     }
     test {
@@ -24,7 +24,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:mysql://childrenlab.com/childre_qu?useUnicode=true&characterEncoding=UTF-8"
             username = "childre"
-            password = "sUPuteP6"
+            password = "koe7POut"
         }
     }
     production {
@@ -32,7 +32,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:mysql://childrenlab.com/childre_prod?useUnicode=true&characterEncoding=UTF-8"
             username = "childre"
-            password = "sUPuteP6"
+            password = "koe7POut"
             pooled = true
             properties {
                 maxActive = -1

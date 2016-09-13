@@ -1,6 +1,8 @@
 import childrenlab.Activity
+import childrenlab.BootstrapFlag
 import childrenlab.CalendarEvent
 import childrenlab.Device
+import childrenlab.FlagName
 import childrenlab.Kids
 import childrenlab.Role
 import childrenlab.Schedule
@@ -38,6 +40,9 @@ class BootStrap {
         def device = Device.findByMacId('test') ?: new Device(user: userTester, swingVersion: 'Test', macId: 'test').save(flush: true)
 
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+
+        //Intial
+//        kidsRelationBootStrap()
 
         JSON.registerObjectMarshaller(Schedule){
             def returnArray = [:]
@@ -156,5 +161,20 @@ class BootStrap {
         }
     }
     def destroy = {
+    }
+
+    def kidsRelationBootStrap = {
+        def flag = BootstrapFlag.findByFlagName(FlagName.KIDS_RELATION)
+        if(flag?.flag){ return false; }
+
+        def kids = Kids.findAll()
+
+        kids.each() {
+            if(!it.parent) {
+                it.sub = it.parent
+                it.save(failOnError: true)
+            }
+        }
+        new BootstrapFlag(flagName: FlagName.KIDS_RELATION, flag: true).save(failOnError: true)
     }
 }
