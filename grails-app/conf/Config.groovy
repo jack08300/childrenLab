@@ -104,14 +104,20 @@ ftp.username = "user@childrenlab.com"
 ftp.password = "qyn4AS7E"
 ftp.path = "/"
 
+grails.plugin.awssdk.accessKey = "AKIAINLJ6MY2R6AJQGBQ"
+grails.plugin.awssdk.secretKey = "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"
+
+
 environments {
     development {
         grails.logging.jul.usebridge = true
 
+        aws.bucketName="childrenlabqa"
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://www.childrenlab.com"
+        aws.bucketName="childrenlab"
     }
 }
 

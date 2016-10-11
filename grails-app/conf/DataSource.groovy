@@ -14,25 +14,25 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://childrenlab.com/childre_qu?useUnicode=true&characterEncoding=UTF-8"
-            username = "root"
-            password = "koe7POut"
+            url = "jdbc:mysql://173.243.120.226/childre_qu?useUnicode=true&characterEncoding=UTF-8"
+            username = "childre"
+            password = "sUPuteP6"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://childrenlab.com/childre_qu?useUnicode=true&characterEncoding=UTF-8"
+            url = "jdbc:mysql://173.243.120.226/childre_qu?useUnicode=true&characterEncoding=UTF-8"
             username = "childre"
-            password = "koe7POut"
+            password = "sUPuteP6"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://childrenlab.com/childre_prod?useUnicode=true&characterEncoding=UTF-8"
-            username = "root"
-            password = "koe7POut"
+            url = "jdbc:mysql://173.243.120.226/childre_prod?useUnicode=true&characterEncoding=UTF-8"
+            username = "childre"
+            password = "sUPuteP6"
             pooled = true
             properties {
                 maxActive = -1

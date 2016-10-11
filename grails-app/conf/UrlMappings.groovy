@@ -7,6 +7,7 @@ class UrlMappings {
             }
         }
 
+        "/getAvatar"(controller: "avatar", action: "getUserAvatar")
         "/"(controller: 'home')
         "500"(view:'/error')
 	}

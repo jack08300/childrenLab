@@ -1,5 +1,8 @@
 package childrenlab
 
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.AmazonS3Client
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -7,6 +10,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class AvatarController {
 
     def avatarService
+    def amazonWebService
+    AmazonS3Client s3
 
     def temp(){
         def result
@@ -29,6 +34,17 @@ class AvatarController {
         def result = avatarService.uploadProfileImage(encodedImage)
 
         render result as JSON
+    }
+
+    def uploadProfileImageToS3(String encodedImage){
+
+        if (!s3) {
+
+            s3 = amazonWebService.getS3("US Standard")
+        }
+
+
+        render avatarService.uploadProfileImageToS3(encodedImage, s3)
     }
 
     def uploadKidsProfileImage(String encodedImage, int kidId){

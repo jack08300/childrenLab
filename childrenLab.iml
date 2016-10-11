@@ -63,8 +63,6 @@
           <root url="jar://$MAVEN_REPOSITORY$/net/minidev/json-smart/1.1.1/json-smart-1.1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/nimbusds/nimbus-jose-jwt/3.8/nimbus-jose-jwt-3.8.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.0.6/jackson-core-2.0.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.0.6/jackson-annotations-2.0.6.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.0.6/jackson-databind-2.0.6.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/scribe/scribe/1.3.5/scribe-1.3.5.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar!/" />
@@ -114,10 +112,13 @@
           <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.2.1/httpcore-4.2.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.2.1/httpclient-4.2.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/modules/http-builder/http-builder/0.6/http-builder-0.6.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.3/joda-time-2.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk/1.7.7/aws-java-sdk-1.7.7.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.2/httpclient-4.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.2/httpcore-4.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.1.1/jackson-annotations-2.1.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.1.1/jackson-core-2.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

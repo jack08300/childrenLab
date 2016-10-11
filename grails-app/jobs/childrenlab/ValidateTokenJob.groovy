@@ -6,6 +6,6 @@ class ValidateTokenJob {
     }
 
     def execute() {
-        AuthenticationToken.executeUpdate("delete AuthenticationToken where lastUpdated < ?", [new Date()-1])
+//        AuthenticationToken.executeUpdate("delete AuthenticationToken where lastUpdated < ?", [new Date()-1])
     }
 }

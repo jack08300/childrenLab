@@ -1,5 +1,8 @@
 package childrenlab
 
+import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.model.CannedAccessControlList
+import com.amazonaws.services.s3.model.ObjectMetadata
 import grails.transaction.Transactional
 import sun.misc.BASE64Decoder
 
@@ -11,6 +14,8 @@ class AvatarService {
 
     def ftpService
     def springSecurityService
+    def grailsApplication
+
 
     def convertUploadImageFileToBytes(def file){
         BufferedImage originalImage = ImageIO.read(file.getInputStream())
@@ -37,6 +42,35 @@ class AvatarService {
         ftpService.save(baos.toByteArray(), fileName, "avatars")
 
         user.profile = fileName
+
+        return [success: true, profileImage: user.profile]
+
+    }
+
+    def uploadProfileImageToS3(String encodedImage, AmazonS3Client s3) {
+        encodedImage = encodedImage.replace("data:image/png;base64,", "")
+        BufferedImage image = decodeToImage(encodedImage)
+        ByteArrayOutputStream baos = new ByteArrayOutputStream()
+        ImageIO.write( image, "png", baos )
+
+        User user = springSecurityService.getCurrentUser() as User
+
+        String fileName = "avatar_${user.id}.png"
+
+        InputStream stream = new ByteArrayInputStream(baos.toByteArray());
+        ObjectMetadata meta = new ObjectMetadata();
+        meta.setContentLength(baos.toByteArray().length);
+        meta.setContentType("image/png");
+
+        try{
+            s3.putObject(grailsApplication.config.aws.bucketName + "/userProfile" , fileName, stream, meta)
+            s3.setObjectAcl(grailsApplication.config.aws.bucketName + "/userProfile", fileName, CannedAccessControlList.PublicRead)
+
+        }catch(Exception e){
+            e.printStackTrace()
+            return [success: false]
+        }
+        user.profile = "userProfile/$fileName"
 
         return [success: true, profileImage: user.profile]
 

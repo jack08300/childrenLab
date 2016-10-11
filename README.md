@@ -542,3 +542,14 @@ macId:           tester1
   "query": "monthly"
 }
 ```
+
+# user/updateIOSRegistrationId
+* Params(required) - registrationId
+* Example returns
+```
+  ['success':true]
+```
+* After updated the Registration ID, you can find it in
+* www.childrenlab.com/user/getPushList
+
+

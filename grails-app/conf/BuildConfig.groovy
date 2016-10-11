@@ -5,6 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
+grails.server.port.http = 8001
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -77,6 +78,7 @@ grails.project.dependency.resolution = {
 
         compile "org.grails.plugins:rest:0.8"
         compile "org.grails.plugins:joda-time:1.5"
+        compile ":aws-sdk:1.7.7"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.7.4"
