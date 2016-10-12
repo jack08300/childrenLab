@@ -77,7 +77,7 @@ class UserController {
     def updateIOSRegistrationId(String registrationId){
         def result = userService.updateRegistration(registrationId)
 
-        render result
+        render result as JSON
     }
 
     @Secured(['ROLE_ADMIN'])
