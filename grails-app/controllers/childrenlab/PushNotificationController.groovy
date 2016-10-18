@@ -5,7 +5,7 @@ import com.notnoop.apns.ApnsService
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_TESTER'])
 class PushNotificationController {
 
     ApnsService service
@@ -16,8 +16,6 @@ class PushNotificationController {
             setupService()
             String payload = APNS.newPayload().alertBody(message).build();
             service.push(token, payload)
-
-
 
             Map<String, Date> inactiveDevices = service.getInactiveDevices();
             for (String deviceToken : inactiveDevices.keySet()) {
@@ -35,8 +33,8 @@ class PushNotificationController {
     def setupService(){
         try{
             if(!service){
-                InputStream certFile = this.class.classLoader.getResourceAsStream('data/PushChatKey.p12')
-                service = APNS.newService().withCert(certFile, "koe7POut").withProductionDestination().build()
+                InputStream certFile = this.class.classLoader.getResourceAsStream('data/swing-push-product.p12')
+                service = APNS.newService().withCert(certFile, "111111").withProductionDestination().build()
             }
         }catch(Exception e){
             e.printStackTrace()

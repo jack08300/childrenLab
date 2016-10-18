@@ -80,7 +80,7 @@ class UserController {
         render result as JSON
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def getPushList(){
         def users = User.findAllByRegistrationIdIsNotNull()
 
