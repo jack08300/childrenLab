@@ -43,6 +43,10 @@ class DeviceService {
             }
 
         }
+
+        println("Receiving activity from: " + user.email)
+        println("Data: indoor: ${indoorActivity}. Outdoor: ${outdoorActivity}")
+
         def device = Device.findByMacIdAndUser(macId, user) ?: new Device(macId: macId, user: user).save(failOnError: true)
 
         //Insert into
