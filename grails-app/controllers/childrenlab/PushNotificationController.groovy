@@ -5,7 +5,7 @@ import com.notnoop.apns.ApnsService
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_TESTER'])
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_TESTER', 'ROLE_ADMIN'])
 class PushNotificationController {
 
     ApnsService service
