@@ -10,6 +10,7 @@ class PushNotificationController {
 
     ApnsService service
 
+    @Secured(['ROLE_ADMIN'])
     def push(String token, String message){
 
         try{

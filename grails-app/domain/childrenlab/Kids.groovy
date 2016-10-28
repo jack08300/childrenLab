@@ -18,7 +18,7 @@ class Kids {
     Date lastUpdated
 
     static belongsTo = [parent: User]
-    static hasMany = [subHost: User]
+//    static hasMany = [subHost: User]
 
     static constraints = {
         firstName nullable: false
@@ -27,7 +27,7 @@ class Kids {
         birthday nullable: true
         note nullable: true
         profile nullable: true
-        subHost nullable: true
+//        subHost nullable: true
 
         dateCreated nullable: true
         lastUpdated nullable: true
