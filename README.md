@@ -184,9 +184,9 @@ Ex:
 
 # calendarEvent/addEvent
 * Event creation
-* Params(required) - eventName, startDate, endDate, color, status, description, alert
+* Params(required) - eventName, startDate, endDate, color, status, description, alert, timezoneOffset
 * Other Params - city, state
-* Type - eventName: String, startDate: Formatted String, endDate: Formatted String, color: String, status: String, description: String, alert: Int
+* Type - eventName: String, startDate: Formatted String, endDate: Formatted String, color: String, status: String, description: String, alert: Int, timezoneOffset: Int
 * Status Value: Open, Pass, Cancel
 * Color: yellow, purple, green, pink, orange, grey
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
@@ -195,16 +195,18 @@ Ex:
 {
   "success": true,
   "newEvent": {
-    "id": 3,
-    "eventName": "test1",
-    "startDate": "2015-10-10 03:12:12",
-    "endDate": "2015-12-01 12:12:12",
+    "id": 195,
+    "eventName": "Test",
+    "startDate": "2016-11-03 19:02:30",
+    "endDate": "2016-11-05 20:22:33",
     "color": "blue",
     "status": "Open",
-    "description": "",
+    "description": "Tester ididi",
     "alert": 0,
-    "city": "Taipei",
-    "state": null
+    "city": null,
+    "state": null,
+    "timezoneOffset": 240,
+    "todo": null
   }
 }
 ```
