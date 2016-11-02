@@ -108,8 +108,8 @@ class CalendarEventController {
 
     @Transactional
     @Secured(['ROLE_USER'])
-    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state){
-        def result = calendarEventService.addEvent(eventName, startDate, endDate, color, status, description, alert, city, state)
+    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset){
+        def result = calendarEventService.addEvent(eventName, startDate, endDate, color, status, description, alert, city, state, timezoneOffset)
 
         render result as JSON
     }

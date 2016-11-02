@@ -1,6 +1,5 @@
 package childrenlab
 
-import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional
@@ -8,7 +7,7 @@ class CalendarEventService {
 
     def springSecurityService
 
-    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state){
+    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset){
         if(!eventName || !startDate || !endDate){
             return [success: false, message: "One of parameter doesn't fill"]
         }
@@ -18,7 +17,7 @@ class CalendarEventService {
 
         def newEvent = new CalendarEvent(eventName: eventName, startDate: start, endDate: end, color: color,
                 status: status ? status as EventStatus : EventStatus.Open, description: description,
-                user: springSecurityService.currentUser as User, alert: alert, city: city, state: state).save(failOnError: true)
+                user: springSecurityService.currentUser as User, alert: alert, city: city, state: state, timezoneOffset: timezoneOffset).save(failOnError: true)
 
         if(!newEvent){
             return [success: false, message: "Something wrong when save the event"]

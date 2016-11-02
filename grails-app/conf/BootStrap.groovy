@@ -133,6 +133,7 @@ class BootStrap {
             returnArray['alert'] = it.alert
             returnArray['city'] = it.city
             returnArray['state'] = it.state
+            returnArray['timezoneOffset'] = it.timezoneOffset
             returnArray['todo'] = it.todoList
 
             return returnArray

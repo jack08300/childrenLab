@@ -15,6 +15,7 @@ class CalendarEvent {
     int alert
     String city
     String state
+    int timezoneOffset
 
 
     static belongsTo = [user: User]

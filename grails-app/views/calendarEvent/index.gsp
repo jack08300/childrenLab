@@ -38,6 +38,7 @@
 						<g:sortableColumn property="endDate" title="End Date" />
 						<g:sortableColumn property="status" title="Status" />
 						<g:sortableColumn property="description" title="Description" />
+						<g:sortableColumn property="timezoneOffset" title="TimeZone Offset" />
 					</tr>
 				</thead>
 				<tbody>
@@ -51,6 +52,7 @@
 						<td>${fieldValue(bean: calendarEventInstance, field: "endDate")}</td>
 						<td>${fieldValue(bean: calendarEventInstance, field: "status")}</td>
 						<td>${fieldValue(bean: calendarEventInstance, field: "description")}</td>
+						<td>${fieldValue(bean: calendarEventInstance, field: "timezoneOffset")}</td>
 					</tr>
 				</g:each>
 				</tbody>
