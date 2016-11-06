@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 import org.springframework.web.servlet.support.RequestContextUtils
 
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_USER', 'IS_AUTHENTICATED_ANONYMOUSLY'])
 class DeviceController {
     def deviceService
 
@@ -15,6 +15,7 @@ class DeviceController {
         render result as JSON
     }
 
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def uploadRawData(String indoorActivity, String outdoorActivity, long time, String macId, int timezone, String userEmail){
         def result = deviceService.uploadRawData(indoorActivity, outdoorActivity, time, macId, timezone, userEmail)
 
