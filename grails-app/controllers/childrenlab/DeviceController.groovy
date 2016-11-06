@@ -15,8 +15,8 @@ class DeviceController {
         render result as JSON
     }
 
-    def uploadRawData(String indoorActivity, String outdoorActivity, long time, String macId, int timezone){
-        def result = deviceService.uploadRawData(indoorActivity, outdoorActivity, time, macId, timezone)
+    def uploadRawData(String indoorActivity, String outdoorActivity, long time, String macId, int timezone, String userEmail){
+        def result = deviceService.uploadRawData(indoorActivity, outdoorActivity, time, macId, timezone, userEmail)
 
         render result as JSON
     }

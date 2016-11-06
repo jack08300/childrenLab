@@ -26,11 +26,11 @@ class BootStrap {
         new Role(authority: 'ROLE_TESTER').save(flush: true)
 
 
-        def testUser = new User(email: 'admin', password: 'admin', firstName: "Jay", lastName: "Chen", phoneNumber: '12345656').save(flush: true)
+        def testUser = new User(email: 'admin', password: 'sUPuteP6', firstName: "Jay", lastName: "Chen", phoneNumber: '12345656').save(flush: true)
         def tester = new User(email: 'tester', password: 'tester', firstName: "Tester For Data", lastName: "", phoneNumber: '').save(flush: true)
         def testUser2 = new User(email: 'user', password: 'user', firstName: 'Jay', lastName: 'chen', phoneNumber: '12234214512').save(flush: true)
         def userTester = new User(email: 'user', password: 'user', firstName: 'TESTER', lastName: 'TESTER', phoneNumber: '12234214512').save(flush: true)
-        def userTester2 = new User(email: 'jack08300@gmail.com', password: 'aaaaa', firstName: 'Jay', lastName: 'Chen', phoneNumber: '12234214512').save(flush: true)
+        def userTester2 = new User(email: 'jack08300@gmail.com', password: 'aaaaaa', firstName: 'Jay', lastName: 'Chen', phoneNumber: '12234214512').save(flush: true)
 
         new UserRole(role: Role.get(1), user: testUser).save(flush: true)
         new UserRole(role: Role.get(2), user: testUser2).save(flush: true)

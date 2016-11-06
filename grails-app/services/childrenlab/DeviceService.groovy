@@ -69,6 +69,7 @@ class DeviceService {
         def outdoorDatetime = new DateTime(outdoorTime).withZone(dateTimezone)
 
         println "--------------------------------------------\n" +
+                "User: ${user.email}\n" +
                 "indoorTime Long: $indoorTime\n" +
                 "indoorDateTime: $indoorDateTime\n" +
                 "indoorActivityStep: $indoorActivityStep\n" +
