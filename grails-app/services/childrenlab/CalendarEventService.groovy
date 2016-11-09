@@ -1,6 +1,8 @@
 package childrenlab
 
 import grails.transaction.Transactional
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 
 @Transactional
 class CalendarEventService {
@@ -15,14 +17,32 @@ class CalendarEventService {
         Date start = Date.parse("yyyy/MM/dd HH:mm:ss", startDate)
         Date end = Date.parse("yyyy/MM/dd HH:mm:ss", endDate)
 
-        def newEvent = new CalendarEvent(eventName: eventName, startDate: start, endDate: end, color: color,
+
+        DateTime startDateTime = new DateTime(start).withZone(DateTimeZone.forOffsetHours(0))
+        DateTime endDateTime = new DateTime(end).withZone(DateTimeZone.forOffsetHours(0))
+
+        if(timezoneOffset != 0) {
+            timezoneOffset = (timezoneOffset / 60).toInteger()
+            startDateTime = startDateTime.minusMinutes(timezoneOffset)
+            endDateTime = endDateTime.minusMinutes(timezoneOffset)
+        }
+
+        def newEvent = new CalendarEvent(eventName: eventName, startDate: startDateTime.toDate(), endDate: endDateTime.toDate(), color: color,
                 status: status ? status as EventStatus : EventStatus.Open, description: description,
                 user: springSecurityService.currentUser as User, alert: alert, city: city, state: state, timezoneOffset: timezoneOffset).save(failOnError: true)
 
         if(!newEvent){
             return [success: false, message: "Something wrong when save the event"]
         }
+        startDateTime = new DateTime(newEvent.startDate)
+        startDateTime = startDateTime.plusMinutes(newEvent.timezoneOffset)
+        newEvent.startDate = startDateTime.toDate()
 
+        endDateTime = new DateTime(newEvent.endDate)
+        endDateTime = endDateTime.plusMinutes(newEvent.timezoneOffset)
+        newEvent.endDate = endDateTime.toDate()
+
+        newEvent.discard()
         return [success: true, newEvent: newEvent]
 
     }
@@ -31,8 +51,8 @@ class CalendarEventService {
         def user = springSecurityService.currentUser as User
 
         def events
-
         if(query == "month"){
+
             events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ? order by startDate", [user, month, year])
         }else if(query == "day"){
             events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ? and Day(startDate) = ?  order by startDate", [user, month, year, day])
@@ -55,9 +75,18 @@ class CalendarEventService {
         Date start = startDate ? Date.parse("yyyy/MM/dd HH:mm:ss", startDate) : null
         Date end = endDate ? Date.parse("yyyy/MM/dd HH:mm:ss", endDate) : null
 
+
         if(eventName) event.eventName = eventName
-        if(start) event.startDate = start
-        if(end) event.endDate = end
+        if(start) {
+            DateTime startDateTime = new DateTime(start)
+            startDateTime.plusMinutes(event.timezoneOffset)
+            event.startDate = startDateTime
+        }
+        if(end) {
+            DateTime endDateTime = new DateTime(end)
+            endDateTime.plusMinutes(event.timezoneOffset)
+            event.endDate = endDateTime
+        }
         if(color) event.color = color
         if(description) event.description = description
         if(alert > 0) event.alert = alert

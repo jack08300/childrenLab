@@ -13,6 +13,7 @@ import childrenlab.UserRole
 import grails.converters.JSON
 import grails.plugin.springsecurity.SecurityFilterPosition
 import grails.plugin.springsecurity.SpringSecurityUtils
+import org.joda.time.DateTime
 
 import java.text.SimpleDateFormat
 
@@ -125,8 +126,17 @@ class BootStrap {
             def returnArray = [:]
             returnArray['id'] = it.id
             returnArray['eventName'] = it.eventName
-            returnArray['startDate'] = dateFormat.format(it.startDate)
-            returnArray['endDate'] = dateFormat.format(it.endDate)
+
+
+            def start = new DateTime(it.startDate)
+            start = start.plusMinutes(it.timezoneOffset)
+
+            def end = new DateTime(it.endDate)
+            end = end.plusMinutes(it.timezoneOffset)
+
+
+            returnArray['startDate'] = dateFormat.format(start.toDate())
+            returnArray['endDate'] = dateFormat.format(end.toDate())
             returnArray['color'] = it.color
             returnArray['status'] = it.status?.name()
             returnArray['description'] = it.description ?: ''
