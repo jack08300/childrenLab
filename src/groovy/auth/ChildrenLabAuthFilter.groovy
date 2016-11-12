@@ -1,5 +1,6 @@
 package auth
 
+import childrenlab.AuthenticationToken
 import com.odobo.grails.plugin.springsecurity.rest.RestAuthenticationToken
 import com.odobo.grails.plugin.springsecurity.rest.credentials.CredentialsExtractor
 import com.odobo.grails.plugin.springsecurity.rest.token.generation.TokenGenerator
@@ -102,6 +103,9 @@ class ChildrenLabAuthFilter extends GenericFilterBean {
             }
 
             if (authenticationResult?.authenticated) {
+                //Remove existing token
+                AuthenticationToken.executeUpdate("DELETE FROM AuthenticationToken WHERE email = '${authenticationRequest.principal.toString()}'");
+
                 String tokenValue = tokenGenerator.generateToken(authenticationResult.principal)
                 log.debug "Generated token: ${tokenValue}"
 

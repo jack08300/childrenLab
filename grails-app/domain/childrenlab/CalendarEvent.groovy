@@ -16,6 +16,7 @@ class CalendarEvent {
     String city
     String state
     int timezoneOffset
+    boolean pushNotification
 
 
     static belongsTo = [user: User]
