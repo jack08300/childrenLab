@@ -185,11 +185,12 @@ Ex:
 # calendarEvent/addEvent
 * Event creation
 * Params(required) - eventName, startDate, endDate, color, status, description, alert, timezoneOffset
-* Other Params - city, state
-* Type - eventName: String, startDate: Formatted String, endDate: Formatted String, color: String, status: String, description: String, alert: Int, timezoneOffset: Int
+* Other Params - city, state, repeat
+* Type - eventName: String, startDate: Formatted String, endDate: Formatted String, color: String, status: String, description: String, alert: Int, timezoneOffset: Int, repeat: String
 * Status Value: Open, Pass, Cancel
 * Color: yellow, purple, green, pink, orange, grey
 * startDate and endDate format: yyyy/MM/dd HH:mm:ss
+* repeat value: DAILY, WEEKLY
 * Return example:
 ```
 {

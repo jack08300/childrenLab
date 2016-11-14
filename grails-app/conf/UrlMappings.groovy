@@ -9,6 +9,6 @@ class UrlMappings {
 
         "/getAvatar"(controller: "avatar", action: "getUserAvatar")
         "/"(controller: 'home')
-        "500"(view:'/error')
+        "500"(controller: "error", action: "internalServerError")
 	}
 }

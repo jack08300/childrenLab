@@ -1,6 +1,7 @@
 import childrenlab.Activity
 import childrenlab.BootstrapFlag
 import childrenlab.CalendarEvent
+import childrenlab.CalendarRepeatEvent
 import childrenlab.Device
 import childrenlab.FlagName
 import childrenlab.Kids
@@ -11,8 +12,6 @@ import childrenlab.TodoList
 import childrenlab.User
 import childrenlab.UserRole
 import grails.converters.JSON
-import grails.plugin.springsecurity.SecurityFilterPosition
-import grails.plugin.springsecurity.SpringSecurityUtils
 import org.joda.time.DateTime
 
 import java.text.SimpleDateFormat
@@ -148,7 +147,33 @@ class BootStrap {
 
             return returnArray
         }
+/*
+        JSON.registerObjectMarshaller(CalendarRepeatEvent){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['eventName'] = it.eventName
 
+
+            def start = new DateTime(it.startDate)
+            start = start.plusMinutes(it.timezoneOffset)
+
+            def end = new DateTime(it.endDate)
+            end = end.plusMinutes(it.timezoneOffset)
+
+
+            returnArray['startDate'] = dateFormat.format(start.toDate())
+            returnArray['endDate'] = dateFormat.format(end.toDate())
+            returnArray['color'] = it.color
+            returnArray['status'] = it.status?.name()
+            returnArray['description'] = it.description ?: ''
+            returnArray['alert'] = it.alert
+            returnArray['city'] = it.city
+            returnArray['state'] = it.state
+            returnArray['timezoneOffset'] = it.timezoneOffset
+            returnArray['todo'] = it.todoList
+
+            return returnArray
+        }*/
         JSON.registerObjectMarshaller(Activity){
             def returnArray = [:]
             returnArray['id'] = it.id
