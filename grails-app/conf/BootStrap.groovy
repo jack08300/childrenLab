@@ -1,7 +1,6 @@
 import childrenlab.Activity
 import childrenlab.BootstrapFlag
 import childrenlab.CalendarEvent
-import childrenlab.CalendarRepeatEvent
 import childrenlab.Device
 import childrenlab.FlagName
 import childrenlab.Kids
