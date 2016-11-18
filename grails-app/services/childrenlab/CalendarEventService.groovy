@@ -3,6 +3,8 @@ package childrenlab
 import grails.transaction.Transactional
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 
 
 @Transactional
@@ -10,9 +12,15 @@ class CalendarEventService {
 
     def springSecurityService
 
-    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset, String repeat) {
+    def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset, String repeat, String repeatEventId) {
         if (!eventName || !startDate || !endDate) {
             return [success: false, message: "One of parameter doesn't fill"]
+        }
+
+        def user = springSecurityService.currentUser as User
+
+        if(!user) {
+            return [status: 400, message: "Error occurred", error: "Please login first"]
         }
 
         EventRepeat eventRepeat
@@ -24,37 +32,26 @@ class CalendarEventService {
             DateTime startDateTime = new DateTime(start).withZone(DateTimeZone.forOffsetHours(0))
             DateTime endDateTime = new DateTime(end).withZone(DateTimeZone.forOffsetHours(0))
 
-            if (timezoneOffset != 0) {
-                timezoneOffset = (timezoneOffset / 60).toInteger()
-                startDateTime = startDateTime.minusMinutes(timezoneOffset)
-                endDateTime = endDateTime.minusMinutes(timezoneOffset)
+
+            eventRepeat = repeat.toUpperCase() as EventRepeat
+
+            def eventStatus = eventRepeat != null ? EventStatus.ENABLED : EventStatus.Open
+
+            def createdFromEvent = null
+            if(repeatEventId != 0) {
+                createdFromEvent = CalendarEvent.get(repeatEventId) ?: null
+                eventRepeat = null
             }
 
 
-            def newEvent
-            if (repeat) {
-                eventRepeat = repeat.toUpperCase() as EventRepeat
-                new CalendarRepeatEvent(eventName: eventName, startDate: startDateTime.toDate(), endDate: endDateTime.toDate(), color: color,
-                        status: RepeatEventStatus.ENABLED, description: description,
-                        user: springSecurityService.currentUser as User, alert: alert, city: city, state: state, timezoneOffset: timezoneOffset, eventRepeat: eventRepeat).save(failOnError: true)
-            }
-
-            newEvent = new CalendarEvent(eventName: eventName, startDate: startDateTime.toDate(), endDate: endDateTime.toDate(), color: color,
-                    status: status ? status as EventStatus : EventStatus.Open, description: description,
-                    user: springSecurityService.currentUser as User, alert: alert, city: city, state: state, timezoneOffset: timezoneOffset).save(failOnError: true)
+            def newEvent = new CalendarEvent(eventName: eventName, startDate: startDateTime.toDate(), endDate: endDateTime.toDate(), color: color,
+                    status: eventStatus, description: description,
+                    user: user, alert: alert, city: city, state: state, timezoneOffset: timezoneOffset, eventRepeat: eventRepeat, createdFromEvent: createdFromEvent).save(failOnError: true)
 
             if (!newEvent) {
                 return [success: false, message: "Something wrong when save the event"]
             }
-            startDateTime = new DateTime(newEvent.startDate)
-            startDateTime = startDateTime.plusMinutes(newEvent.timezoneOffset)
-            newEvent.startDate = startDateTime.toDate()
-
-            endDateTime = new DateTime(newEvent.endDate)
-            endDateTime = endDateTime.plusMinutes(newEvent.timezoneOffset)
-            newEvent.endDate = endDateTime.toDate()
-
-            newEvent.discard()
+            println newEvent.startDate
             return [success: true, newEvent: newEvent, status: 200]
         } catch (Exception e) {
             return [status: 400, message: "Error occurred", error: e.toString()]
@@ -63,8 +60,6 @@ class CalendarEventService {
     }
 
     def getEventsByUser(String query, int month, int year, int day) {
-
-
         try {
             def user = springSecurityService.currentUser as User
             def events
@@ -77,15 +72,43 @@ class CalendarEventService {
                 events = CalendarEvent.findAll("from CalendarEvent where user = ?  order by startDate", [user])
             }
 
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+            def date = formatter.parseDateTime("${year}-${month}-${day}").withZone(DateTimeZone.forOffsetHours(0))
+
+
+            def dailyRepeat = CalendarEvent.findAll("from CalendarEvent where user = ? and eventRepeat = ? and status = ? and startDate < ? order by startDate "
+                    , [user, EventRepeat.DAILY, EventStatus.ENABLED, date.toDate()])
+            def weeklyRepeat = CalendarEvent.findAll("from CalendarEvent where user = ? and eventRepeat = ? and status = ?", [user, EventRepeat.WEEKLY, EventStatus.ENABLED])
+
+            dailyRepeat.each(){ event ->
+                if(events.find {it.id == event.id} == null && events.find {it.createdFromEvent.id == event.id} == null) {
+                    events.add(event)
+                }
+            }
+            weeklyRepeat.each() { event ->
+                def weeklyDate = new DateTime(event.startDate).withZone(DateTimeZone.forOffsetHours(0))
+                if(date.getDayOfWeek() == weeklyDate.getDayOfWeek() && !events.find {it.createdFromEvent.id == event.id}) {
+                    if(!events.find {it.id == event.id}) {
+                        events.add(event)
+                    }
+                }
+
+            }
+
+            events.sort({it.startDate})
+
+
+
             return [success: true, events: events, totalCount: events.size(), status: 200]
         } catch (Exception e) {
+            e.printStackTrace()
             return [status: 400, error: e.toString()]
         }
 
     }
 
     @Transactional
-    def editEvent(int id, String eventName, String startDate, String endDate, String color, String description, int alert) {
+    def editEvent(int id, String eventName, String startDate, String endDate, String color, String description, int alert, String repeat) {
         try {
             def user = springSecurityService.currentUser as User
             def event = CalendarEvent.findByUserAndId(user, id)

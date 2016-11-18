@@ -109,7 +109,7 @@ class CalendarEventController {
     @Transactional
     @Secured(['ROLE_USER'])
     def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset, String repeat){
-        def result = calendarEventService.addEvent(eventName, startDate, endDate, color, status, description, alert, city, state, timezoneOffset, repeat)
+        def result = calendarEventService.addEvent(eventName, startDate, endDate, color, status, description, alert, city, state, timezoneOffset, repeat, params.repeatEventId)
 
         render(status: result.status, text: result as JSON, contentType: "application/json")
 
@@ -143,8 +143,8 @@ class CalendarEventController {
 
     @Transactional
     @Secured(['ROLE_USER'])
-    def editEvent(int id, String eventName, String startDate, String endDate, String color, String description, int alert){
-        def result = calendarEventService.editEvent(id, eventName, startDate, endDate, color, description, alert)
+    def editEvent(int id, String eventName, String startDate, String endDate, String color, String description, int alert, String repeat){
+        def result = calendarEventService.editEvent(id, eventName, startDate, endDate, color, description, alert, repeat)
 
         render result as JSON
     }

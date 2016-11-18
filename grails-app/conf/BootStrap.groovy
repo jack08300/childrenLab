@@ -13,6 +13,7 @@ import childrenlab.User
 import childrenlab.UserRole
 import grails.converters.JSON
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 
 import java.text.SimpleDateFormat
 
@@ -127,11 +128,11 @@ class BootStrap {
             returnArray['eventName'] = it.eventName
 
 
-            def start = new DateTime(it.startDate)
-            start = start.plusMinutes(it.timezoneOffset)
+            def start = new DateTime(it.startDate).withZone(DateTimeZone.UTC)
+//            start = start.plusMinutes(it.timezoneOffset)
 
-            def end = new DateTime(it.endDate)
-            end = end.plusMinutes(it.timezoneOffset)
+            def end = new DateTime(it.endDate).withZone(DateTimeZone.UTC)
+//            end = end.plusMinutes(it.timezoneOffset)
 
 
             returnArray['startDate'] = dateFormat.format(start.toDate())
@@ -144,6 +145,8 @@ class BootStrap {
             returnArray['state'] = it.state
             returnArray['timezoneOffset'] = it.timezoneOffset
             returnArray['todo'] = it.todoList
+            returnArray['repeat'] = it.eventRepeat?.name()
+            returnArray['createdFromRepeatEvent'] = it.createdFromEventId
 
             return returnArray
         }

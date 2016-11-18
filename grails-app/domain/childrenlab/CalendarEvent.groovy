@@ -1,7 +1,11 @@
 package childrenlab
 
 public enum EventStatus {
-    Open, Pass, Cancel
+    Open, Pass, Cancel, ENABLED, DISABLED, REMOVED
+}
+
+public enum EventRepeat {
+    DAILY, WEEKLY
 }
 
 class CalendarEvent {
@@ -16,7 +20,9 @@ class CalendarEvent {
     String city
     String state
     int timezoneOffset
+    EventRepeat eventRepeat
     boolean pushNotification
+    CalendarEvent createdFromEvent
 
 
     static belongsTo = [user: User]
@@ -40,5 +46,7 @@ class CalendarEvent {
         city nullable: true
         state nullable: true
         todoList nullable: true
+        eventRepeat nullable: true
+        createdFromEvent nullable: true
     }
 }
