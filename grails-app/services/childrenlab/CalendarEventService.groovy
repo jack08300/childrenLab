@@ -28,6 +28,10 @@ class CalendarEventService {
             Date start = Date.parse("yyyy/MM/dd HH:mm:ss", startDate)
             Date end = Date.parse("yyyy/MM/dd HH:mm:ss", endDate)
 
+            if (timezoneOffset != 0) {
+                timezoneOffset = (timezoneOffset / 60).toInteger()
+            }
+
 
             DateTime startDateTime = new DateTime(start).withZone(DateTimeZone.forOffsetHours(0))
             DateTime endDateTime = new DateTime(end).withZone(DateTimeZone.forOffsetHours(0))
