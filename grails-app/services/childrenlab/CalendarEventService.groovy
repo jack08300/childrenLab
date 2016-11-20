@@ -37,7 +37,7 @@ class CalendarEventService {
             DateTime endDateTime = new DateTime(end).withZone(DateTimeZone.forOffsetHours(0))
 
 
-            eventRepeat = repeat.toUpperCase() as EventRepeat
+            eventRepeat = repeat ? repeat.toUpperCase() as EventRepeat : null
 
             def eventStatus = eventRepeat != null ? EventStatus.ENABLED : EventStatus.Open
 
