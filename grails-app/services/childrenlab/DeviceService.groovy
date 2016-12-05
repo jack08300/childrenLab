@@ -41,7 +41,6 @@ class DeviceService {
                 user = new User(email: userEmail, password: "11111111").save(failOnError: true)
                 new UserRole(role: Role.get(2), user: user).save(flush: true)
             }
-
         }
 
         println("Receiving activity from: " + user.email)
@@ -49,10 +48,20 @@ class DeviceService {
 
         def device = Device.findByMacIdAndUser(macId, user) ?: new Device(macId: macId, user: user).save(failOnError: true)
 
+
         //Insert into
         def indoorActivityArray = indoorActivity.split(",")
 
         def indoorTime = Long.parseLong(indoorActivityArray[0]) * 1000
+
+        //If it's not test account
+        if(userEmail == null) {
+            def duplicate = ActivityRaw.findByTimeAndDevice(indoorTime, device)
+            if(duplicate) {
+                return [success: true, message: "This record is duplicate"]
+            }
+        }
+
 
         new ActivityRaw(indoorActivity: indoorActivity, outdoorActivity: outdoorActivity, time: indoorTime, device: device, deviceTime: time).save(failOnError: true)
 
