@@ -556,3 +556,10 @@ macId:           tester1
 * www.childrenlab.com/user/getPushList
 
 
+# Repeat Event Expiration
+## When a user creates repeat Event
+### **iOS**
+1. ***Validate Event Information*** - Validate the event information, if the system find any error, display on the screen.
+2. ***Save to local database*** - Create and save the event record in the local database (iOS database)
+3. ***Add the event to backend*** - Use [Add Event](#calendareventaddevent) to create event on backend
+4. ***DO NOT CREATE MULTIPLE EVENT ON the DATABASE***, only have one repeat event record on the local, and calculate repeat events when user receive calendar
