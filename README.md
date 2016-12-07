@@ -558,8 +558,18 @@ macId:           tester1
 
 # Repeat Event Expiration
 ## When a user creates repeat Event
-### **iOS**
+### **APP**
 1. ***Validate Event Information*** - Validate the event information, if the system find any error, display on the screen.
 2. ***Save to local database*** - Create and save the event record in the local database (iOS database)
 3. ***Add the event to backend*** - Use [Add Event](#calendareventaddevent) to create event on backend
 4. ***DO NOT CREATE MULTIPLE EVENT ON the DATABASE***, only have one repeat event record on the local, and calculate repeat events when user receive calendar
+5. ***Calendar page (Monthly, Daily) should include repeat event*** - Calculate repeat event to display on the calendar when user is on calendar page. It should looks like normal event, however, the event should only for displaying, DO NOT SAVE IT ON THE DATABASE
+
+### ***Sync repeat event to the watch***
+1. Gather all of normal events, and put it into a Alert Array List
+2. Calculate and create normal events based from repeat event, and put it into the Alert Array List
+  * For daily, create 30 (Event for a month) events before adding to the Alert Array List
+  * For weekly, create 4 (Event for a month) events before adding to the Alert Array List
+3. Sort the Alert Array List by start time
+4. Send the Alert Array List to the watch
+  * The watch is limited for 200 events
