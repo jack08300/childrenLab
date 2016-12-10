@@ -55,12 +55,11 @@ class DeviceService {
         def indoorTime = Long.parseLong(indoorActivityArray[0]) * 1000
 
         //If it's not test account
-        if(userEmail == null) {
-            def duplicate = ActivityRaw.findByTimeAndDevice(indoorTime, device)
-            if(duplicate) {
-                return [success: true, message: "This record is duplicate"]
-            }
+        def duplicate = ActivityRaw.findByTimeAndDevice(indoorTime, device)
+        if (duplicate) {
+            return [success: true, message: "This record is duplicate"]
         }
+
 
 
         new ActivityRaw(indoorActivity: indoorActivity, outdoorActivity: outdoorActivity, time: indoorTime, device: device, deviceTime: time).save(failOnError: true)
