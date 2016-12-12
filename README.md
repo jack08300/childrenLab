@@ -577,9 +577,9 @@ macId:           tester1
 
 # Multi-Host API
 ## device/registerDevice
-| Parameters        | Type           | Example  |
-| ------------- |:-------------:| -----:|
-| macId      | String | 13031FCFE5E0 |
-| firstName      | String      |   Jay |
-| lastName | String      |    Chen |
+| Parameters    | Required      | Type  | Example  |
+| ------------- |:-------------:|:-------------:| -----:|
+| macId         | Yes | String  |   13031FCFE5E0 |
+| firstName     | Yes | String  |   Jay |
+| lastName      | Yes | String  |   Chen |
 
