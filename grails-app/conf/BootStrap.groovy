@@ -7,6 +7,7 @@ import childrenlab.Kids
 import childrenlab.Role
 import childrenlab.Schedule
 import childrenlab.ScheduleMessage
+import childrenlab.SubHostRequest
 import childrenlab.TodoList
 import childrenlab.User
 import childrenlab.UserRole
@@ -95,8 +96,6 @@ class BootStrap {
             returnArray['id'] = it.id
             returnArray['firstName'] = it.firstName
             returnArray['lastName'] = it.lastName
-            returnArray['nickName'] = it.nickName
-            returnArray['note'] = it.note
             returnArray['profile'] = it.profile
 
             return returnArray
@@ -107,14 +106,9 @@ class BootStrap {
             returnArray['id'] = it.id
             returnArray['firstName'] = it.firstName
             returnArray['lastName'] = it.lastName
-            returnArray['nickName'] = it.nickName
-            returnArray['birthday'] = it.birthday ? dateFormat.format(it.birthday) : null
             returnArray['phoneNumber'] = it.phoneNumber
             returnArray['email'] = it.email
             returnArray['profile'] = it.profile
-            returnArray['address'] = it.address
-            returnArray['city'] = it.city
-            returnArray['state'] = it.state
             returnArray['zipCode'] = it.zipCode
 
 
@@ -181,8 +175,6 @@ class BootStrap {
             returnArray['id'] = it.id
             returnArray['steps'] = it.steps
             returnArray['type'] = it.type.name()
-            returnArray['distance'] = it.distance
-            returnArray['calories'] = it.steps
             returnArray['receivedTime'] = it.receivedTime
             returnArray['receivedDate'] = it.receivedDate
 
@@ -194,6 +186,27 @@ class BootStrap {
             returnArray['id'] = it.id
             returnArray['text'] = it.text
             returnArray['status'] = it.status.name()
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(SubHostRequest){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['requestFrom'] = it.requestFrom
+            returnArray['requestTo'] = it.requestTo
+            returnArray['status'] = it.status.name()
+            returnArray['device'] = it.device
+
+            return returnArray
+        }
+
+        JSON.registerObjectMarshaller(Device){
+            def returnArray = [:]
+            returnArray['id'] = it.id
+            returnArray['kid'] = it.kid
+            returnArray['macId'] = it.macId
+            returnArray['subHost'] = it.subHost
 
             return returnArray
         }

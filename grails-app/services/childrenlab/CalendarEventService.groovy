@@ -12,6 +12,67 @@ class CalendarEventService {
 
     def springSecurityService
 
+    def addEventUnderDevice(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset, String repeat, String repeatEventId, String macId) {
+        if (!eventName || !startDate || !endDate) {
+            return [success: false, message: "One of parameter doesn't fill"]
+        }
+
+        def user = springSecurityService.currentUser as User
+
+        if (!user) {
+            return [status: 400, message: "Error occurred", error: "Please login first"]
+        }
+
+        def device = Device.findByMacIdAndUser(macId, user)
+
+        if(!device) {
+            device = isSubHost(macId, user)
+        }
+
+        if(!device) {
+            return [success: false, status: 403, message: "The user doesn't have permission to add event under the device"]
+        }
+
+        EventRepeat eventRepeat
+        try {
+            Date start = Date.parse("yyyy/MM/dd HH:mm:ss", startDate)
+            Date end = Date.parse("yyyy/MM/dd HH:mm:ss", endDate)
+
+            if (timezoneOffset != 0) {
+                timezoneOffset = (timezoneOffset / 60).toInteger()
+            }
+
+
+            DateTime startDateTime = new DateTime(start).withZone(DateTimeZone.forOffsetHours(0))
+            DateTime endDateTime = new DateTime(end).withZone(DateTimeZone.forOffsetHours(0))
+
+
+            eventRepeat = repeat ? repeat.toUpperCase() as EventRepeat : null
+
+            def eventStatus = eventRepeat != null ? EventStatus.ENABLED : EventStatus.Open
+
+            def createdFromEvent = null
+            if (repeatEventId != 0) {
+                createdFromEvent = CalendarEvent.get(repeatEventId) ?: null
+                eventRepeat = null
+            }
+
+
+            def newEvent = new CalendarEvent(eventName: eventName, startDate: startDateTime.toDate(), endDate: endDateTime.toDate(), color: color,
+                    status: eventStatus, description: description,
+                    user: user, alert: alert, city: city, state: state, timezoneOffset: timezoneOffset, eventRepeat: eventRepeat, createdFromEvent: createdFromEvent, device: device).save(failOnError: true)
+
+            if (!newEvent) {
+                return [success: false, message: "Something wrong when save the event"]
+            }
+            println newEvent.startDate
+            return [success: true, newEvent: newEvent, status: 200]
+        } catch (Exception e) {
+            return [status: 400, message: "Error occurred", error: e.toString()]
+        }
+
+    }
+
     def addEvent(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset, String repeat, String repeatEventId) {
         if (!eventName || !startDate || !endDate) {
             return [success: false, message: "One of parameter doesn't fill"]
@@ -19,7 +80,7 @@ class CalendarEventService {
 
         def user = springSecurityService.currentUser as User
 
-        if(!user) {
+        if (!user) {
             return [status: 400, message: "Error occurred", error: "Please login first"]
         }
 
@@ -42,7 +103,7 @@ class CalendarEventService {
             def eventStatus = eventRepeat != null ? EventStatus.ENABLED : EventStatus.Open
 
             def createdFromEvent = null
-            if(repeatEventId != 0) {
+            if (repeatEventId != 0) {
                 createdFromEvent = CalendarEvent.get(repeatEventId) ?: null
                 eventRepeat = null
             }
@@ -68,7 +129,6 @@ class CalendarEventService {
             def user = springSecurityService.currentUser as User
             def events
             if (query == "month") {
-
                 events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ? order by startDate", [user, month, year])
             } else if (query == "day") {
                 events = CalendarEvent.findAll("from CalendarEvent where user = ? and Month(startDate) = ? and Year(startDate) = ? and Day(startDate) = ?  order by startDate", [user, month, year, day])
@@ -84,22 +144,26 @@ class CalendarEventService {
                     , [user, EventRepeat.DAILY, EventStatus.ENABLED, date.toDate()])
             def weeklyRepeat = CalendarEvent.findAll("from CalendarEvent where user = ? and eventRepeat = ? and status = ?", [user, EventRepeat.WEEKLY, EventStatus.ENABLED])
 
-            dailyRepeat.each(){ event ->
-                if(events.find {it.id == event.id} == null && events.find {it.createdFromEvent.id == event.id} == null) {
+            dailyRepeat.each() { event ->
+                if (events.find { it.id == event.id } == null && events.find {
+                    it.createdFromEvent.id == event.id
+                } == null) {
                     events.add(event)
                 }
             }
             weeklyRepeat.each() { event ->
                 def weeklyDate = new DateTime(event.startDate).withZone(DateTimeZone.forOffsetHours(0))
-                if(date.getDayOfWeek() == weeklyDate.getDayOfWeek() && !events.find {it.createdFromEvent.id == event.id}) {
-                    if(!events.find {it.id == event.id}) {
+                if (date.getDayOfWeek() == weeklyDate.getDayOfWeek() && !events.find {
+                    it.createdFromEvent.id == event.id
+                }) {
+                    if (!events.find { it.id == event.id }) {
                         events.add(event)
                     }
                 }
 
             }
 
-            events.sort({it.startDate})
+            events.sort({ it.startDate })
 
 
 
@@ -279,5 +343,15 @@ class CalendarEventService {
         }
 
         return [success: true, event: event, status: 200]
+    }
+
+    def isSubHost(String macId, User user) {
+        def device = Device.withCriteria {
+            subHost {
+                eq 'id', user.id
+            }
+            eq 'macId', macId
+        }
+        return device
     }
 }

@@ -573,3 +573,13 @@ macId:           tester1
 3. Sort the Alert Array List by start time
 4. Send the Alert Array List to the watch
   * The watch is limited for 200 events
+
+
+# Multi-Host API
+## device/registerDevice
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+

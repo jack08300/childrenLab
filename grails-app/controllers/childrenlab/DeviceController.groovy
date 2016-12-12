@@ -9,15 +9,45 @@ import org.springframework.web.servlet.support.RequestContextUtils
 class DeviceController {
     def deviceService
 
-    def uploadData(String x, String y, String z, String u, String v, String macId){
-        def result = deviceService.uploadData(x, y, z, u, v, macId)
-
-        render result as JSON
-    }
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def uploadRawData(String indoorActivity, String outdoorActivity, long time, String macId, int timezone, String userEmail){
         def result = deviceService.uploadRawData(indoorActivity, outdoorActivity, time, macId, timezone, userEmail)
+
+        render result as JSON
+    }
+
+    @Secured(['ROLE_USER'])
+    def registerDevice(String macId, String firstName, String lastName, String nickName) {
+        def result = deviceService.registerDevice(macId, firstName, lastName, nickName)
+
+        render result as JSON
+    }
+
+    @Secured(['ROLE_USER'])
+    def isDeviceRegistered(String macId) {
+        def result = deviceService.isDeviceRegistered(macId)
+
+        render result as JSON
+    }
+
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def acceptSubHostRequest(int requestId) {
+        def result = deviceService.acceptSubHostRequest(requestId)
+
+        render result as JSON
+    }
+
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def denySubHostRequest(int requestId) {
+        def result = deviceService.denySubHostRequest(requestId)
+
+        render result as JSON
+    }
+
+    @Secured(['ROLE_USER'])
+    def requestSubHost(String macId, int hostId) {
+        def result = deviceService.requestSubHost(macId, hostId)
 
         render result as JSON
     }

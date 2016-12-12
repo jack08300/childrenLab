@@ -117,6 +117,16 @@ class CalendarEventController {
 
     @Transactional
     @Secured(['ROLE_USER'])
+    def addEventUnderDevice(String eventName, String startDate, String endDate, String color, String status, String description, int alert, String city, String state, int timezoneOffset, String repeat, String macId){
+        def result = calendarEventService.addEventUnderDevice(eventName, startDate, endDate, color, status, description, alert, city, state, timezoneOffset, repeat, params.repeatEventId, macId)
+
+        render(status: result.status, text: result as JSON, contentType: "application/json")
+
+    }
+
+
+    @Transactional
+    @Secured(['ROLE_USER'])
     def editEventWithTodo(int id
                          , String eventName
                          , String startDate

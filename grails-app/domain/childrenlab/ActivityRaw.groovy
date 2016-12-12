@@ -4,6 +4,7 @@ class ActivityRaw {
 
     String indoorActivity
     String outdoorActivity
+    User uploadedUser
     long time
     Device device
     long deviceTime
@@ -13,5 +14,6 @@ class ActivityRaw {
 
     static constraints = {
         deviceTime nullable: true
+        uploadedUser nullable: true
     }
 }

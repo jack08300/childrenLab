@@ -4,8 +4,10 @@ public enum KidsStatus {
     PRIVATE, PUBLIC, REMOVED
 }
 
+
 class Kids {
 
+    static hasOne = [device: Device]
     String firstName
     String lastName
     String nickName
@@ -18,7 +20,7 @@ class Kids {
     Date lastUpdated
 
     static belongsTo = [parent: User]
-//    static hasMany = [subHost: User]
+
 
     static constraints = {
         firstName nullable: false
@@ -27,8 +29,7 @@ class Kids {
         birthday nullable: true
         note nullable: true
         profile nullable: true
-//        subHost nullable: true
-
+        device nullable: true
         dateCreated nullable: true
         lastUpdated nullable: true
     }

@@ -11,21 +11,100 @@ class DeviceService {
 
     def springSecurityService
 
-    def uploadData(String x, String y, String z, String u, String v, String macId) {
+
+    def registerDevice(String macId, String firstName, String lastName, String nickName) {
+        def user = springSecurityService.getCurrentUser() as User
+
+        def isRegistered = Device.findByMacId(macId)
+        if(isRegistered) {
+            return [success: false, message: "The device is already registered by ${isRegistered.user.lastName} ${isRegistered.user.firstName}"]
+        }
+
+        def kid = new Kids(firstName: firstName, lastName: lastName, nickName: nickName, parent: user)
+        def device = new Device(macId: macId, user: user, kid: kid)
+        kid.device = device
+        kid.save(failOnError: true)
+        device.save(failOnError: true)
 
 
-        User user = springSecurityService.getCurrentUser() as User
+        return [success: true]
 
-        if (!macId) {
-            macId = 'test'
+    }
+
+    def isDeviceRegistered(String macId) {
+        def device = Device.findByMacId(macId)
+        if(device) {
+            return [isRegistered : true, host: device.user]
+        } else {
+            return [isRegistered: false]
+        }
+    }
+
+    def requestSubHost(String macId, int hostId){
+        def hostUser = User.get(hostId)
+
+        if(!hostUser){
+            return [success: false, message: "Host is not exists"]
+        }
+
+        def device = Device.findByUserAndMacId(hostUser, macId)
+        if(!device) {
+            return [success: false, message: "Can't find the device"]
+        }
+
+        def user = springSecurityService.getCurrentUser() as User
+
+        def subHostRequest = SubHostRequest.findByRequestFromAndRequestToAndDevice(user, hostUser, device)
+        if(subHostRequest) {
+            return [success: false, message: "The request is already exists"]
+        }
+
+        subHostRequest = new SubHostRequest(requestFrom: user, requestTo: hostUser, device: device).save(failOnError: true)
+
+        return [success: true, request: subHostRequest]
+
+    }
+
+    def acceptSubHostRequest(int requestId) {
+        def user = springSecurityService.getCurrentUser() as User
+
+        def request = SubHostRequest.findByRequestToAndId(user, requestId)
+
+        if(!request) {
+            return [success: false, message: "can't find the request"]
+        }
+
+        request.status = SubHostRequestStatus.ACCEPTED
+
+        if(!request.device.subHost.find({request.requestFrom})){
+            request.device.addToSubHost(request.requestFrom)
         }
 
 
-        def device = Device.findByMacId(macId) ?: new Device(macId: macId, user: user).save(failOnError: true)
+        return [success: true,  request: request]
+    }
 
-        new DeviceActivity(activityX: x, activityY: y, activityZ: z, u: u, v: v, device: device).save(failOnError: true)
+    def denySubHostRequest(int requestId) {
+        def user = springSecurityService.getCurrentUser() as User
 
-        return true
+        def request = SubHostRequest.findByRequestToAndId(user, requestId)
+
+        if(!request) {
+            return [success: false, message: "can't find the request"]
+        }
+
+        request.status = SubHostRequestStatus.DENIED
+
+        if(request.device.subHost.find({request.requestFrom})){
+            request.device.subHost.each(){ subHost ->
+                if(subHost.id == request.requestFrom.id) {
+                    request.device.removeFromSubHost(subHost)
+                }
+            }
+        }
+
+
+        return [success: true,  request: request]
     }
 
     def uploadRawData(String indoorActivity, String outdoorActivity, long time, String macId, int timezone = 0, String userEmail = null) {
@@ -46,7 +125,22 @@ class DeviceService {
         println("Receiving activity from: " + user.email)
         println("Data: indoor: ${indoorActivity}. Outdoor: ${outdoorActivity}")
 
-        def device = Device.findByMacIdAndUser(macId, user) ?: new Device(macId: macId, user: user).save(failOnError: true)
+        def device = Device.findByMacIdAndUser(macId, user)
+
+        if(!device) {
+            device = Device.withCriteria {
+                subHost {
+                    eq 'id', user.id
+                }
+                eq 'macId', macId
+            }
+            println("The user is sub host")
+        }
+
+        if(!device) {
+            return [success: false, message: "can't find the device"]
+        }
+
 
 
         //Insert into
@@ -57,6 +151,8 @@ class DeviceService {
         //If it's not test account
         def duplicate = ActivityRaw.findByTimeAndDevice(indoorTime, device)
         if (duplicate) {
+            println("Stop update - Duplicate")
+            println "--------------------------------------------"
             return [success: true, message: "This record is duplicate"]
         }
 
