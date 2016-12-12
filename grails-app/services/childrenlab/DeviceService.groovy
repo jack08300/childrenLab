@@ -95,11 +95,14 @@ class DeviceService {
 
         request.status = SubHostRequestStatus.DENIED
 
+
         if(request.device.subHost.find({request.requestFrom})){
-            request.device.subHost.each(){ subHost ->
-                if(subHost.id == request.requestFrom.id) {
-                    request.device.removeFromSubHost(subHost)
-                }
+            request.device.removeFromSubHost(request.requestFrom)
+            def device = Device.findById(request.device.id)
+            def l = []
+            l += request.device.subHost
+            l.each(){ subHost ->
+                request.device.removeFromSubHost(subHost)
             }
         }
 

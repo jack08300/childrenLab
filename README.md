@@ -577,9 +577,175 @@ macId:           tester1
 
 # Multi-Host API
 ## device/registerDevice
+* Register a new device
+
 | Parameters    | Required      | Type  | Example  |
 | ------------- |:-------------:|:-------------:| -----:|
 | macId         | Yes | String  |   13031FCFE5E0 |
 | firstName     | Yes | String  |   Jay |
 | lastName      | Yes | String  |   Chen |
+| nickName      | No | String   |   Yen-Chieh |
+* Example return
+```
+{
+  "success": true
+}
+```
 
+## device/isDeviceRegistered
+* Check if the device already registered. It returns the host information
+
+| Parameters    | Required      | Type  | Example  |
+| ------------- |:-------------:|:-------------:| -----:|
+| macId         | Yes | String  |   13031FCFE5E0 |
+* Example return
+```
+{
+  "isRegistered": true,
+  "host": {
+    "id": 28,
+    "firstName": "Frank",
+    "lastName": "Lin",
+    "phoneNumber": "0922782495",
+    "email": "franklinchinsheng@gmail.com",
+    "profile": null,
+    "zipCode": "221"
+  }
+}
+```
+
+## device/requestSubHost
+* Send access request to host
+
+| Parameters    | Required      | Type  | Example  |
+| ------------- |:-------------:|:-------------:| -----:|
+| macId         | Yes | String  |   13031FCFE5E0 |
+| hostId        | Yes | Integer |   10 |
+* Example return
+```
+{
+  "success": true,
+  "request": {
+    "id": 6,
+    "requestFrom": {
+      "id": 28,
+      "firstName": "Frank",
+      "lastName": "Lin",
+      "phoneNumber": "0922782495",
+      "email": "franklinchinsheng@gmail.com",
+      "profile": null,
+      "zipCode": "221"
+    },
+    "requestTo": {
+      "id": 10,
+      "firstName": "q",
+      "lastName": "w",
+      "phoneNumber": "1",
+      "email": "lwz3@swing.com",
+      "profile": null,
+      "zipCode": null
+    },
+    "status": "PENDING",
+    "device": {
+      "id": 5,
+      "kid": null,
+      "macId": "87432B199E68",
+      "subHost": []
+    }
+  }
+}
+```
+
+## device/acceptSubHostRequest
+* Accept request
+* Only Host User is able to accept the request (Need to use Host User's token to call this API)
+
+| Parameters    | Required      | Type  | Example  |
+| ------------- |:-------------:|:-------------:| -----:|
+| requestId     | Yes | Integer |   6 |
+* Example return
+```
+{
+  "success": true,
+  "request": {
+    "id": 6,
+    "requestFrom": {
+      "id": 28,
+      "firstName": "Frank",
+      "lastName": "Lin",
+      "phoneNumber": "0922782495",
+      "email": "franklinchinsheng@gmail.com",
+      "profile": null,
+      "zipCode": "221"
+    },
+    "requestTo": {
+      "id": 10,
+      "firstName": "q",
+      "lastName": "w",
+      "phoneNumber": "1",
+      "email": "lwz3@swing.com",
+      "profile": null,
+      "zipCode": null
+    },
+    "status": "ACCEPTED",
+    "device": {
+      "id": 5,
+      "kid": null,
+      "macId": "87432B199E68",
+      "subHost": [
+        {
+          "id": 28,
+          "firstName": "Frank",
+          "lastName": "Lin",
+          "phoneNumber": "0922782495",
+          "email": "franklinchinsheng@gmail.com",
+          "profile": null,
+          "zipCode": "221"
+        }
+      ]
+    }
+  }
+}
+```
+
+## device/denySubHostRequest
+* Deny sub host request
+* Only Host User is able to deny the request (Need to use Host User's token to call this API)
+
+| Parameters    | Required      | Type  | Example  |
+| ------------- |:-------------:|:-------------:| -----:|
+| requestId     | Yes | Integer |   6 |
+* Example return
+```
+{
+  "success": true,
+  "request": {
+    "id": 6,
+    "requestFrom": {
+      "id": 28,
+      "firstName": "Frank",
+      "lastName": "Lin",
+      "phoneNumber": "0922782495",
+      "email": "franklinchinsheng@gmail.com",
+      "profile": null,
+      "zipCode": "221"
+    },
+    "requestTo": {
+      "id": 10,
+      "firstName": "q",
+      "lastName": "w",
+      "phoneNumber": "1",
+      "email": "lwz3@swing.com",
+      "profile": null,
+      "zipCode": null
+    },
+    "status": "DENIED",
+    "device": {
+      "id": 5,
+      "kid": null,
+      "macId": "87432B199E68",
+      "subHost": []
+    }
+  }
+}
+```
