@@ -577,9 +577,9 @@ macId:           tester1
 
 # Multi-Host API
 ## device/registerDevice
-| Tables        | Are           | Cool  |
+| Parameters        | Type           | Example  |
 | ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| macId      | String | 13031FCFE5E0 |
+| firstName      | String      |   Jay |
+| lastName | String      |    Chen |
 
