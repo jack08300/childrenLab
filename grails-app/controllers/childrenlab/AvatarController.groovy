@@ -40,7 +40,7 @@ class AvatarController {
 
         if (!s3) {
 
-            s3 = amazonWebService.getS3("US Standard")
+            s3 = amazonWebService.getS3("us-east-1")
         }
 
 

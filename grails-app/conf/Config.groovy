@@ -72,6 +72,7 @@ grails {
     }
 }
 
+grails.config.locations = [ "classpath:app-config.properties"]
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
@@ -104,8 +105,8 @@ ftp.username = "user@childrenlab.com"
 ftp.password = "qyn4AS7E"
 ftp.path = "/"
 
-grails.plugin.awssdk.accessKey = "AKIAINLJ6MY2R6AJQGBQ"
-grails.plugin.awssdk.secretKey = "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"
+grails.plugin.awssdk.accessKey = ""
+grails.plugin.awssdk.secretKey = ""
 
 
 environments {

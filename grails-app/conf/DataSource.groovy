@@ -1,8 +1,8 @@
 dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
-    username = "root"
-    password = "koe7POut"
+    username = ""
+    password = ""
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -14,25 +14,25 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://45.55.248.58/childre_qu?useUnicode=true&characterEncoding=UTF-8"
-            username = "root"
-            password = "koe7POut"
+            url = ""
+            username = ""
+            password = ""
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://45.55.248.58/childre_qu?useUnicode=true&characterEncoding=UTF-8"
-            username = "root"
-            password = "koe7POut"
+            url = ""
+            username = ""
+            password = ""
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://45.55.248.58/childre_prod?useUnicode=true&characterEncoding=UTF-8"
-            username = "root"
-            password = "koe7POut"
+            url = ""
+            username = ""
+            password = ""
             pooled = true
             properties {
                 maxActive = -1
