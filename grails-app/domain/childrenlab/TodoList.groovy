@@ -16,5 +16,6 @@ class TodoList {
     static constraints = {
         text nullable: false
         status nullable: false
+        event nullable: true
     }
 }
