@@ -24,6 +24,7 @@ class CalendarEvent {
     boolean pushNotification
     CalendarEvent createdFromEvent
     Device device
+    Kids kid
 
 
     static belongsTo = [user: User]
@@ -50,5 +51,6 @@ class CalendarEvent {
         eventRepeat nullable: true
         createdFromEvent nullable: true
         device nullable: true
+        kid nullable: true
     }
 }

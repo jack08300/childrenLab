@@ -8,6 +8,7 @@ class TodoList {
 
     String text
     TodoStatus status = TodoStatus.PENDING
+    CalendarEvent event
 
     Date dateCreated
     Date lastUpdated
