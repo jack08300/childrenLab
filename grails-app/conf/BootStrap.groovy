@@ -7,7 +7,7 @@ import childrenlab.Kids
 import childrenlab.Role
 import childrenlab.Schedule
 import childrenlab.ScheduleMessage
-import childrenlab.SubHostRequest
+import childrenlab.SubHost
 import childrenlab.TodoList
 import childrenlab.User
 import childrenlab.UserRole
@@ -190,13 +190,12 @@ class BootStrap {
             return returnArray
         }
 
-        JSON.registerObjectMarshaller(SubHostRequest){
+        JSON.registerObjectMarshaller(SubHost){
             def returnArray = [:]
             returnArray['id'] = it.id
             returnArray['requestFrom'] = it.requestFrom
             returnArray['requestTo'] = it.requestTo
             returnArray['status'] = it.status.name()
-            returnArray['device'] = it.device
 
             return returnArray
         }

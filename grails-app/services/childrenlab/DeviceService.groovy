@@ -54,12 +54,12 @@ class DeviceService {
 
         def user = springSecurityService.getCurrentUser() as User
 
-        def subHostRequest = SubHostRequest.findByRequestFromAndRequestToAndDevice(user, hostUser, device)
+        def subHostRequest = SubHost.findByRequestFromAndRequestTo(user, hostUser)
         if(subHostRequest) {
             return [success: false, message: "The request is already exists"]
         }
 
-        subHostRequest = new SubHostRequest(requestFrom: user, requestTo: hostUser, device: device).save(failOnError: true)
+        subHostRequest = new SubHost(requestFrom: user, requestTo: hostUser, device: device).save(failOnError: true)
 
         return [success: true, request: subHostRequest]
 
@@ -68,7 +68,7 @@ class DeviceService {
     def acceptSubHostRequest(int requestId) {
         def user = springSecurityService.getCurrentUser() as User
 
-        def request = SubHostRequest.findByRequestToAndId(user, requestId)
+        def request = SubHost.findByRequestToAndId(user, requestId)
 
         if(!request) {
             return [success: false, message: "can't find the request"]
@@ -76,9 +76,6 @@ class DeviceService {
 
         request.status = SubHostRequestStatus.ACCEPTED
 
-        if(!request.device.subHost.find({request.requestFrom})){
-            request.device.addToSubHost(request.requestFrom)
-        }
 
 
         return [success: true,  request: request]
@@ -87,7 +84,7 @@ class DeviceService {
     def denySubHostRequest(int requestId) {
         def user = springSecurityService.getCurrentUser() as User
 
-        def request = SubHostRequest.findByRequestToAndId(user, requestId)
+        def request = SubHost.findByRequestToAndId(user, requestId)
 
         if(!request) {
             return [success: false, message: "can't find the request"]
@@ -95,16 +92,6 @@ class DeviceService {
 
         request.status = SubHostRequestStatus.DENIED
 
-
-        if(request.device.subHost.find({request.requestFrom})){
-            request.device.removeFromSubHost(request.requestFrom)
-            def device = Device.findById(request.device.id)
-            def l = []
-            l += request.device.subHost
-            l.each(){ subHost ->
-                request.device.removeFromSubHost(subHost)
-            }
-        }
 
 
         return [success: true,  request: request]
@@ -128,22 +115,6 @@ class DeviceService {
         println("Receiving activity from: " + user.email)
         println("Data: indoor: ${indoorActivity}. Outdoor: ${outdoorActivity}")
 
-        def device = Device.findByMacIdAndUser(macId, user)
-
-        if(!device) {
-            device = Device.withCriteria {
-                subHost {
-                    eq 'id', user.id
-                }
-                eq 'macId', macId
-            }
-            println("The user is sub host")
-        }
-
-        if(!device) {
-            return [success: false, message: "can't find the device"]
-        }
-
 
 
         //Insert into
@@ -152,7 +123,7 @@ class DeviceService {
         def indoorTime = Long.parseLong(indoorActivityArray[0]) * 1000
 
         //If it's not test account
-        def duplicate = ActivityRaw.findByTimeAndDevice(indoorTime, device)
+        def duplicate = ActivityRaw.findByTime(indoorTime)
         if (duplicate) {
             println("Stop update - Duplicate")
             println "--------------------------------------------"
