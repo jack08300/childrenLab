@@ -5,8 +5,6 @@ import childrenlab.Device
 import childrenlab.FlagName
 import childrenlab.Kids
 import childrenlab.Role
-import childrenlab.Schedule
-import childrenlab.ScheduleMessage
 import childrenlab.SubHost
 import childrenlab.TodoList
 import childrenlab.User
