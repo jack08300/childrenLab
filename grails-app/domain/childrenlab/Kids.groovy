@@ -15,6 +15,7 @@ class Kids {
     String note
     KidsStatus status = KidsStatus.PUBLIC
     String profile
+    String macId
 
     Date dateCreated
     Date lastUpdated
@@ -32,5 +33,6 @@ class Kids {
         device nullable: true
         dateCreated nullable: true
         lastUpdated nullable: true
+        macId nullable: true
     }
 }

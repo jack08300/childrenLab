@@ -40,3 +40,10 @@ web-app/WEB-INF/tld/fmt.tld
 childrenLab.iml
 .idea/encodings.xml
 grails-app/conf/app-config.properties
+
+.slcache
+
+
+.slcache/.index
+
+.idea/.name

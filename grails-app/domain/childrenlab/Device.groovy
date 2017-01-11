@@ -3,7 +3,6 @@ package childrenlab
 class Device {
 
     static belongsTo = [kid: Kids]
-    static hasMany = [subHost: User]
     List<User> subHost
     User user
     String swingVersion
@@ -15,11 +14,9 @@ class Device {
 
     static constraints = {
         swingVersion nullable: true
-        kid nullable: true
         macId nullable: false
         batteryStatus nullable: true
         user nullable: true
-        subHost nullable: true
         dateCreated nullable: true
         lastUpdated nullable: true
     }

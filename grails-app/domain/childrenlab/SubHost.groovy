@@ -1,23 +1,25 @@
 package childrenlab
 
-public enum SubHostRequestStatus {
+enum SubHostRequestStatus {
     PENDING, ACCEPTED, DENIED
 }
 
-class SubHostRequest {
+
+class SubHost {
 
     User requestFrom
     User requestTo
-    Device device
     SubHostRequestStatus status = SubHostRequestStatus.PENDING
 
+    static hasMany = [kid: Kids]
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
         requestFrom nullable: false
         requestTo nullable: false
-        device nullable: false
         status nullable: false
+        kid nullable: true
     }
+
 }
