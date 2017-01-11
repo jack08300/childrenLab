@@ -38,56 +38,7 @@ class BootStrap {
 
         def device = Device.findByMacId('test') ?: new Device(user: userTester, swingVersion: 'Test', macId: 'test').save(flush: true)
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
-
-        //Intial
-//        kidsRelationBootStrap()
-
-        JSON.registerObjectMarshaller(Schedule){
-            def returnArray = [:]
-            returnArray['id'] = it.id
-            returnArray['dateCreated'] = dateFormat.format(it.dateCreated)
-            returnArray['lastUpdated'] = dateFormat.format(it.lastUpdated)
-            returnArray['startDate'] = dateFormat.format(it.startDate)
-            returnArray['endDate'] = dateFormat.format(it.endDate)
-            returnArray['status'] = it.status.name()
-            returnArray['type'] = it.type.name()
-            returnArray['price'] = it.paymentPerHour
-            returnArray['note'] = it.note
-            returnArray['user'] = [
-                    id: it.user.id,
-                    firstName: it.user.firstName,
-                    lastName: it.user.lastName,
-                    name: "$it.user.firstName  $it.user.lastName",
-                    nickName: it.user.nickName,
-                    birthday: it.user.birthday,
-                    phoneNumber: it.user.phoneNumber,
-                    gender: it.user.sex,
-                    email: it.user.email
-
-            ]
-            returnArray['note'] = it.note
-
-            return returnArray
-        }
-
-        JSON.registerObjectMarshaller(ScheduleMessage){
-            def returnArray = [:]
-
-            returnArray['id'] = it.id
-            returnArray['user'] = [
-                    id: it.user.id,
-                    email: it.user.email
-            ]
-            returnArray['message'] = it.message
-            returnArray['owner'] = [
-                    id: it.schedule.user.id,
-                    email: it.schedule.user.email
-            ]
-            returnArray['date'] = it.dateCreated
-
-            return returnArray
-        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss")
 
         JSON.registerObjectMarshaller(Kids){
             def returnArray = [:]

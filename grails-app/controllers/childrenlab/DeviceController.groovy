@@ -75,15 +75,15 @@ class DeviceController {
 
         render result as JSON
     }
-
+/*
     @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def list(){
         def device = Device.list()
 
         render(view: "list", model: [deviceList: device, deviceInstanceCount: Device.count()])
-    }
+    }*/
 
-    @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
+/*    @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def deviceDataList(String macId, int userId, int max){
         def device = Device.findByMacIdAndUser(macId, User.get(userId))
 
@@ -95,7 +95,7 @@ class DeviceController {
         }
 
         render(view: "dataList", model: [data: data, deviceActivityInstance: Activity.countByDevice(device), macId: macId, userId: userId])
-    }
+    }*/
 
     @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def deviceDataRawList(String macId, int userId, int max){
@@ -113,19 +113,19 @@ class DeviceController {
         render(view: "dataRawList", model: [data: data, deviceActivityInstanceCount: ActivityRaw.countByDevice(device), macId: macId, userId: userId])
     }
 
-    def export(String macId, int userId){
-        def device = Device.findByMacIdAndUser(macId, User.get(userId))
-        def data = DeviceActivity.findAllByDevice(device)
-
-        String csvFile = "Activity X, Activity Y, Activity Z, U, V, Date\n"
-        data.each(){
-            def date = new Date(it.receivedTime*1000).format("YYYY/MM/dd HH:mm:ss")
-            csvFile += "${it.activityX}, ${it.activityY}, ${it.activityZ}, ${it.u}, ${it.v}, ${date}\n"
-        }
-
-        response.setHeader("content-disposition", "attachment; filename=Activity_${macId}.csv")
-        render(contentType: "text/csv", text: csvFile)
-    }
+//    def export(String macId, int userId){
+//        def device = Device.findByMacIdAndUser(macId, User.get(userId))
+//        def data = DeviceActivity.findAllByDevice(device)
+//
+//        String csvFile = "Activity X, Activity Y, Activity Z, U, V, Date\n"
+//        data.each(){
+//            def date = new Date(it.receivedTime*1000).format("YYYY/MM/dd HH:mm:ss")
+//            csvFile += "${it.activityX}, ${it.activityY}, ${it.activityZ}, ${it.u}, ${it.v}, ${date}\n"
+//        }
+//
+//        response.setHeader("content-disposition", "attachment; filename=Activity_${macId}.csv")
+//        render(contentType: "text/csv", text: csvFile)
+//    }
 
     def exportRaw(String macId, int userId){
         def device = Device.findByMacIdAndUser(macId, User.get(userId))
