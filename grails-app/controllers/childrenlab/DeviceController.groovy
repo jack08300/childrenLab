@@ -75,13 +75,12 @@ class DeviceController {
 
         render result as JSON
     }
-/*
     @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def list(){
         def device = Device.list()
 
         render(view: "list", model: [deviceList: device, deviceInstanceCount: Device.count()])
-    }*/
+    }
 
 /*    @Secured(['ROLE_ADMIN', 'ROLE_TESTER'])
     def deviceDataList(String macId, int userId, int max){
